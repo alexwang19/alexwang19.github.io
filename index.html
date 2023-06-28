@@ -2,76 +2,140 @@
 <html>
 
 <head>
-  <title>Dynamic Input Generation</title>
+  <title>Configuration Options</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 20px;
     }
-    
+
+    h1 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
     label {
       display: block;
       margin-bottom: 10px;
+      font-weight: bold;
     }
-    
+
     .input-wrapper {
+      display: none;
       margin-bottom: 10px;
     }
-    
-    input[type="text"] {
-      padding: 8px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    
-    button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 8px 16px;
-      font-size: 16px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    
-    button:hover {
-      background-color: #45a049;
-    }
-    
-    #dynamicInputs {
-      margin-top: 20px;
-    }
-    
+
     #output {
       margin-top: 20px;
       background-color: #f2f2f2;
       padding: 10px;
     }
+
+    input[type="text"],
+    button {
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .form-container {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .form-section {
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 
 <body>
-  <h1>Dynamic Input Generation</h1>
+  <div class="form-container">
+    <h1>Sysdig Installation</h1>
 
-  <label>
-    <input type="checkbox" id="generateInputsCheckbox" onchange="toggleInputs('generateInputsCheckbox', 'dynamicInputs')">
-    Generate Inputs
-  </label>
+    <div id="namespaceInput" class="form-section">
+      <label for="namespaceInput">Kubernetes Namespace</label>
+      <input type="text" id="namespace" placeholder="Enter k8s Namespace">
+    </div>
 
-  <div id="dynamicInputs"></div>
+    <div id="accessKeyInput" class="form-section">
+      <label for="accessKeyInput">Sysdig Access Key</label>
+      <input type="text" id="accessKey" placeholder="Enter Sysdig Access Key">
+    </div>
 
-        <label>
+    <div id="regionInput" class="form-section">
+      <label for="regionInput">Sysdig Region</label>
+      <input type="text" id="region" placeholder="Enter Sysdig Region">
+    </div>
+
+    <div id="clusterNameInput" class="form-section">
+      <label for="clusterNameInput">Cluster Name</label>
+      <input type="text" id="clusterName" placeholder="Enter Cluster Name">
+    </div>
+
+    <div id="clusterTagsInput" class="form-section">
+      <label for="clusterTagsInput">Cluster Tags</label>
+      <input type="text" id="clusterTags" placeholder="Enter Cluster Tags">
+    </div>
+
+    <label>
+      <input type="checkbox" id="generateInputsCheckbox"
+        onchange="toggleInputs('generateInputsCheckbox', 'dynamicInputs')">
+      Generate Inputs
+    </label>
+
+    <div id="dynamicInputs"></div>
+
+    <div class="form-section">
+      <label>
+        <input type="checkbox" id="proxyCheckbox" onchange="toggleInput('proxyCheckbox', 'proxyInput')">
+        Proxy Required
+      </label>
+      <div id="proxyInput" class="input-wrapper">
+        <input type="text" id="proxyDetails" placeholder="Enter Proxy Details">
+      </div>
+    </div>
+
+
+    <div class="form-section">
+      <label>
+        <input type="checkbox" id="registryCheckbox" onchange="toggleInput('registryCheckbox', 'registryInput')">
+        Internal Registry Required
+      </label>
+      <div id="registryInput" class="input-wrapper">
+        <input type="text" id="registryDetails" placeholder="Enter Registry Details">
+      </div>
+    </div>
+
+    <div class="form-section">
+      <label>
         <input type="checkbox" id="priorityCheckbox" onchange="toggleInput('priorityCheckbox', 'priorityInput')">
         Priority Class Required
       </label>
       <div id="priorityInput" class="input-wrapper">
         <input type="text" id="priorityDetails" placeholder="Enter Priority Class Details">
       </div>
+    </div>
 
-  <button onclick="displayOutput()">Submit</button>
+    <div class="form-section">
+      <button onclick="displayOutput()">Submit</button>
+    </div>
 
-  <div id="output"></div>
+    <div id="output"></div>
+  </div>
 
   <script>
     function toggleInputs(checkboxId, inputsContainerId) {
@@ -106,32 +170,57 @@
         inputsContainer.innerHTML = '';
       }
     }
-
-        function toggleInput(checkboxId, inputId) {
+    function toggleInput(checkboxId, inputId) {
       const checkbox = document.getElementById(checkboxId);
       const inputDiv = document.getElementById(inputId);
       inputDiv.style.display = checkbox.checked ? 'block' : 'none';
     }
 
     function displayOutput() {
-      const checkbox = document.getElementById('generateInputsCheckbox');
-      const inputsContainer = document.getElementById('dynamicInputs');
-      const inputs = inputsContainer.getElementsByTagName('input');
+      // const checkbox = document.getElementById('generateInputsCheckbox');
+      // const inputsContainer = document.getElementById('dynamicInputs');
+      // const inputs = inputsContainer.getElementsByTagName('input');
+      const namespaceInput = document.querySelector('#namespaceInput input');
+      const accessKeyInput = document.querySelector('#accessKeyInput input');
+      const regionInput = document.querySelector('#regionInput input');
+      const clusterNameInput = document.querySelector('#clusterNameInput input');
+      const clusterTagsInput = document.querySelector('#clusterTagsInput input');
+      const proxyCheckbox = document.getElementById('proxyCheckbox');
+      const proxyInput = document.querySelector('#proxyInput input');
+      const registryCheckbox = document.getElementById('registryCheckbox');
+      const registryInput = document.querySelector('#registryInput input');
+      const priorityCheckbox = document.getElementById('priorityCheckbox');
+      const priorityInput = document.querySelector('#priorityInput input');
       const outputDiv = document.getElementById('output');
 
-      let outputText = '';
+      let helmInstallText = 'helm install sysdig-agent --namespace ' + namespaceInput.value + ' --force-update \\<br>';
+      let accessKeyText = '--set global.sysdig.accessKey=' + accessKeyInput.value + ' \\ <br>';
+      let regionText = '--set global.sysdig.region=' + regionInput.value + ' \\ <br>';
+      let clusterNameText = '--set global.clusterConfig.name=' + clusterNameInput.value + ' \\ <br>';
+      let clusterTagsText = '--set agent.sysdig.settings.tags=' + clusterTagsInput.value + ' \\ <br>';
+      let outputText = helmInstallText + accessKeyText + regionText + clusterNameText + clusterTagsText;
 
-      if (checkbox.checked) {
-        outputText += 'Checkbox is checked<br>';
+      // if (checkbox.checked) {
+      //   outputText += 'Checkbox is checked<br>';
 
-        for (let i = 0; i < inputs.length; i++) {
-          const inputName = inputs[i].name;
-          const inputValue = inputs[i].value;
+      //   for (let i = 0; i < inputs.length; i++) {
+      //     const inputName = inputs[i].name;
+      //     const inputValue = inputs[i].value;
 
-          outputText += inputName + ': ' + inputValue + '<br>';
-        }
-      } else {
-        outputText = 'Checkbox is unchecked';
+      //     outputText += inputName + ': ' + inputValue + '<br>';
+      //   }
+      // }
+
+      if (proxyCheckbox.checked) {
+        outputText += '- Require Proxy: ' + proxyInput.value + '<br>';
+      }
+
+      if (registryCheckbox.checked) {
+        outputText += '- Require Internal Registry: ' + registryInput.value + '<br>';
+      }
+
+      if (priorityCheckbox.checked) {
+        outputText += '- Require Priority Class: ' + priorityInput.value + '<br>';
       }
 
       outputDiv.innerHTML = outputText;
