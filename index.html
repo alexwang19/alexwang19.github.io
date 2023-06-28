@@ -266,11 +266,11 @@
         let noProxy = '--set global.proxy.noProxy=' + inputs[2].value + ' \\ <br>';
         let agentHttpProxyPort = '--set agent.sysdig.settings.http_proxy.proxy_port=' + inputs[1].value + ' \\ <br>';
         let agentHttpProxyHost = '--set agent.sysdig.settings.http_proxy.proxy_host=' + inputs[0].value + ' \\ <br>';
-        outputText += httpProxy
-        outputText += httpsProxy
-        outputText += noProxy
-        outputText += agentHttpProxyPort
-        outputText += agentHttpProxyHost
+        outputText += httpProxy;
+        outputText += httpsProxy;
+        outputText += noProxy;
+        outputText += agentHttpProxyPort;
+        outputText += agentHttpProxyHost;
       }
       if (registryCheckbox.checked) {
         let agentImageRegistry = '--set agent.image.registry=' + registryInputs[0].value + ' \\ <br>';
@@ -281,14 +281,14 @@
         let nodeAnalyzerNodeAnalyzerPullSecrets = '--set nodeAnalyzer.nodeAnalyzer.pullSecrets=' + registryInputs[2].value + ' \\ <br>';
         let agentImageTag = '--set agent.image.tag=' + registryInputs[4].value + ' \\<br>';
         let nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag = '--set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + registryInputs[5].value + ' \\ <br>';
-        outputText += agentImageRegistry
-        outputText += agentImageRepository
-        outputText += agentImagePullSecrets
-        outputText += nodeAnalyzerImageRegistry
-        outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository
-        outputText += nodeAnalyzerNodeAnalyzerPullSecrets
-        outputText += agentImageTag
-        outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag
+        outputText += agentImageRegistry;
+        outputText += agentImageRepository;
+        outputText += agentImagePullSecrets;
+        outputText += nodeAnalyzerImageRegistry;
+        outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository;
+        outputText += nodeAnalyzerNodeAnalyzerPullSecrets;
+        outputText += agentImageTag;
+        outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag;
       }
 
       if (priorityCheckbox.checked) {
