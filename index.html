@@ -151,16 +151,16 @@
         inputsContainer.innerHTML = '';
 
         // Generate input boxes
-        for (let i = 0; i <= registry_fields.length; i++) {
+        for (let i = 0; i < registry_fields.length; i++) {
           const inputWrapper = document.createElement('div');
           inputWrapper.classList.add('dynamic-input-wrapper');
 
           const label = document.createElement('label');
-          label.textContent = i;
+          label.textContent = registry_fields[i];
 
           const input = document.createElement('input');
           input.type = 'text';
-          input.name = i;
+          input.name = registry_fields[i];
 
           inputWrapper.appendChild(label);
           inputWrapper.appendChild(input);
