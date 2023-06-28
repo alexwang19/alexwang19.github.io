@@ -104,18 +104,14 @@
       <div id="proxyInput" class="form-section"></div>
     </div>
 
-
-
-<!--     <div class="form-section">
+    <div class="form-section">
       <label>
-        <input type="checkbox" id="proxyCheckbox" onchange="toggleInput('proxyCheckbox', 'proxyInput')">
+        <input type="checkbox" id="registryCheckbox"
+          onchange="toggleRegistryInputs('registryCheckbox', 'registryInput')">
         Proxy Required
       </label>
-      <div id="proxyInput" class="input-wrapper">
-        <input type="text" id="proxyDetails" placeholder="Enter Proxy Details">
-      </div>
+      <div id="registryInput" class="form-section"></div>
     </div>
- -->
 
     <div class="form-section">
       <label>
@@ -145,13 +141,43 @@
   </div>
 
   <script>
+    function toggleRegistryInputs(checkboxId, inputsContainerId) {
+      const checkbox = document.getElementById(checkboxId);
+      const inputsContainer = document.getElementById(inputsContainerId);
+
+      if (checkbox.checked) {
+        const inputCount = 8; // Change this value to adjust the number of input boxes generated
+        const registry_fields = ["Internal Registry", "Internal Sysdig Agent Image", "Internal Registry Pull Secret", "Internal Sysdig Runtime Scanner Image", "Sysdig Agent Tag", "Sysdig Runtime Scanner Tag"];
+        // Clear existing inputs
+        inputsContainer.innerHTML = '';
+
+        // Generate input boxes
+        for (let i = 0; i < registry_fields.length; i++) {
+          const inputWrapper = document.createElement('div');
+          inputWrapper.classList.add('input-wrapper');
+
+          const label = document.createElement('label');
+          label.textContent = i;
+
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.name = i;
+
+          inputWrapper.appendChild(label);
+          inputWrapper.appendChild(input);
+
+          inputsContainer.appendChild(inputWrapper);
+        }
+      } else {
+        // Clear inputs when unchecked
+        inputsContainer.innerHTML = '';
+      }
+    }
     function toggleProxyInputs(checkboxId, inputsContainerId) {
       const checkbox = document.getElementById(checkboxId);
       const inputsContainer = document.getElementById(inputsContainerId);
 
       if (checkbox.checked) {
-        const inputCount = 3; // Change this value to adjust the number of input boxes generated
-
         // Clear existing inputs
         inputsContainer.innerHTML = '';
         const inputWrapper = document.createElement('div');
@@ -222,7 +248,8 @@
       const proxyInput = document.getElementById('proxyInput');
       const inputs = proxyInput.getElementsByTagName('input');
       const registryCheckbox = document.getElementById('registryCheckbox');
-      const registryInput = document.querySelector('#registryInput input');
+      const registryInput = document.getElementById('#registryInput');
+      const registryInputs = registryInput.getElementsByTagName('input');
       const priorityCheckbox = document.getElementById('priorityCheckbox');
       const priorityInput = document.querySelector('#priorityInput input');
       const outputDiv = document.getElementById('output');
@@ -245,10 +272,24 @@
         outputText += noProxy
         outputText += agentHttpProxyPort
         outputText += agentHttpProxyHost
-
       }
       if (registryCheckbox.checked) {
-        outputText += '- Require Internal Registry: ' + registryInput.value + '<br>';
+        let agentImageRegistry = '--set agent.image.registry=' + registryInputs[0].value + ' \\ <br>';
+        let agentImageRepository = '--set agent.image.repository=' + registryInputs[1].value + ' \\ <br>';
+        let agentImagePullSecrets = '--set agent.image.pullSecrets=' + registryInputs[2].value + ' \\ <br>';
+        let nodeAnalyzerImageRegistry= = '--set nodeAnalyzer.image.registry=' + registryInputs[0].value + ' \\ <br>';
+        let nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository = '--set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.repository=' + registryInputs[3].value + ' \\ <br>';
+        let nodeAnalyzerNodeAnalyzerPullSecrets = '--set nodeAnalyzer.nodeAnalyzer.pullSecrets=' + registryInputs[2].value + ' \\ <br>';
+        let agentImageTag = '--set agent.image.tag=' + registryInputs[4].value + ' \\<br>';
+        let nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag = '--set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + registryInputs[5].value + ' \\ <br>';
+        outputText += agentImageRegistry
+        outputText += agentImageRepository
+        outputText += agentImagePullSecrets
+        outputText += nodeAnalyzerImageRegistry
+        outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository
+        outputText += nodeAnalyzerNodeAnalyzerPullSecrets
+        outputText += agentImageTag
+        outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag
       }
 
       if (priorityCheckbox.checked) {
