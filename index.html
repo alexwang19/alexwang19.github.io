@@ -25,6 +25,10 @@
       margin-bottom: 10px;
     }
 
+    .dynamic-input-wrapper {
+      margin-bottom: 10px;
+    }
+
     #output {
       margin-top: 20px;
       background-color: #f2f2f2;
@@ -151,7 +155,7 @@
         // Generate input boxes
         for (let i = 1; i <= inputCount; i++) {
           const inputWrapper = document.createElement('div');
-          inputWrapper.classList.add('input-wrapper');
+          inputWrapper.classList.add('dynamic-input-wrapper');
 
           const label = document.createElement('label');
           label.textContent = 'Input ' + i;
