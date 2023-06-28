@@ -154,52 +154,48 @@
 
         // Clear existing inputs
         inputsContainer.innerHTML = '';
+        const inputWrapper = document.createElement('div');
+        inputWrapper.classList.add('dynamic-input-wrapper');
 
-        // Generate input boxes
-        // for (let i = 1; i <= inputCount; i++) {
-        //   const inputWrapper = document.createElement('div');
-        //   inputWrapper.classList.add('dynamic-input-wrapper');
+        const label = document.createElement('label');
+        label.textContent = 'Proxy Host';
 
-        //   const label = document.createElement('label');
-        //   label.textContent = 'Input ' + i;
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.name = 'proxy_host';
 
-        //   const input = document.createElement('input');
-        //   input.type = 'text';
-        //   input.name = 'input' + i;
+        inputWrapper.appendChild(label);
+        inputWrapper.appendChild(input);
 
-        //   inputWrapper.appendChild(label);
-        //   inputWrapper.appendChild(input);
+        const inputWrapper2 = document.createElement('div');
+        inputWrapper2.classList.add('dynamic-input-wrapper');
 
-        //   inputsContainer.appendChild(inputWrapper);
-        // }
-          const inputWrapper = document.createElement('div');
-          inputWrapper.classList.add('dynamic-input-wrapper');
+        const label2 = document.createElement('label');
+        label2.textContent = 'Proxy Port';
 
-          const label = document.createElement('label');
-          label.textContent = 'Proxy Host';
+        const input2 = document.createElement('input');
+        input2.type = 'text';
+        input2.name = 'proxy_port';
 
-          const input = document.createElement('input');
-          input.type = 'text';
-          input.name = 'proxy_host';
+        inputWrapper2.appendChild(label2);
+        inputWrapper2.appendChild(input2);
 
-          inputWrapper.appendChild(label);
-          inputWrapper.appendChild(input);
+        const inputWrapper3 = document.createElement('div');
+        inputWrapper3.classList.add('dynamic-input-wrapper');
 
-          const inputWrapper2 = document.createElement('div');
-          inputWrapper2.classList.add('dynamic-input-wrapper');
+        const label3 = document.createElement('label');
+        label3.textContent = 'No Proxy List(Comma delimited)';
 
-          const label2 = document.createElement('label');
-          label2.textContent = 'Proxy Port';
+        const input3 = document.createElement('input');
+        input3.type = 'text';
+        input3.name = 'no_proxy_list';
 
-          const input2 = document.createElement('input');
-          input2.type = 'text';
-          input2.name = 'proxy_port';
+        inputWrapper3.appendChild(label2);
+        inputWrapper3.appendChild(input2);
 
-          inputWrapper2.appendChild(label2);
-          inputWrapper2.appendChild(input2);
-
-          inputsContainer.appendChild(inputWrapper);
-          inputsContainer.appendChild(inputWrapper2);
+        inputsContainer.appendChild(inputWrapper);
+        inputsContainer.appendChild(inputWrapper2);
+        inputsContainer.appendChild(inputWrapper3);
       } else {
         // Clear inputs when unchecked
         inputsContainer.innerHTML = '';
