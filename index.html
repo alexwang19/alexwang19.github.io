@@ -181,9 +181,9 @@
     }
 
     function displayOutput() {
-      // const checkbox = document.getElementById('generateInputsCheckbox');
-      // const inputsContainer = document.getElementById('dynamicInputs');
-      // const inputs = inputsContainer.getElementsByTagName('input');
+      const checkbox = document.getElementById('generateInputsCheckbox');
+      const inputsContainer = document.getElementById('dynamicInputs');
+      const inputs = inputsContainer.getElementsByTagName('input');
       const namespaceInput = document.querySelector('#namespaceInput input');
       const accessKeyInput = document.querySelector('#accessKeyInput input');
       const regionInput = document.querySelector('#regionInput input');
@@ -204,16 +204,16 @@
       let clusterTagsText = '--set agent.sysdig.settings.tags=' + clusterTagsInput.value + ' \\ <br>';
       let outputText = helmInstallText + accessKeyText + regionText + clusterNameText + clusterTagsText;
 
-      // if (checkbox.checked) {
-      //   outputText += 'Checkbox is checked<br>';
+      if (checkbox.checked) {
+        outputText += 'Checkbox is checked<br>';
 
-      //   for (let i = 0; i < inputs.length; i++) {
-      //     const inputName = inputs[i].name;
-      //     const inputValue = inputs[i].value;
+        for (let i = 0; i < inputs.length; i++) {
+          const inputName = inputs[i].name;
+          const inputValue = inputs[i].value;
 
-      //     outputText += inputName + ': ' + inputValue + '<br>';
-      //   }
-      // }
+          outputText += inputName + ': ' + inputValue + '<br>';
+        }
+      }
 
       if (proxyCheckbox.checked) {
         outputText += '- Require Proxy: ' + proxyInput.value + '<br>';
