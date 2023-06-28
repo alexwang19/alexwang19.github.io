@@ -274,7 +274,15 @@
       }
       if (registryCheckbox.checked) {
         let agentImageRegistry = '--set agent.image.registry=' + registryInputs[0].value + ' \\ <br>';
+        let agentImageRepository = '--set agent.image.repository=' + registryInputs[1].value + ' \\ <br>';
+        let agentImagePullSecrets = '--set agent.image.pullSecrets=' + registryInputs[2].value + ' \\ <br>';
+        let nodeAnalyzerImageRegistry= = '--set nodeAnalyzer.image.registry=' + registryInputs[0].value + ' \\ <br>';
+        let nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository = '--set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.repository=' + registryInputs[3].value + ' \\ <br>';
         outputText += agentImageRegistry;
+        outputText += agentImageRepository;
+        outputText += agentImagePullSecrets;
+        outputText += nodeAnalyzerImageRegistry;
+        outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository;
       }
       //   let agentImageRegistry = '--set agent.image.registry=' + registryInputs[0].value + ' \\ <br>';
       //   // let agentImageRepository = '--set agent.image.repository=' + registryInputs[1].value + ' \\ <br>';
