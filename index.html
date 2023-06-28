@@ -146,13 +146,12 @@
       const inputsContainer = document.getElementById(inputsContainerId);
 
       if (checkbox.checked) {
-        const inputCount = 8; // Change this value to adjust the number of input boxes generated
         const registry_fields = ["Internal Registry", "Internal Sysdig Agent Image", "Internal Registry Pull Secret", "Internal Sysdig Runtime Scanner Image", "Sysdig Agent Tag", "Sysdig Runtime Scanner Tag"];
         // Clear existing inputs
         inputsContainer.innerHTML = '';
 
         // Generate input boxes
-        for (let i = 0; i < registry_fields.length; i++) {
+        for (let i = 0; i <= registry_fields.length; i++) {
           const inputWrapper = document.createElement('div');
           inputWrapper.classList.add('input-wrapper');
 
