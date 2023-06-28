@@ -95,13 +95,16 @@
       <input type="text" id="clusterTags" placeholder="Enter Cluster Tags">
     </div>
 
-    <label>
-      <input type="checkbox" id="generateInputsCheckbox"
-        onchange="toggleInputs('generateInputsCheckbox', 'dynamicInputs')">
-      Generate Inputs
-    </label>
+    <div class="form-section">
+      <label>
+        <input type="checkbox" id="generateInputsCheckbox"
+          onchange="toggleInputs('generateInputsCheckbox', 'dynamicInputs')">
+        Generate Inputs
+      </label>
+      <div id="dynamicInputs" class="form-section"></div>
+    </div>
 
-    <div id="dynamicInputs"></div>
+
 
     <div class="form-section">
       <label>
