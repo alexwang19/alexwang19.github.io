@@ -185,7 +185,21 @@
           inputWrapper.appendChild(label);
           inputWrapper.appendChild(input);
 
+          const inputWrapper2 = document.createElement('div');
+          inputWrapper2.classList.add('dynamic-input-wrapper');
+
+          const label2 = document.createElement('label');
+          label2.textContent = 'Proxy Port';
+
+          const input2 = document.createElement('input');
+          input2.type = 'text';
+          input2.name = 'proxy_port';
+
+          inputWrapper2.appendChild(label2);
+          inputWrapper2.appendChild(input2);
+
           inputsContainer.appendChild(inputWrapper);
+          inputsContainer.appendChild(inputWrapper2);
       } else {
         // Clear inputs when unchecked
         inputsContainer.innerHTML = '';
@@ -228,7 +242,7 @@
           const inputName = inputs[i].name;
           const inputValue = inputs[i].value;
 
-          outputText += inputName + ': ' + inputValue + '<br>';
+          outputText += inputName + inputValue + '<br>';
         }
       }
 
