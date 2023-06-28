@@ -93,6 +93,14 @@
 
     <div class="form-section">
       <label>
+        <input type="checkbox" id="generateInputsCheckbox" onchange="toggleInputs('generateInputsCheckbox', 'dynamicInputs')">
+        Generate Inputs
+      </label>
+        <div id="dynamicInputs"></div>
+    </div>
+
+    <div class="form-section">
+      <label>
         <input type="checkbox" id="proxyCheckbox" onchange="toggleInput('proxyCheckbox', 'proxyInput')">
         Proxy Required
       </label>
@@ -100,6 +108,7 @@
         <input type="text" id="proxyDetails" placeholder="Enter Proxy Details">
       </div>
     </div>
+    
 
     <div class="form-section">
       <label>
@@ -129,6 +138,38 @@
   </div>
 
   <script>
+    function toggleInputs(checkboxId, inputsContainerId) {
+      const checkbox = document.getElementById(checkboxId);
+      const inputsContainer = document.getElementById(inputsContainerId);
+
+      if (checkbox.checked) {
+        const inputCount = 3; // Change this value to adjust the number of input boxes generated
+
+        // Clear existing inputs
+        inputsContainer.innerHTML = '';
+
+        // Generate input boxes
+        for (let i = 1; i <= inputCount; i++) {
+          const inputWrapper = document.createElement('div');
+          inputWrapper.classList.add('input-wrapper');
+
+          const label = document.createElement('label');
+          label.textContent = 'Input ' + i;
+
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.name = 'input' + i;
+
+          inputWrapper.appendChild(label);
+          inputWrapper.appendChild(input);
+
+          inputsContainer.appendChild(inputWrapper);
+        }
+      } else {
+        // Clear inputs when unchecked
+        inputsContainer.innerHTML = '';
+      }
+    }
     function toggleInput(checkboxId, inputId) {
       const checkbox = document.getElementById(checkboxId);
       const inputDiv = document.getElementById(inputId);
@@ -136,6 +177,9 @@
     }
 
     function displayOutput() {
+      const checkbox = document.getElementById('generateInputsCheckbox');
+      const inputsContainer = document.getElementById('dynamicInputs');
+      const inputs = inputsContainer.getElementsByTagName('input');
       const namespaceInput = document.querySelector('#namespaceInput input');
       const accessKeyInput = document.querySelector('#accessKeyInput input');
       const regionInput = document.querySelector('#regionInput input');
@@ -156,6 +200,17 @@
       let clusterTagsText = '--set agent.sysdig.settings.tags=' + clusterTagsInput.value + ' \\ <br>';
       let outputText = helmInstallText + accessKeyText + regionText + clusterNameText + clusterTagsText;
 
+      if (checkbox.checked) {
+        outputText += 'Checkbox is checked<br>';
+
+        for (let i = 0; i < inputs.length; i++) {
+          const inputName = inputs[i].name;
+          const inputValue = inputs[i].value;
+
+          outputText += inputName + ': ' + inputValue + '<br>';
+        }
+      }
+      
       if (proxyCheckbox.checked) {
         outputText += '- Require Proxy: ' + proxyInput.value + '<br>';
       }
