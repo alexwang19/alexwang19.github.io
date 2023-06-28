@@ -99,7 +99,7 @@
       <label>
         <input type="checkbox" id="generateInputsCheckbox"
           onchange="toggleProxyInputs('generateInputsCheckbox', 'dynamicInputs')">
-        Generate Inputs
+        Proxy Required
       </label>
       <div id="dynamicInputs" class="form-section"></div>
     </div>
@@ -156,22 +156,36 @@
         inputsContainer.innerHTML = '';
 
         // Generate input boxes
-        for (let i = 1; i <= inputCount; i++) {
+        // for (let i = 1; i <= inputCount; i++) {
+        //   const inputWrapper = document.createElement('div');
+        //   inputWrapper.classList.add('dynamic-input-wrapper');
+
+        //   const label = document.createElement('label');
+        //   label.textContent = 'Input ' + i;
+
+        //   const input = document.createElement('input');
+        //   input.type = 'text';
+        //   input.name = 'input' + i;
+
+        //   inputWrapper.appendChild(label);
+        //   inputWrapper.appendChild(input);
+
+        //   inputsContainer.appendChild(inputWrapper);
+        // }
           const inputWrapper = document.createElement('div');
           inputWrapper.classList.add('dynamic-input-wrapper');
 
           const label = document.createElement('label');
-          label.textContent = 'Input ' + i;
+          label.textContent = 'Proxy Host';
 
           const input = document.createElement('input');
           input.type = 'text';
-          input.name = 'input' + i;
+          input.name = 'proxy_host';
 
           inputWrapper.appendChild(label);
           inputWrapper.appendChild(input);
 
           inputsContainer.appendChild(inputWrapper);
-        }
       } else {
         // Clear inputs when unchecked
         inputsContainer.innerHTML = '';
