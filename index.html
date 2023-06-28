@@ -97,16 +97,16 @@
 
     <div class="form-section">
       <label>
-        <input type="checkbox" id="generateInputsCheckbox"
+        <input type="checkbox" id="proxyCheckbox"
           onchange="toggleProxyInputs('generateInputsCheckbox', 'dynamicInputs')">
         Proxy Required
       </label>
-      <div id="dynamicInputs" class="form-section"></div>
+      <div id="proxyInput" class="form-section"></div>
     </div>
 
 
 
-    <div class="form-section">
+<!--     <div class="form-section">
       <label>
         <input type="checkbox" id="proxyCheckbox" onchange="toggleInput('proxyCheckbox', 'proxyInput')">
         Proxy Required
@@ -115,7 +115,7 @@
         <input type="text" id="proxyDetails" placeholder="Enter Proxy Details">
       </div>
     </div>
-
+ -->
 
     <div class="form-section">
       <label>
@@ -208,8 +208,8 @@
     }
 
     function displayOutput() {
-      const checkbox = document.getElementById('generateInputsCheckbox');
-      const inputsContainer = document.getElementById('dynamicInputs');
+      // const checkbox = document.getElementById('generateInputsCheckbox');
+      // const inputsContainer = document.getElementById('dynamicInputs');
       const inputs = inputsContainer.getElementsByTagName('input');
       const namespaceInput = document.querySelector('#namespaceInput input');
       const accessKeyInput = document.querySelector('#accessKeyInput input');
@@ -231,7 +231,7 @@
       let clusterTagsText = '--set agent.sysdig.settings.tags=' + clusterTagsInput.value + ' \\ <br>';
       let outputText = helmInstallText + accessKeyText + regionText + clusterNameText + clusterTagsText;
 
-      if (checkbox.checked) {
+      if (proxyCheckbox.checked) {
         outputText += 'Checkbox is checked<br>';
 
         for (let i = 0; i < inputs.length; i++) {
@@ -242,9 +242,9 @@
         }
       }
 
-      if (proxyCheckbox.checked) {
-        outputText += '- Require Proxy: ' + proxyInput.value + '<br>';
-      }
+      // if (proxyCheckbox.checked) {
+      //   outputText += '- Require Proxy: ' + proxyInput.value + '<br>';
+      // }
 
       if (registryCheckbox.checked) {
         outputText += '- Require Internal Registry: ' + registryInput.value + '<br>';
