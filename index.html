@@ -232,11 +232,11 @@
       let outputText = helmInstallText + accessKeyText + regionText + clusterNameText + clusterTagsText;
 
       if (proxyCheckbox.checked) {
-        let httpProxy = '--set global.proxy.httpProxy=' + inputs[0] + ':' + inputs[1] + ' \\ <br>';
-        let httpsProxy = '--set global.proxy.httpsProxy=' + inputs[0] + ':' + inputs[1] + ' \\ <br>';
+        let httpProxy = '--set global.proxy.httpProxy=' + inputs[0].value + ':' + inputs[1].value + ' \\ <br>';
+        let httpsProxy = '--set global.proxy.httpsProxy=' + inputs[0].value + ':' + inputs[1].value + ' \\ <br>';
         let noProxy = '--set global.proxy.noProxy=' + inputs[2] + ' \\ <br>';
-        let agentHttpProxyPort = '--set agent.sysdig.settings.http_proxy.proxy_port=' + inputs[1] + ' \\ <br>';
-        let agentHttpProxyHost = '--set agent.sysdig.settings.http_proxy.proxy_host=' + inputs[0] + ' \\ <br>';
+        let agentHttpProxyPort = '--set agent.sysdig.settings.http_proxy.proxy_port=' + inputs[1].value + ' \\ <br>';
+        let agentHttpProxyHost = '--set agent.sysdig.settings.http_proxy.proxy_host=' + inputs[0].value + ' \\ <br>';
         outputText += httpProxy
         outputText += httpsProxy
         outputText += noProxy
@@ -261,7 +261,7 @@
       }
 
       if (priorityCheckbox.checked) {
-        outputText += '- Require Priority Class: ' + priorityInput.value + '<br>';
+        outputText += '--set agent.priorityClassName=' + priorityInput.value + ' \\ <br>';
       }
 
       outputDiv.innerHTML = outputText;
