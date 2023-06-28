@@ -274,20 +274,20 @@
       }
       if (registryCheckbox.checked) {
         let agentImageRegistry = '--set agent.image.registry=' + registryInputs[0].value + ' \\ <br>';
-        let agentImageRepository = '--set agent.image.repository=' + registryInputs[1].value + ' \\ <br>';
-        let agentImagePullSecrets = '--set agent.image.pullSecrets=' + registryInputs[2].value + ' \\ <br>';
-        let nodeAnalyzerImageRegistry= = '--set nodeAnalyzer.image.registry=' + registryInputs[0].value + ' \\ <br>';
-        let nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository = '--set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.repository=' + registryInputs[3].value + ' \\ <br>';
-        let nodeAnalyzerNodeAnalyzerPullSecrets = '--set nodeAnalyzer.nodeAnalyzer.pullSecrets=' + registryInputs[2].value + ' \\ <br>';
-        let agentImageTag = '--set agent.image.tag=' + registryInputs[4].value + ' \\<br>';
-        let nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag = '--set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + registryInputs[5].value + ' \\ <br>';
-        outputText += agentImageRegistry;
-        outputText += agentImageRepository;
-        outputText += agentImagePullSecrets;
-        outputText += nodeAnalyzerImageRegistry;
-        outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository;
-        outputText += nodeAnalyzerNodeAnalyzerPullSecrets;
-        outputText += agentImageTag;
+        // let agentImageRepository = '--set agent.image.repository=' + registryInputs[1].value + ' \\ <br>';
+        // let agentImagePullSecrets = '--set agent.image.pullSecrets=' + registryInputs[2].value + ' \\ <br>';
+        // let nodeAnalyzerImageRegistry= = '--set nodeAnalyzer.image.registry=' + registryInputs[0].value + ' \\ <br>';
+        // let nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository = '--set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.repository=' + registryInputs[3].value + ' \\ <br>';
+        // let nodeAnalyzerNodeAnalyzerPullSecrets = '--set nodeAnalyzer.nodeAnalyzer.pullSecrets=' + registryInputs[2].value + ' \\ <br>';
+        // let agentImageTag = '--set agent.image.tag=' + registryInputs[4].value + ' \\<br>';
+        // let nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag = '--set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + registryInputs[5].value + ' \\ <br>';
+        // outputText += agentImageRegistry;
+        // outputText += agentImageRepository;
+        // outputText += agentImagePullSecrets;
+        // outputText += nodeAnalyzerImageRegistry;
+        // outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository;
+        // outputText += nodeAnalyzerNodeAnalyzerPullSecrets;
+        // outputText += agentImageTag;
         outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag;
       }
 
