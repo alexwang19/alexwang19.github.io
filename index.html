@@ -61,6 +61,14 @@
 
   <div id="dynamicInputs"></div>
 
+        <label>
+        <input type="checkbox" id="priorityCheckbox" onchange="toggleInput('priorityCheckbox', 'priorityInput')">
+        Priority Class Required
+      </label>
+      <div id="priorityInput" class="input-wrapper">
+        <input type="text" id="priorityDetails" placeholder="Enter Priority Class Details">
+      </div>
+
   <button onclick="displayOutput()">Submit</button>
 
   <div id="output"></div>
@@ -97,6 +105,12 @@
         // Clear inputs when unchecked
         inputsContainer.innerHTML = '';
       }
+    }
+
+        function toggleInput(checkboxId, inputId) {
+      const checkbox = document.getElementById(checkboxId);
+      const inputDiv = document.getElementById(inputId);
+      inputDiv.style.display = checkbox.checked ? 'block' : 'none';
     }
 
     function displayOutput() {
