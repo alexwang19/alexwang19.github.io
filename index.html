@@ -98,7 +98,7 @@
     <div class="form-section">
       <label>
         <input type="checkbox" id="proxyCheckbox"
-          onchange="toggleProxyInputs('generateInputsCheckbox', 'proxyInput')">
+          onchange="toggleProxyInputs('proxyCheckbox', 'proxyInput')">
         Proxy Required
       </label>
       <div id="proxyInput" class="form-section"></div>
@@ -210,7 +210,6 @@
     function displayOutput() {
       // const checkbox = document.getElementById('generateInputsCheckbox');
       // const inputsContainer = document.getElementById('dynamicInputs');
-      const inputs = inputsContainer.getElementsByTagName('input');
       const namespaceInput = document.querySelector('#namespaceInput input');
       const accessKeyInput = document.querySelector('#accessKeyInput input');
       const regionInput = document.querySelector('#regionInput input');
@@ -218,6 +217,7 @@
       const clusterTagsInput = document.querySelector('#clusterTagsInput input');
       const proxyCheckbox = document.getElementById('proxyCheckbox');
       const proxyInput = document.querySelector('#proxyInput input');
+      const inputs = proxyInput.getElementsByTagName('input');
       const registryCheckbox = document.getElementById('registryCheckbox');
       const registryInput = document.querySelector('#registryInput input');
       const priorityCheckbox = document.getElementById('priorityCheckbox');
