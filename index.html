@@ -98,7 +98,7 @@
     <div class="form-section">
       <label>
         <input type="checkbox" id="generateInputsCheckbox"
-          onchange="toggleInputs('generateInputsCheckbox', 'dynamicInputs')">
+          onchange="toggleProxyInputs('generateInputsCheckbox', 'dynamicInputs')">
         Generate Inputs
       </label>
       <div id="dynamicInputs" class="form-section"></div>
@@ -145,7 +145,7 @@
   </div>
 
   <script>
-    function toggleInputs(checkboxId, inputsContainerId) {
+    function toggleProxyInputs(checkboxId, inputsContainerId) {
       const checkbox = document.getElementById(checkboxId);
       const inputsContainer = document.getElementById(inputsContainerId);
 
