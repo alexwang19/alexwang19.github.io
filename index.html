@@ -72,27 +72,27 @@
 
     <div id="namespaceInput" class="form-section">
       <label for="namespaceInput">Kubernetes Namespace</label>
-      <input type="text" id="namespace" placeholder="Enter k8s Namespace">
+      <input type="text" id="namespace" placeholder="Enter k8s Namespace" required>
     </div>
 
     <div id="accessKeyInput" class="form-section">
       <label for="accessKeyInput">Sysdig Access Key</label>
-      <input type="text" id="accessKey" placeholder="Enter Sysdig Access Key">
+      <input type="text" id="accessKey" placeholder="Enter Sysdig Access Key" required>
     </div>
 
     <div id="regionInput" class="form-section">
       <label for="regionInput">Sysdig Region</label>
-      <input type="text" id="region" placeholder="Enter Sysdig Region">
+      <input type="text" id="region" placeholder="Enter Sysdig Region" required>
     </div>
 
     <div id="clusterNameInput" class="form-section">
       <label for="clusterNameInput">Cluster Name</label>
-      <input type="text" id="clusterName" placeholder="Enter Cluster Name">
+      <input type="text" id="clusterName" placeholder="Enter Cluster Name" required>
     </div>
 
     <div id="clusterTagsInput" class="form-section">
       <label for="clusterTagsInput">Cluster Tags</label>
-      <input type="text" id="clusterTags" placeholder="Enter Cluster Tags">
+      <input type="text" id="clusterTags" placeholder="Enter Cluster Tags" required>
     </div>
 
     <div class="form-section">
@@ -163,7 +163,7 @@
         const input = document.createElement('input');
         input.type = 'text';
         input.name = 'proxy_host';
-        input.required = true;
+        input.required = required;
 
         inputWrapper.appendChild(label);
         inputWrapper.appendChild(input);
@@ -177,7 +177,7 @@
         const input2 = document.createElement('input');
         input2.type = 'text';
         input2.name = 'proxy_port';
-        input2.required = true;
+        input2.required = required;
 
         inputWrapper2.appendChild(label2);
         inputWrapper2.appendChild(input2);
@@ -191,7 +191,7 @@
         const input3 = document.createElement('input');
         input3.type = 'text';
         input3.name = 'no_proxy_list';
-        input3.required = true;
+        input3.required = required;
 
         inputWrapper3.appendChild(label3);
         inputWrapper3.appendChild(input3);
