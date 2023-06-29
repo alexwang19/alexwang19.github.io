@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Configuration Options</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .input-wrapper {
+      display: none;
+      margin-bottom: 10px;
+    }
+
+    .dynamic-input-wrapper {
+      margin-bottom: 10px;
+    }
+
+    #output {
+      margin-top: 20px;
+      background-color: #f2f2f2;
+      padding: 5px;
+    }
+
+    input[type="text"],
+    button {
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .form-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .form-section {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form-container">
+    <h1>Sysdig Installation</h1>
+
+    <div id="namespaceInput" class="form-section">
+      <label for="namespaceInput">Kubernetes Namespace</label>
+      <input type="text" id="namespace" placeholder="Enter k8s Namespace" required>
+    </div>
+
+    <div id="accessKeyInput" class="form-section">
+      <label for="accessKeyInput">Sysdig Access Key</label>
+      <input type="text" id="accessKey" placeholder="Enter Sysdig Access Key" required>
+    </div>
+
+    <div id="regionInput" class="form-section">
+      <label for="regionInput">Sysdig Region</label>
+      <input type="text" id="region" placeholder="Enter Sysdig Region" required>
+    </div>
+
+    <div id="clusterNameInput" class="form-section">
+      <label for="clusterNameInput">Cluster Name</label>
+      <input type="text" id="clusterName" placeholder="Enter Cluster Name" required>
+    </div>
+
+    <div id="clusterTagsInput" class="form-section">
+      <label for="clusterTagsInput">Cluster Tags</label>
+      <input type="text" id="clusterTags" placeholder="Enter Cluster Tags" required>
+    </div>
+
+    <div class="form-section">
+      <label>
+        <input type="checkbox" id="proxyCheckbox"
+          onchange="toggleProxyInputs('proxyCheckbox', 'proxyInput')">
+        Proxy Required
+      </label>
+      <div id="proxyInput" class="form-section"></div>
+    </div>
+
+    <div class="form-section">
+      <label>
+        <input type="checkbox" id="registryCheckbox"
+          onchange="toggleRegistryInputs('registryCheckbox', 'registryInput')">
+        Internal Registry Required
+      </label>
+      <div id="registryInput" class="form-section"></div>
+    </div>
+
+<!--     <div class="form-section">
+      <label>
+        <input type="checkbox" id="registryCheckbox" onchange="toggleInput('registryCheckbox', 'registryInput')">
+        Internal Registry Required
+      </label>
+      <div id="registryInput" class="input-wrapper">
+        <input type="text" id="registryDetails" placeholder="Enter Registry Details">
+      </div>
+    </div> -->
+
+    <div class="form-section">
+      <label>
+        <input type="checkbox" id="priorityCheckbox" onchange="toggleInput('priorityCheckbox', 'priorityInput')">
+        Priority Class Required
+      </label>
+      <div id="priorityInput" class="input-wrapper">
+        <input type="text" id="priorityDetails" placeholder="Enter Priority Class Details">
+      </div>
+    </div>
+
+    <div class="form-section">
+      <button onclick="displayOutput()">Submit</button>
+    </div>
+
+    <div id="output"></div>
+  </div>
+
+  <script>
+    function toggleRegistryInputs(checkboxId, inputsContainerId) {
+      const checkbox = document.getElementById(checkboxId);
+      const inputsContainer = document.getElementById(inputsContainerId);
+
+      if (checkbox.checked) {
+        const registry_fields = ["Internal Registry", "Internal Sysdig Agent Image", "Internal Registry Pull Secret", "Internal Sysdig Runtime Scanner Image", "Sysdig Agent Tag", "Sysdig Runtime Scanner Tag"];
+        // Clear existing inputs
+        inputsContainer.innerHTML = '';
+
+        // Generate input boxes
+        for (let i = 0; i < registry_fields.length; i++) {
+          const inputWrapper = document.createElement('div');
+          inputWrapper.classList.add('dynamic-input-wrapper');
+
+          const label = document.createElement('label');
+          label.textContent = registry_fields[i];
+
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.name = registry_fields[i];
+
+          inputWrapper.appendChild(label);
+          inputWrapper.appendChild(input);
+
+          inputsContainer.appendChild(inputWrapper);
+        }
+      } else {
+        // Clear inputs when unchecked
+        inputsContainer.innerHTML = '';
+      }
+    }
+    function toggleProxyInputs(checkboxId, inputsContainerId) {
+      const checkbox = document.getElementById(checkboxId);
+      const inputsContainer = document.getElementById(inputsContainerId);
+
+      if (checkbox.checked) {
+        // Clear existing inputs
+        inputsContainer.innerHTML = '';
+        const inputWrapper = document.createElement('div');
+        inputWrapper.classList.add('dynamic-input-wrapper');
+
+        const label = document.createElement('label');
+        label.textContent = 'Proxy Host';
+
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.name = 'proxy_host';
+        input.required = true;
+
+        inputWrapper.appendChild(label);
+        inputWrapper.appendChild(input);
+
+        const inputWrapper2 = document.createElement('div');
+        inputWrapper2.classList.add('dynamic-input-wrapper');
+
+        const label2 = document.createElement('label');
+        label2.textContent = 'Proxy Port';
+
+        const input2 = document.createElement('input');
+        input2.type = 'text';
+        input2.name = 'proxy_port';
+        input2.required = true;
+
+        inputWrapper2.appendChild(label2);
+        inputWrapper2.appendChild(input2);
+
+        const inputWrapper3 = document.createElement('div');
+        inputWrapper3.classList.add('dynamic-input-wrapper');
+
+        const label3 = document.createElement('label');
+        label3.textContent = 'No Proxy List(Comma delimited)';
+
+        const input3 = document.createElement('input');
+        input3.type = 'text';
+        input3.name = 'no_proxy_list';
+        input3.required = true;
+
+        inputWrapper3.appendChild(label3);
+        inputWrapper3.appendChild(input3);
+
+        inputsContainer.appendChild(inputWrapper);
+        inputsContainer.appendChild(inputWrapper2);
+        inputsContainer.appendChild(inputWrapper3);
+      } else {
+        // Clear inputs when unchecked
+        inputsContainer.innerHTML = '';
+      }
+    }
+    function toggleInput(checkboxId, inputId) {
+      const checkbox = document.getElementById(checkboxId);
+      const inputDiv = document.getElementById(inputId);
+      inputDiv.style.display = checkbox.checked ? 'block' : 'none';
+    }
+
+    function displayOutput() {
+      // const checkbox = document.getElementById('generateInputsCheckbox');
+      // const inputsContainer = document.getElementById('dynamicInputs');
+      const namespaceInput = document.querySelector('#namespaceInput input');
+      const accessKeyInput = document.querySelector('#accessKeyInput input');
+      const regionInput = document.querySelector('#regionInput input');
+      const clusterNameInput = document.querySelector('#clusterNameInput input');
+      const clusterTagsInput = document.querySelector('#clusterTagsInput input');
+      const proxyCheckbox = document.getElementById('proxyCheckbox');
+      const proxyInput = document.getElementById('proxyInput');
+      const inputs = proxyInput.getElementsByTagName('input');
+      const registryCheckbox = document.getElementById('registryCheckbox');
+      const registryInput = document.getElementById('registryInput');
+      const registryInputs = registryInput.getElementsByTagName('input');
+      const priorityCheckbox = document.getElementById('priorityCheckbox');
+      const priorityInput = document.querySelector('#priorityInput input');
+      const outputDiv = document.getElementById('output');
+
+      let helmInstallText = 'helm install sysdig-agent --namespace ' + namespaceInput.value + ' --force-update \\<br>';
+      let accessKeyText = '--set global.sysdig.accessKey=' + accessKeyInput.value + ' \\ <br>';
+      let regionText = '--set global.sysdig.region=' + regionInput.value + ' \\ <br>';
+      let clusterNameText = '--set global.clusterConfig.name=' + clusterNameInput.value + ' \\ <br>';
+      let clusterTagsText = '--set agent.sysdig.settings.tags=' + clusterTagsInput.value + ' \\ <br>';
+      let outputText = helmInstallText + accessKeyText + regionText + clusterNameText + clusterTagsText;
+
+      if (proxyCheckbox.checked) {
+        let httpProxy = '--set global.proxy.httpProxy=' + inputs[0].value + ':' + inputs[1].value + ' \\ <br>';
+        let httpsProxy = '--set global.proxy.httpsProxy=' + inputs[0].value + ':' + inputs[1].value + ' \\ <br>';
+        let noProxy = '--set global.proxy.noProxy=' + inputs[2].value + ' \\ <br>';
+        let agentHttpProxyPort = '--set agent.sysdig.settings.http_proxy.proxy_port=' + inputs[1].value + ' \\ <br>';
+        let agentHttpProxyHost = '--set agent.sysdig.settings.http_proxy.proxy_host=' + inputs[0].value + ' \\ <br>';
+        outputText += httpProxy;
+        outputText += httpsProxy;
+        outputText += noProxy;
+        outputText += agentHttpProxyPort;
+        outputText += agentHttpProxyHost;
+      }
+      if (registryCheckbox.checked) {
+        let agentImageRegistry = '--set agent.image.registry=' + registryInputs[0].value + ' \\ <br>';
+        let agentImageRepository = '--set agent.image.repository=' + registryInputs[1].value + ' \\ <br>';
+        let agentImagePullSecrets = '--set agent.image.pullSecrets=' + registryInputs[2].value + ' \\ <br>';
+        let nodeAnalyzerImageRegistry = '--set nodeAnalyzer.image.registry=' + registryInputs[0].value + ' \\ <br>';
+        let nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository = '--set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.repository=' + registryInputs[3].value + ' \\ <br>';
+        let nodeAnalyzerNodeAnalyzerPullSecrets = '--set nodeAnalyzer.nodeAnalyzer.pullSecrets=' + registryInputs[2].value + ' \\ <br>';
+        let agentImageTag = '--set agent.image.tag=' + registryInputs[4].value + ' \\<br>';
+        let nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag = '--set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + registryInputs[5].value + ' \\ <br>';
+        outputText += agentImageRegistry;
+        outputText += agentImageRepository;
+        outputText += agentImagePullSecrets;
+        outputText += nodeAnalyzerImageRegistry;
+        outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository;
+        outputText += nodeAnalyzerNodeAnalyzerPullSecrets;
+        outputText += agentImageTag;
+        outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag;
+      }
+
+      if (priorityCheckbox.checked) {
+        outputText += '--set agent.priorityClassName=' + priorityInput.value + ' \\ <br>';
+      }
+
+      outputDiv.innerHTML = outputText;
+    }
+  </script>
+</body>
+
+</html>
