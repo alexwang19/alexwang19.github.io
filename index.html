@@ -318,17 +318,6 @@
     region: "us2"
   clusterConfig:
     name: ${clusterNameInput}
-  agent:
-    slim:
-      enabled: false
-    auditLog:
-      enabled: false
-    sysdig:
-      settings:
-        tags: mytag:test
-    image:
-      repository: sysdig/agent
-      tag: 12.14.1
   nodeAnalyzer:
     secure:
       vulnerabilityManagement:
@@ -361,6 +350,20 @@
             memory: 4Gi
             ephemeral-storage: 6Gi`;
 
+
+  let agentYamlContent = `
+    agent:
+    slim:
+      enabled: false
+    auditLog:
+      enabled: false
+    sysdig:
+      settings:
+        tags: mytag:test
+    image:
+      repository: sysdig/agent
+      tag: 12.14.1`;
+
   //   if (proxyCheckbox.checked) {
   //     yamlContent += `
   // proxy:
@@ -376,10 +379,10 @@
   //   }
 
     if (priorityCheckbox.checked) {
-      yamlContent += `
+      agentYamlContent += `
           priorityClassName: "system-node-critical"`;
     }
-
+    yamlContent += agentYamlContent
     // Create a Blob with the YAML content
     const blob = new Blob([yamlContent], { type: 'text/yaml' });
 
