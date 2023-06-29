@@ -364,8 +364,9 @@ agent:
     enabled: false
   sysdig:
     settings:
-      tags: mytag:test
-  image:
+      tags: ${clusterTagsInput}`;
+  let agentImageYamlContent = 
+  `image:
     repository: sysdig/agent
     tag: 12.14.1`;
 
@@ -376,6 +377,10 @@ agent:
     httpsProxy: http://${inputs[0].value}:${inputs[1].value}
     noProxy: ${inputs[2].value}`
     };
+    agentYamlContent += `
+      http_proxy:
+        proxy_host: ${inputs[0].value}
+        proxy_port: ${inputs[1].value}`;
 
   //   if (registryCheckbox.checked) {
   //     yamlContent += `
@@ -389,6 +394,7 @@ agent:
   priorityClassName: "system-node-critical"`;
     }
     yamlContent += agentYamlContent;
+    yamlContent += agentImageYamlContent;
     yamlContent += nodeAnalyzerYamlContent;
     // Create a Blob with the YAML content
     const blob = new Blob([yamlContent], { type: 'text/yaml' });
