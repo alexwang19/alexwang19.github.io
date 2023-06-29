@@ -317,8 +317,8 @@
     accessKey: "xxx-xxxx-xxxx-xxx"
     region: "us2"
   clusterConfig:
-    name: ${clusterNameInput}
-  nodeAnalyzer:
+    name: ${clusterNameInput}`;
+let nodeAnalyzerYamlContent=`  nodeAnalyzer:
     secure:
       vulnerabilityManagement:
         newEngineOnly: true
@@ -382,7 +382,8 @@
       agentYamlContent += `
     priorityClassName: "system-node-critical"`;
     }
-    yamlContent += agentYamlContent
+    yamlContent += agentYamlContent;
+    yamlContent += nodeAnalyzerYamlContent;
     // Create a Blob with the YAML content
     const blob = new Blob([yamlContent], { type: 'text/yaml' });
 
