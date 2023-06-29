@@ -353,17 +353,17 @@ nodeAnalyzer:
 
 
   let agentYamlContent = `
-  agent:
-    slim:
-      enabled: false
-    auditLog:
-      enabled: false
-    sysdig:
-      settings:
-        tags: mytag:test
-    image:
-      repository: sysdig/agent
-      tag: 12.14.1`;
+agent:
+  slim:
+    enabled: false
+  auditLog:
+    enabled: false
+  sysdig:
+    settings:
+      tags: mytag:test
+  image:
+    repository: sysdig/agent
+    tag: 12.14.1`;
 
   //   if (proxyCheckbox.checked) {
   //     yamlContent += `
@@ -381,7 +381,7 @@ nodeAnalyzer:
 
     if (priorityCheckbox.checked) {
       agentYamlContent += `
-    priorityClassName: "system-node-critical"`;
+  priorityClassName: "system-node-critical"`;
     }
     yamlContent += agentYamlContent;
     yamlContent += nodeAnalyzerYamlContent;
