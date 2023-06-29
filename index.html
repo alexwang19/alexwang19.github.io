@@ -312,36 +312,72 @@
     const priorityInput = document.querySelector('#priorityInput input').value;
 
     // Create YAML content
-    let yamlContent = `apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: my-config
-data:
-  namespace: ${namespaceInput}
-  accessKey: ${accessKeyInput}
-  region: ${regionInput}
-  clusterName: ${clusterNameInput}
-  clusterTags: ${clusterTagsInput}`;
+    let yamlContent = `global:
+  sysdig:
+    accessKey: "xxx-xxxx-xxxx-xxx"
+    region: "us2"
+  clusterConfig:
+    name: ${clusterNameInput}
+  agent:
+    slim:
+      enabled: false
+    auditLog:
+      enabled: false
+    sysdig:
+      settings:
+        tags: mytag:test
+    image:
+      repository: sysdig/agent
+      tag: 12.14.1
+  nodeAnalyzer:
+    secure:
+      vulnerabilityManagement:
+        newEngineOnly: true
+    nodeAnalyzer:
+      sslVerifyCertificate: false
+      imageAnalyzer:
+        deploy: false
+      benchmarkRunner:
+        deploy: false
+      hostAnalyzer:
+        deploy: false
+      hostScanner:
+        deploy: false
+      runtimeScanner:
+        deploy: true
+        image:
+          tag: 1.5.1
+        settings:
+          eveEnabled: false
+          maxImageSizeAllowed: "6442450944"
+          maxFileSizeAllowed: "500000000"
+        eveConnector:
+          deploy: false
+        resources:
+          requests:
+            ephemeral-storage: 6Gi
+          limits:
+            cpu: 1000m
+            memory: 4Gi
+            ephemeral-storage: 6Gi`;
 
-    if (proxyCheckbox.checked) {
-      yamlContent += `
-  proxy:
-    enabled: true
-    details: test`;
-    }
+  //   if (proxyCheckbox.checked) {
+  //     yamlContent += `
+  // proxy:
+  //   enabled: true
+  //   details: test`;
+  //   }
 
-    if (registryCheckbox.checked) {
-      yamlContent += `
-  internalRegistry:
-    enabled: true
-    details: test`;
-    }
+  //   if (registryCheckbox.checked) {
+  //     yamlContent += `
+  // internalRegistry:
+  //   enabled: true
+  //   details: test`;
+  //   }
 
     if (priorityCheckbox.checked) {
       yamlContent += `
-  priorityClass:
-    enabled: true
-    details: ${priorityInput}`;
+          priorityClassName: "system-node-critical"`;
     }
 
     // Create a Blob with the YAML content
