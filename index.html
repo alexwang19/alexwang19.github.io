@@ -304,18 +304,20 @@
     const regionInput = document.querySelector('#regionInput input').value;
     const clusterNameInput = document.querySelector('#clusterNameInput input').value;
     const clusterTagsInput = document.querySelector('#clusterTagsInput input').value;
-    // const proxyCheckbox = document.getElementById('proxyCheckbox');
-    // const proxyInput = document.querySelector('#proxyInput input').value;
-    // const registryCheckbox = document.getElementById('registryCheckbox');
-    // const registryInput = document.querySelector('#registryInput input').value;
+    const proxyCheckbox = document.getElementById('proxyCheckbox');
+    const proxyInput = document.getElementById('proxyInput');
+    const inputs = proxyInput.getElementsByTagName('input');
+    const registryCheckbox = document.getElementById('registryCheckbox');
+    const registryInput = document.getElementById('registryInput');
+    const registryInputs = registryInput.getElementsByTagName('input');
     const priorityCheckbox = document.getElementById('priorityCheckbox');
     const priorityInput = document.querySelector('#priorityInput input').value;
 
     // Create YAML content
     let yamlContent = `global:
   sysdig:
-    accessKey: "xxx-xxxx-xxxx-xxx"
-    region: "us2"
+    accessKey: ${accessKeyInput}
+    region: ${regionInput}
   clusterConfig:
     name: ${clusterNameInput}`;
 let nodeAnalyzerYamlContent=`
@@ -351,7 +353,6 @@ nodeAnalyzer:
             memory: 4Gi
             ephemeral-storage: 6Gi`;
 
-
   let agentYamlContent = `
 agent:
   slim:
@@ -365,12 +366,13 @@ agent:
     repository: sysdig/agent
     tag: 12.14.1`;
 
-  //   if (proxyCheckbox.checked) {
-  //     yamlContent += `
-  // proxy:
-  //   enabled: true
-  //   details: test`;
-  //   }
+    if (proxyCheckbox.checked) {
+      yamlContent += `
+  proxy:
+    httpProxy: http://${inputs[0].value}:${inputs[1].value}
+    httpsProxy: http://${inputs[0].value}:${inputs[1].value}
+    noProxy: ${inputs[2].value}`
+    };
 
   //   if (registryCheckbox.checked) {
   //     yamlContent += `
