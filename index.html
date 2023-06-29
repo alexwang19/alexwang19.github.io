@@ -391,7 +391,7 @@ agent:
   priorityClassName: "system-node-critical"`;
     }
     yamlContent += agentYamlContent;
-    // yamlContent += agentImageYamlContent;
+    yamlContent += agentImageYamlContent;
     yamlContent += nodeAnalyzerYamlContent;
     // Create a Blob with the YAML content
     const blob = new Blob([yamlContent], { type: 'text/yaml' });
