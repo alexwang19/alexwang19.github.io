@@ -340,19 +340,19 @@ nodeAnalyzer:
       runtimeScanner:
         deploy: true`;
   let nodeAnalyzerRuntimeScannerImageSizingContent = `
-      settings:
-        eveEnabled: false
-        maxImageSizeAllowed: "6442450944"
-        maxFileSizeAllowed: "500000000"
-      eveConnector:
-        deploy: false
-      resources:
-        requests:
-          ephemeral-storage: 6Gi
-        limits:
-          cpu: 1000m
-          memory: 4Gi
-          ephemeral-storage: 6Gi`;
+        settings:
+          eveEnabled: false
+          maxImageSizeAllowed: "6442450944"
+          maxFileSizeAllowed: "500000000"
+        eveConnector:
+          deploy: false
+        resources:
+          requests:
+            ephemeral-storage: 6Gi
+          limits:
+            cpu: 1000m
+            memory: 4Gi
+            ephemeral-storage: 6Gi`;
   let agentYamlContent = `
 agent:
   slim:
@@ -385,9 +385,9 @@ agent:
     repository: ${registryInputs[0].value}/${registryInputs[1].value}
     tag: ${registryInputs[4].value}`;
       let nodeAnalyzerRuntimeScannerImageContent=`
-      image:
-        repository: ${registryInputs[0].value}/${registryInputs[3].value}
-        tag: ${registryInputs[5].value}`;
+        image:
+          repository: ${registryInputs[0].value}/${registryInputs[3].value}
+          tag: ${registryInputs[5].value}`;
       nodeAnalyzerYamlContent += nodeAnalyzerRuntimeScannerImageContent;
       nodeAnalyzerYamlContent += nodeAnalyzerRuntimeScannerImageSizingContent;
       yamlContent += agentImageYamlContent;
