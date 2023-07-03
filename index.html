@@ -374,10 +374,12 @@ agent:
         proxy_host: ${inputs[0].value}
         proxy_port: ${inputs[1].value}`;
     };
+    if (registryCheckbox.checked) {
+      yamlContent += `imageRegistry: ${registryInputs[0].value}/${registryInputs[1].value}`;
+    };
     nodeAnalyzerYamlContent += nodeAnalyzerRuntimeScannerYamlContent;
     yamlContent += agentYamlContent;
     if (registryCheckbox.checked) {
-      yamlContent += `imageRegistry: ${registryInputs[0].value}/${registryInputs[1].value}`;
       let agentImageYamlContent = `
   image:
     repository: ${registryInputs[0].value}/${registryInputs[1].value}
@@ -389,7 +391,7 @@ agent:
       nodeAnalyzerYamlContent += nodeAnalyzerRuntimeScannerImageContent;
       nodeAnalyzerYamlContent += nodeAnalyzerRuntimeScannerImageSizingContent;
       yamlContent += agentImageYamlContent;
-    }
+    };
     yamlContent += nodeAnalyzerYamlContent;
 
     if (priorityCheckbox.checked) {
