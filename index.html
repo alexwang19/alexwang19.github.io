@@ -335,11 +335,15 @@ nodeAnalyzer:
       hostAnalyzer:
         deploy: false
       hostScanner:
-        deploy: false
+        deploy: false`;
+  let nodeAnalyzerRuntimeScannerYamlContent=`
       runtimeScanner:
-        deploy: true
+        deploy: true`;
+  let nodeAnalyzerRuntimeScannerImageContent=`
         image:
-          tag: 1.5.1
+          repository: ${registryInputs[0].value}/${registryInputs[3].value}
+          tag: ${registryInputs[5].value}`;
+  let nodeAnalyzerRuntimeScannerImageSizingContent = `
         settings:
           eveEnabled: false
           maxImageSizeAllowed: "6442450944"
@@ -353,7 +357,6 @@ nodeAnalyzer:
             cpu: 1000m
             memory: 4Gi
             ephemeral-storage: 6Gi`;
-
   let agentYamlContent = `
 agent:
   slim:
@@ -365,8 +368,8 @@ agent:
       tags: ${clusterTagsInput}`;
   let agentImageYamlContent = `
   image:
-    repository: sysdig/agent
-    tag: 12.14.1`;
+    repository: ${registryInputs[0].value}/${registryInputs[1].value}
+    tag: ${registryInputs[4].value}`;
 
     if (proxyCheckbox.checked) {
       yamlContent += `
