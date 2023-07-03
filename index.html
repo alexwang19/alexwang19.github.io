@@ -375,7 +375,8 @@ agent:
         proxy_port: ${inputs[1].value}`;
     };
     if (registryCheckbox.checked) {
-      yamlContent += `imageRegistry: ${registryInputs[0].value}/${registryInputs[1].value}`;
+      yamlContent += `
+    imageRegistry: ${registryInputs[0].value}/${registryInputs[1].value}`;
     };
     nodeAnalyzerYamlContent += nodeAnalyzerRuntimeScannerYamlContent;
     yamlContent += agentYamlContent;
