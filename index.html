@@ -375,6 +375,7 @@ agent:
         proxy_port: ${inputs[1].value}`;
     };
     nodeAnalyzerYamlContent += nodeAnalyzerRuntimeScannerYamlContent;
+    yamlContent += agentYamlContent;
     if (registryCheckbox.checked) {
       yamlContent += `imageRegistry: ${registryInputs[0].value}/${registryInputs[1].value}`;
       let agentImageYamlContent = `
@@ -387,15 +388,14 @@ agent:
         tag: ${registryInputs[5].value}`;
       nodeAnalyzerYamlContent += nodeAnalyzerRuntimeScannerImageContent;
       nodeAnalyzerYamlContent += nodeAnalyzerRuntimeScannerImageSizingContent;
+      yamlContent += agentImageYamlContent;
     }
+    yamlContent += nodeAnalyzerYamlContent;
 
     if (priorityCheckbox.checked) {
       agentYamlContent += `
   priorityClassName: ${priorityInput}`;
     }
-    yamlContent += agentYamlContent;
-    yamlContent += agentImageYamlContent;
-    yamlContent += nodeAnalyzerYamlContent;
     // Create a Blob with the YAML content
     const blob = new Blob([yamlContent], { type: 'text/yaml' });
 
