@@ -393,7 +393,7 @@ agent:
     // Create a Blob with the YAML content
     const blob = new Blob([yamlContent], { type: 'text/yaml' });
 
-    let outputText = `Install script with helm install sysdig-agent --namespace ${namespaceInput} -f config.yaml sysdig/sysdig-deploy`;
+    let outputText = `Install Command<br> helm install sysdig-agent --namespace ${namespaceInput} -f config.yaml sysdig/sysdig-deploy`;
     outputDiv.innerHTML = outputText;
     // Create a temporary <a> element to trigger the download
     const link = document.createElement('a');
