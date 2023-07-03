@@ -389,7 +389,7 @@ agent:
 
     if (priorityCheckbox.checked) {
       agentYamlContent += `
-  priorityClassName: "system-node-critical"`;
+  priorityClassName: ${priorityInput}`;
     }
     yamlContent += agentYamlContent;
     yamlContent += agentImageYamlContent;
@@ -397,7 +397,7 @@ agent:
     // Create a Blob with the YAML content
     const blob = new Blob([yamlContent], { type: 'text/yaml' });
 
-    let outputText = 'Install script with helm install -f values.yaml';
+    let outputText = 'Install script with helm install sysdig-agent --namespace ' + ${namespaceInput} + ' -f config.yaml sysdig/sysdig-deploy';
     outputDiv.innerHTML = outputText;
     // Create a temporary <a> element to trigger the download
     const link = document.createElement('a');
