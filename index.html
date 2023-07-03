@@ -339,10 +339,6 @@ nodeAnalyzer:
   let nodeAnalyzerRuntimeScannerYamlContent=`
       runtimeScanner:
         deploy: true`;
-  let nodeAnalyzerRuntimeScannerImageContent=`
-        image:
-          repository: ${registryInputs[0].value}/${registryInputs[3].value}
-          tag: ${registryInputs[5].value}`;
   let nodeAnalyzerRuntimeScannerImageSizingContent = `
         settings:
           eveEnabled: false
@@ -382,8 +378,15 @@ agent:
         proxy_host: ${inputs[0].value}
         proxy_port: ${inputs[1].value}`;
     };
+    nodeAnalyzerYamlContent += nodeAnalyzerRuntimeScannerYamlContent;
     if (registryCheckbox.checked) {
       yamlContent += `imageRegistry: ${registryInputs[0].value}/${registryInputs[1].value}`;
+      let nodeAnalyzerRuntimeScannerImageContent=`
+      image:
+        repository: ${registryInputs[0].value}/${registryInputs[3].value}
+        tag: ${registryInputs[5].value}`;
+      nodeAnalyzerYamlContent += nodeAnalyzerRuntimeScannerImageContent
+      nodeAnalyzerYamlContent += nodeAnalyzerRuntimeScannerImageSizingContent
     }
 
     if (priorityCheckbox.checked) {
@@ -393,6 +396,7 @@ agent:
     yamlContent += agentYamlContent;
     yamlContent += agentImageYamlContent;
     yamlContent += nodeAnalyzerYamlContent;
+    yamlContent += 
     // Create a Blob with the YAML content
     const blob = new Blob([yamlContent], { type: 'text/yaml' });
 
