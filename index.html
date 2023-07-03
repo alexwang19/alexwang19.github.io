@@ -385,8 +385,8 @@ agent:
       image:
         repository: ${registryInputs[0].value}/${registryInputs[3].value}
         tag: ${registryInputs[5].value}`;
-      nodeAnalyzerYamlContent += nodeAnalyzerRuntimeScannerImageContent
-      nodeAnalyzerYamlContent += nodeAnalyzerRuntimeScannerImageSizingContent
+      nodeAnalyzerYamlContent += nodeAnalyzerRuntimeScannerImageContent;
+      nodeAnalyzerYamlContent += nodeAnalyzerRuntimeScannerImageSizingContent;
     }
 
     if (priorityCheckbox.checked) {
