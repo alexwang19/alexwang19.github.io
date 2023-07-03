@@ -379,9 +379,9 @@ agent:
         proxy_host: ${inputs[0].value}
         proxy_port: ${inputs[1].value}`;
     };
-    // if (registryCheckbox.checked) {
-    //   yamlContent += `imageRegistry: ${registryInputs[0].value}/${registryInputs[1].value}`;
-    // }
+    if (registryCheckbox.checked) {
+      yamlContent += `imageRegistry: ${registryInputs[0].value}/${registryInputs[1].value}`;
+    }
 
     if (priorityCheckbox.checked) {
       agentYamlContent += `
