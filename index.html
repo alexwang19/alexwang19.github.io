@@ -276,7 +276,7 @@
       const outputDiv = document.getElementById('output');
 
       // Validate required inputs
-      if (!accessKeyInput || !businessUnitInput || !platformInput || !environmentInput || !vastInput || !vsadInput) {
+      if (accessKeyInput.value.trim() === '' || businessUnitInput.value.trim() === '' || platformInput.value.trim() === '' || environmentInput.value.trim() === '' || vastInput.value.trim() === '' || vsadInput.value.trim() === '') {
         alert('Please fill in all required fields.');
         return;
       }
