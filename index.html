@@ -155,9 +155,10 @@
       <select id="regionSelect" onchange="handleRegionChange()" required>
         <option value="us2">us2</option>
         <option value="us3">us3</option>
-        <option value="custom">Custom Region</option>
+        <option value="custom">Custom (For On-Prem)</option>
       </select>
-      <input type="text" id="customRegionInput" placeholder="Enter custom region" style="display: none;">
+      <input type="text" id="customCollectorUrl" placeholder="Enter Collector URL" style="display: none;">
+      <input type="text" id="customCollectorPort" placeholder="Enter Collector Port" style="display: none;">
     </div>
 
     <div id="clusterNameInput" class="form-section">
