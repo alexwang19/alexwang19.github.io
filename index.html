@@ -313,10 +313,12 @@
         let nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + registryInputs[5].value + ' \\ <br>';
         outputText += agentImageRegistry;
         outputText += agentImageRepository;
-        outputText += agentImagePullSecrets;
+        if (registryInputs[2].value.trim () != '') {
+          outputText += agentImagePullSecrets;
+          outputText += nodeAnalyzerNodeAnalyzerPullSecrets;
+        };
         outputText += nodeAnalyzerImageRegistry;
         outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository;
-        outputText += nodeAnalyzerNodeAnalyzerPullSecrets;
         outputText += agentImageTag;
         outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag;
       }
