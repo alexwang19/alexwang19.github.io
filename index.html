@@ -108,6 +108,27 @@
     .dropdown-option:hover {
       background-color: #e5e5e5;
     }
+    
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+      box-sizing: border-box;
+      background-color: #fff;
+    }
+    
+    select:required:invalid {
+      color: gray;
+    }
+    
+    option[value=""] {
+      display: none;
+    }
   </style>
 </head>
 
