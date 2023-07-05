@@ -151,10 +151,15 @@
       <input type="text" id="region" placeholder="Enter Sysdig Region">
     </div> -->
     <div id="regionInput" class="form-section">
-      <label for="regionInput">Sysdig Region (Required)</label>
-      <select id="regionSelect" onchange="handleRegionChange()" required>
-        <option value="us2">us2</option>
-        <option value="us3">us3</option>
+      <label for="regionInput">Sysdig Region</label>
+      <div class="dropdown">
+        <div class="dropdown-select" id="regionSelect" onclick="toggleRegionOptions()">Select Region</div>
+        <div class="dropdown-options" id="regionOptions">
+          <div class="dropdown-option" onclick="selectRegion('us2')">us2</div>
+          <div class="dropdown-option" onclick="selectRegion('us3')">us3</div>
+          <div class="dropdown-option" onclick="selectRegion('eu1')">eu1</div>
+        </div>
+      </div>
     </div>
 
     <div id="clusterNameInput" class="form-section">
@@ -343,7 +348,7 @@
     const namespaceInput = document.querySelector('#namespaceInput input').value;
     const accessKeyInput = document.querySelector('#accessKeyInput input').value;
     // const regionInput = document.querySelector('#regionInput input').value;
-    // const regionInput = document.getElementById('regionSelect').textContent;
+    const regionInput = document.getElementById('regionSelect').textContent;
     const clusterNameInput = document.querySelector('#clusterNameInput input').value;
     const clusterTagsInput = document.querySelector('#clusterTagsInput input').value;
     const proxyCheckbox = document.getElementById('proxyCheckbox');
@@ -356,13 +361,13 @@
     const priorityInput = document.querySelector('#priorityInput input').value;
     const outputDiv = document.getElementById('output');
 
-    let regionInput;
-    const regionSelect = document.getElementById('regionSelect');
-    if (regionSelect.value === 'custom') {
-      regionInput = document.getElementById('customRegionInput').value;
-    } else {
-      regionInput = regionSelect.value;
-    }
+    // let regionInput;
+    // const regionSelect = document.getElementById('regionSelect');
+    // if (regionSelect.value === 'custom') {
+    //   regionInput = document.getElementById('customRegionInput').value;
+    // } else {
+    //   regionInput = regionSelect.value;
+    // }
 
     // Validate required inputs
     if (!namespaceInput || !accessKeyInput || !regionInput || !clusterNameInput || !clusterTagsInput) {
