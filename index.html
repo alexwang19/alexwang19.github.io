@@ -63,6 +63,52 @@
     .form-section {
       margin-bottom: 20px;
     }
+
+        .dropdown {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .dropdown-select {
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+      box-sizing: border-box;
+      cursor: pointer;
+      background-color: white;
+    }
+
+    .dropdown-select:focus {
+      outline: none;
+      border-color: #4CAF50;
+    }
+
+    .dropdown-options {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: #f9f9f9;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-top: none;
+      border-radius: 0 0 4px 4px;
+      display: none;
+      z-index: 1;
+    }
+
+    .dropdown-option {
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    .dropdown-option:hover {
+      background-color: #e5e5e5;
+    }
+    
   </style>
 </head>
 
@@ -86,11 +132,14 @@
     </div> -->
     <div id="regionInput" class="form-section">
       <label for="regionInput">Sysdig Region</label>
-      <select id="region">
-        <option value="us2">us2</option>
-        <option value="us3">us3</option>
-        <option value="eu1">eu1</option>
-      </select>
+      <div class="dropdown">
+        <div class="dropdown-select" id="regionSelect">Select Region</div>
+        <div class="dropdown-options" id="regionOptions">
+          <div class="dropdown-option" onclick="selectRegion('us2')">us2</div>
+          <div class="dropdown-option" onclick="selectRegion('us3')">us3</div>
+          <div class="dropdown-option" onclick="selectRegion('eu1')">eu1</div>
+        </div>
+      </div>
     </div>
 
     <div id="clusterNameInput" class="form-section">
@@ -149,6 +198,26 @@
   </div>
 
   <script>
+    function selectRegion(region) {
+      document.getElementById('regionSelect').textContent = region;
+      document.getElementById('regionOptions').style.display = 'none';
+    }
+
+    function toggleRegionOptions() {
+      const options = document.getElementById('regionOptions');
+      options.style.display = options.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Close dropdown options when clicking outside
+    document.addEventListener('click', function (event) {
+      const options = document.getElementById('regionOptions');
+      const select = document.getElementById('regionSelect');
+
+      if (event.target !== select) {
+        options.style.display = 'none';
+      }
+    });
+    
     function toggleRegistryInputs(checkboxId, inputsContainerId) {
       const checkbox = document.getElementById(checkboxId);
       const inputsContainer = document.getElementById(inputsContainerId);
