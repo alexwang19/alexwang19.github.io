@@ -63,6 +63,72 @@
     .form-section {
       margin-bottom: 20px;
     }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .dropdown-select {
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 200px; /* Updated width for better visibility */
+      box-sizing: border-box;
+      cursor: pointer;
+      background-color: white;
+    }
+
+    .dropdown-select:focus {
+      outline: none;
+      border-color: #4CAF50;
+    }
+
+    .dropdown-options {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: #f9f9f9;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-top: none;
+      border-radius: 0 0 4px 4px;
+      display: none;
+      z-index: 1;
+    }
+
+    .dropdown-option {
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    .dropdown-option:hover {
+      background-color: #e5e5e5;
+    }
+    
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+      box-sizing: border-box;
+      background-color: #fff;
+    }
+    
+    select:required:invalid {
+      color: gray;
+    }
+    
+    option[value=""] {
+      display: none;
+    }
   </style>
 </head>
 
@@ -71,12 +137,12 @@
     <h1>Sysdig Installation</h1>
 
     <div id="namespaceInput" class="form-section">
-      <label for="namespaceInput">Kubernetes Namespace</label>
+      <label for="namespaceInput">Kubernetes Namespace (Required)</label>
       <input type="text" id="namespace" placeholder="Enter k8s Namespace" required>
     </div>
 
     <div id="accessKeyInput" class="form-section">
-      <label for="accessKeyInput">Sysdig Access Key</label>
+      <label for="accessKeyInput">Sysdig Access Key (Required)</label>
       <input type="text" id="accessKey" placeholder="Enter Sysdig Access Key" required>
     </div>
 
@@ -84,22 +150,24 @@
       <label for="regionInput">Sysdig Region</label>
       <input type="text" id="region" placeholder="Enter Sysdig Region">
     </div> -->
-    <div id="regionInput" class="form-section">
-      <label for="regionInput">Sysdig Region</label>
-      <select id="region">
-        <option value="us2">us2</option>
-        <option value="us3">us3</option>
-        <option value="eu1">eu1</option>
-      </select>
-    </div>
+  <div id="regionInput" class="form-section">
+    <label for="regionInput">Sysdig Region (Reuiqred)</label>
+    <select id="regionSelect" onchange="handleRegionChange()" required>
+      <option value="" disabled selected>Select an option</option>
+      <option value="us2">us2</option>
+      <option value="us3">us3</option>
+<!--       <option value="custom">Custom</option> -->
+    </select>
+<!--     <input type="text" id="customRegionInput" placeholder="Enter custom region" style="display: none;"> -->
+  </div>
 
     <div id="clusterNameInput" class="form-section">
-      <label for="clusterNameInput">Cluster Name</label>
+      <label for="clusterNameInput">Cluster Name (Required)</label>
       <input type="text" id="clusterName" placeholder="Enter Cluster Name" required>
     </div>
 
     <div id="clusterTagsInput" class="form-section">
-      <label for="clusterTagsInput">Cluster Tags</label>
+      <label for="clusterTagsInput">Cluster Tags (Required)</label>
       <input type="text" id="clusterTags" placeholder="Enter Cluster Tags" required>
     </div>
 
@@ -149,6 +217,37 @@
   </div>
 
   <script>
+    function handleRegionChange() {
+      const regionSelect = document.getElementById('regionSelect');
+      const customRegionInput = document.getElementById('customRegionInput');
+    
+      if (regionSelect.value === 'custom') {
+        customRegionInput.style.display = 'block';
+      } else {
+        customRegionInput.style.display = 'none';
+      }
+    }
+    
+    function selectRegion(region) {
+      document.getElementById('regionSelect').textContent = region;
+      document.getElementById('regionOptions').style.display = 'none';
+    }
+
+    function toggleRegionOptions() {
+      const options = document.getElementById('regionOptions');
+      options.style.display = options.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Close dropdown options when clicking outside
+    document.addEventListener('click', function (event) {
+      const options = document.getElementById('regionOptions');
+      const select = document.getElementById('regionSelect');
+
+      if (event.target !== select) {
+        options.style.display = 'none';
+      }
+    });
+    
     function toggleRegistryInputs(checkboxId, inputsContainerId) {
       const checkbox = document.getElementById(checkboxId);
       const inputsContainer = document.getElementById(inputsContainerId);
@@ -242,75 +341,13 @@
       const inputDiv = document.getElementById(inputId);
       inputDiv.style.display = checkbox.checked ? 'block' : 'none';
     }
-
-    // function displayOutput() {
-    //   // const checkbox = document.getElementById('generateInputsCheckbox');
-    //   // const inputsContainer = document.getElementById('dynamicInputs');
-    //   const namespaceInput = document.querySelector('#namespaceInput input');
-    //   const accessKeyInput = document.querySelector('#accessKeyInput input');
-    //   const regionInput = document.querySelector('#regionInput input');
-    //   const clusterNameInput = document.querySelector('#clusterNameInput input');
-    //   const clusterTagsInput = document.querySelector('#clusterTagsInput input');
-    //   const proxyCheckbox = document.getElementById('proxyCheckbox');
-    //   const proxyInput = document.getElementById('proxyInput');
-    //   const inputs = proxyInput.getElementsByTagName('input');
-    //   const registryCheckbox = document.getElementById('registryCheckbox');
-    //   const registryInput = document.getElementById('registryInput');
-    //   const registryInputs = registryInput.getElementsByTagName('input');
-    //   const priorityCheckbox = document.getElementById('priorityCheckbox');
-    //   const priorityInput = document.querySelector('#priorityInput input');
-    //   const outputDiv = document.getElementById('output');
-
-    //   let helmInstallText = 'helm install sysdig-agent --namespace ' + namespaceInput.value + ' --force-update \\<br>';
-    //   let accessKeyText = '--set global.sysdig.accessKey=' + accessKeyInput.value + ' \\ <br>';
-    //   let regionText = '--set global.sysdig.region=' + regionInput.value + ' \\ <br>';
-    //   let clusterNameText = '--set global.clusterConfig.name=' + clusterNameInput.value + ' \\ <br>';
-    //   let clusterTagsText = '--set agent.sysdig.settings.tags=' + clusterTagsInput.value + ' \\ <br>';
-    //   let outputText = helmInstallText + accessKeyText + regionText + clusterNameText + clusterTagsText;
-
-    //   if (proxyCheckbox.checked) {
-    //     let httpProxy = '--set global.proxy.httpProxy=' + inputs[0].value + ':' + inputs[1].value + ' \\ <br>';
-    //     let httpsProxy = '--set global.proxy.httpsProxy=' + inputs[0].value + ':' + inputs[1].value + ' \\ <br>';
-    //     let noProxy = '--set global.proxy.noProxy=' + inputs[2].value + ' \\ <br>';
-    //     let agentHttpProxyPort = '--set agent.sysdig.settings.http_proxy.proxy_port=' + inputs[1].value + ' \\ <br>';
-    //     let agentHttpProxyHost = '--set agent.sysdig.settings.http_proxy.proxy_host=' + inputs[0].value + ' \\ <br>';
-    //     outputText += httpProxy;
-    //     outputText += httpsProxy;
-    //     outputText += noProxy;
-    //     outputText += agentHttpProxyPort;
-    //     outputText += agentHttpProxyHost;
-    //   }
-    //   if (registryCheckbox.checked) {
-    //     let agentImageRegistry = '--set agent.image.registry=' + registryInputs[0].value + ' \\ <br>';
-    //     let agentImageRepository = '--set agent.image.repository=' + registryInputs[1].value + ' \\ <br>';
-    //     let agentImagePullSecrets = '--set agent.image.pullSecrets=' + registryInputs[2].value + ' \\ <br>';
-    //     let nodeAnalyzerImageRegistry = '--set nodeAnalyzer.image.registry=' + registryInputs[0].value + ' \\ <br>';
-    //     let nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository = '--set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.repository=' + registryInputs[3].value + ' \\ <br>';
-    //     let nodeAnalyzerNodeAnalyzerPullSecrets = '--set nodeAnalyzer.nodeAnalyzer.pullSecrets=' + registryInputs[2].value + ' \\ <br>';
-    //     let agentImageTag = '--set agent.image.tag=' + registryInputs[4].value + ' \\<br>';
-    //     let nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag = '--set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + registryInputs[5].value + ' \\ <br>';
-    //     outputText += agentImageRegistry;
-    //     outputText += agentImageRepository;
-    //     outputText += agentImagePullSecrets;
-    //     outputText += nodeAnalyzerImageRegistry;
-    //     outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository;
-    //     outputText += nodeAnalyzerNodeAnalyzerPullSecrets;
-    //     outputText += agentImageTag;
-    //     outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag;
-    //   }
-
-    //   if (priorityCheckbox.checked) {
-    //     outputText += '--set agent.priorityClassName=' + priorityInput.value + ' \\ <br>';
-    //   }
-
-    //   outputDiv.innerHTML = outputText;
-    // }
+    
   function displayOutput() {
     // Retrieve user inputs
     const namespaceInput = document.querySelector('#namespaceInput input').value;
     const accessKeyInput = document.querySelector('#accessKeyInput input').value;
     // const regionInput = document.querySelector('#regionInput input').value;
-    const regionInput = document.getElementById('region').value;
+    // const regionInput = document.getElementById('regionSelect').textContent;
     const clusterNameInput = document.querySelector('#clusterNameInput input').value;
     const clusterTagsInput = document.querySelector('#clusterTagsInput input').value;
     const proxyCheckbox = document.getElementById('proxyCheckbox');
@@ -322,6 +359,21 @@
     const priorityCheckbox = document.getElementById('priorityCheckbox');
     const priorityInput = document.querySelector('#priorityInput input').value;
     const outputDiv = document.getElementById('output');
+
+    let regionInput;
+    const regionSelect = document.getElementById('regionSelect');
+    if (regionSelect.value === 'custom') {
+      regionInput = document.getElementById('customRegionInput').value;
+    } else {
+      regionInput = regionSelect.value;
+    }
+
+    // Validate required inputs
+    if (!namespaceInput || !accessKeyInput || !regionInput || !clusterNameInput || !clusterTagsInput) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+
 
     // Create YAML content
     let yamlContent = `global:
