@@ -1,4 +1,4 @@
-## Java Sctript Tool to create Agent Helm values.yaml
+## Java Script Tool to create Agent Helm values.yaml
 ### This can be used by SaaS and On-Prem
 
 ### Product
