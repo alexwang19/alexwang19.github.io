@@ -340,69 +340,7 @@
       const inputDiv = document.getElementById(inputId);
       inputDiv.style.display = checkbox.checked ? 'block' : 'none';
     }
-
-    // function displayOutput() {
-    //   // const checkbox = document.getElementById('generateInputsCheckbox');
-    //   // const inputsContainer = document.getElementById('dynamicInputs');
-    //   const namespaceInput = document.querySelector('#namespaceInput input');
-    //   const accessKeyInput = document.querySelector('#accessKeyInput input');
-    //   const regionInput = document.querySelector('#regionInput input');
-    //   const clusterNameInput = document.querySelector('#clusterNameInput input');
-    //   const clusterTagsInput = document.querySelector('#clusterTagsInput input');
-    //   const proxyCheckbox = document.getElementById('proxyCheckbox');
-    //   const proxyInput = document.getElementById('proxyInput');
-    //   const inputs = proxyInput.getElementsByTagName('input');
-    //   const registryCheckbox = document.getElementById('registryCheckbox');
-    //   const registryInput = document.getElementById('registryInput');
-    //   const registryInputs = registryInput.getElementsByTagName('input');
-    //   const priorityCheckbox = document.getElementById('priorityCheckbox');
-    //   const priorityInput = document.querySelector('#priorityInput input');
-    //   const outputDiv = document.getElementById('output');
-
-    //   let helmInstallText = 'helm install sysdig-agent --namespace ' + namespaceInput.value + ' --force-update \\<br>';
-    //   let accessKeyText = '--set global.sysdig.accessKey=' + accessKeyInput.value + ' \\ <br>';
-    //   let regionText = '--set global.sysdig.region=' + regionInput.value + ' \\ <br>';
-    //   let clusterNameText = '--set global.clusterConfig.name=' + clusterNameInput.value + ' \\ <br>';
-    //   let clusterTagsText = '--set agent.sysdig.settings.tags=' + clusterTagsInput.value + ' \\ <br>';
-    //   let outputText = helmInstallText + accessKeyText + regionText + clusterNameText + clusterTagsText;
-
-    //   if (proxyCheckbox.checked) {
-    //     let httpProxy = '--set global.proxy.httpProxy=' + inputs[0].value + ':' + inputs[1].value + ' \\ <br>';
-    //     let httpsProxy = '--set global.proxy.httpsProxy=' + inputs[0].value + ':' + inputs[1].value + ' \\ <br>';
-    //     let noProxy = '--set global.proxy.noProxy=' + inputs[2].value + ' \\ <br>';
-    //     let agentHttpProxyPort = '--set agent.sysdig.settings.http_proxy.proxy_port=' + inputs[1].value + ' \\ <br>';
-    //     let agentHttpProxyHost = '--set agent.sysdig.settings.http_proxy.proxy_host=' + inputs[0].value + ' \\ <br>';
-    //     outputText += httpProxy;
-    //     outputText += httpsProxy;
-    //     outputText += noProxy;
-    //     outputText += agentHttpProxyPort;
-    //     outputText += agentHttpProxyHost;
-    //   }
-    //   if (registryCheckbox.checked) {
-    //     let agentImageRegistry = '--set agent.image.registry=' + registryInputs[0].value + ' \\ <br>';
-    //     let agentImageRepository = '--set agent.image.repository=' + registryInputs[1].value + ' \\ <br>';
-    //     let agentImagePullSecrets = '--set agent.image.pullSecrets=' + registryInputs[2].value + ' \\ <br>';
-    //     let nodeAnalyzerImageRegistry = '--set nodeAnalyzer.image.registry=' + registryInputs[0].value + ' \\ <br>';
-    //     let nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository = '--set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.repository=' + registryInputs[3].value + ' \\ <br>';
-    //     let nodeAnalyzerNodeAnalyzerPullSecrets = '--set nodeAnalyzer.nodeAnalyzer.pullSecrets=' + registryInputs[2].value + ' \\ <br>';
-    //     let agentImageTag = '--set agent.image.tag=' + registryInputs[4].value + ' \\<br>';
-    //     let nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag = '--set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + registryInputs[5].value + ' \\ <br>';
-    //     outputText += agentImageRegistry;
-    //     outputText += agentImageRepository;
-    //     outputText += agentImagePullSecrets;
-    //     outputText += nodeAnalyzerImageRegistry;
-    //     outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository;
-    //     outputText += nodeAnalyzerNodeAnalyzerPullSecrets;
-    //     outputText += agentImageTag;
-    //     outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag;
-    //   }
-
-    //   if (priorityCheckbox.checked) {
-    //     outputText += '--set agent.priorityClassName=' + priorityInput.value + ' \\ <br>';
-    //   }
-
-    //   outputDiv.innerHTML = outputText;
-    // }
+    
   function displayOutput() {
     // Retrieve user inputs
     const namespaceInput = document.querySelector('#namespaceInput input').value;
@@ -427,6 +365,12 @@
       regionInput = document.getElementById('customRegionInput').value;
     } else {
       regionInput = regionSelect.value;
+    }
+
+    // Validate required inputs
+    if (!namespaceInput || !accessKeyInput || !regionInput || !clusterNameInput || !clusterTagsInput) {
+      alert('Please fill in all required fields.');
+      return;
     }
 
 
