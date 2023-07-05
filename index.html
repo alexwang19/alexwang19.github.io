@@ -280,14 +280,14 @@
         alert('Please fill in all required fields.');
         return;
       }
-
+      let helmHeader = '<b>Helm Install Commands</b><br>';
       let helmInitText = 'helm repo add sysdig https://charts.sysdig.com --force-update <br><br>';
       let helmInstallText = 'helm install sysdig-agent \\<br>&nbsp;&nbsp;&nbsp;&nbsp; --namespace kube-system \\<br>';
       let accessKeyText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput.value + ' \\ <br>';
       // let regionText = '--set global.sysdig.region=' + regionInput.value + ' \\ <br>';
       let clusterNameText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.clusterConfig.name=' + businessUnitInput.value + '-' + platformInput.value + '-' + environmentInput.value + '-' + vastInput.value + '-' + vsadInput.value + ' \\ <br>';
       let clusterTagsText = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.sysdig.settings.tags=cluster:' + businessUnitInput.value + '-' + platformInput.value + '-' + environmentInput.value + '-' + vastInput.value + '-' + vsadInput.value + '\\,' + 'vz-vsadid:' + vsadInput.value + '\\,' + 'vz-vastid:' + vastInput.value +' \\ <br>';
-      let outputText = helmInitText + helmInstallText + accessKeyText + clusterNameText + clusterTagsText;
+      let outputText = helmHeader + helmInitText + helmInstallText + accessKeyText + clusterNameText + clusterTagsText;
 
       if (proxyCheckbox.checked) {
         for (let i = 0; i < inputs.length; i++) {
