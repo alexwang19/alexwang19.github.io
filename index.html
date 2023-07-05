@@ -162,6 +162,7 @@
 
       if (checkbox.checked) {
         const registry_fields = ["Internal Registry", "Internal Sysdig Agent Image", "Internal Registry Pull Secret", "Internal Sysdig Runtime Scanner Image", "Sysdig Agent Tag", "Sysdig Runtime Scanner Tag"];
+        const registry_placeholders = ["quay.io/organization/sysdig/", "agent", "mysecret", "vuln-runtime-scanner", "1.14.1", "1.5.0"];
         // Clear existing inputs
         inputsContainer.innerHTML = '';
 
@@ -176,6 +177,7 @@
           const input = document.createElement('input');
           input.type = 'text';
           input.name = registry_fields[i];
+          input.placeholder = registry_placeholders[i];
 
           inputWrapper.appendChild(label);
           inputWrapper.appendChild(input);
