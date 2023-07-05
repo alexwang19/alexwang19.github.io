@@ -298,8 +298,8 @@
         let agentImageRepository = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.repository=' + registryInputs[1].value + ' \\ <br>';
         let agentImagePullSecrets = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.pullSecrets=' + registryInputs[2].value + ' \\ <br>';
         let nodeAnalyzerImageRegistry = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.image.registry=' + registryInputs[0].value + ' \\ <br>';
-        let nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository = '--set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.repository=' + registryInputs[3].value + ' \\ <br>';
-        let nodeAnalyzerNodeAnalyzerPullSecrets = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.pullSecrets=' + registryInputs[2].value + ' \\ <br>';
+        let nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository = '&nbsp;&nbsp;&nbsp;&nbsp;--set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.repository=' + registryInputs[3].value + ' \\ <br>';
+        let nodeAnalyzerNodeAnalyzerPullSecrets = '&nbsp;&nbsp;&nbsp;&nbsp;--set nodeAnalyzer.nodeAnalyzer.pullSecrets=' + registryInputs[2].value + ' \\ <br>';
         let agentImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.tag=' + registryInputs[4].value + ' \\<br>';
         let nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + registryInputs[5].value + ' \\ <br>';
         outputText += agentImageRegistry;
