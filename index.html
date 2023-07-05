@@ -278,7 +278,7 @@
       let accessKeyText = '--set global.sysdig.accessKey=' + accessKeyInput.value + ' \\ <br>';
       // let regionText = '--set global.sysdig.region=' + regionInput.value + ' \\ <br>';
       let clusterNameText = '--set global.clusterConfig.name=' + businessUnitInput.value + '-' + platformInput.value + '-' + environmentInput.value + '-' + vastInput.value + '-' + vsadInput.value + ' \\ <br>';
-      let clusterTagsText = '--set agent.sysdig.settings.tags=cluster:' + clusterNameText + '\\,' + 'vz-vsadid:' + vsadInput.value + '\\,' + 'vz-vastid:' + vastInput.value +' \\ <br>';
+      let clusterTagsText = '--set agent.sysdig.settings.tags=cluster:' + businessUnitInput.value + '-' + platformInput.value + '-' + environmentInput.value + '-' + vastInput.value + '-' + vsadInput.value + '\\,' + 'vz-vsadid:' + vsadInput.value + '\\,' + 'vz-vastid:' + vastInput.value +' \\ <br>';
       let outputText = helmInitText + helmInstallText + accessKeyText + clusterNameText + clusterTagsText;
 
       if (proxyCheckbox.checked) {
