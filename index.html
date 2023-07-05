@@ -315,8 +315,58 @@
       // if (priorityCheckbox.checked) {
       //   outputText += '--set agent.priorityClassName=' + priorityInput.value + ' \\ <br>';
       // }
-      outputText += 'sysdig/sysdig-deploy<br>'
+
+      outputText += '-f config.yaml \\<br>';
+      outputText += 'sysdig/sysdig-deploy<br>';
+
+    // Create YAML content
+    let yamlContent = `global:
+  sysdig:
+    region: "us3"
+agent:
+  slim:
+    enabled: false
+  auditLog:
+    enabled: false
+  sysdig:
+    settings:
+      prometheus:
+        enabled: false
+nodeAnalyzer:
+  nodeAnalyzer:
+    sslVerifyCertificate: false
+    imageAnalyzer:
+      deploy: false
+    benchmarkRunner:
+      deploy: false
+    hostAnalyzer:
+      deploy: false
+    hostScanner:
+      deploy: false
+    runtimeScanner:
+      deploy: true
+      settings:
+        eveEnabled: false
+        maxImageSizeAllowed: "4194304000"
+        maxFileSizeAllowed: "262144000"
+      eveConnector:
+        deploy: false
+      resources:
+        requests:
+          ephemeral-storage: 3Gi
+        limits:
+          cpu: 1000m
+          memory: 4Gi
+          ephemeral-storage: 6Gi`;
+
+      // Create a Blob with the YAML content
+      const blob = new Blob([yamlContent], { type: 'text/yaml' });
       outputDiv.innerHTML = outputText;
+      // Create a temporary <a> element to trigger the download
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'config.yaml';
+      link.click();
     }
   </script>
 </body>
