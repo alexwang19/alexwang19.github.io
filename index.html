@@ -75,7 +75,7 @@
       font-size: 16px;
       border: 1px solid #ccc;
       border-radius: 4px;
-      width: 100%;
+      width: 200px; /* Updated width for better visibility */
       box-sizing: border-box;
       cursor: pointer;
       background-color: white;
@@ -108,7 +108,6 @@
     .dropdown-option:hover {
       background-color: #e5e5e5;
     }
-    
   </style>
 </head>
 
@@ -133,7 +132,7 @@
     <div id="regionInput" class="form-section">
       <label for="regionInput">Sysdig Region</label>
       <div class="dropdown">
-        <div class="dropdown-select" id="regionSelect">Select Region</div>
+        <div class="dropdown-select" id="regionSelect" onclick="toggleRegionOptions()">Select Region</div>
         <div class="dropdown-options" id="regionOptions">
           <div class="dropdown-option" onclick="selectRegion('us2')">us2</div>
           <div class="dropdown-option" onclick="selectRegion('us3')">us3</div>
