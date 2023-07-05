@@ -296,6 +296,9 @@
         outputText += agentHttpProxyHost;
       }
       if (registryCheckbox.checked) {
+        if (registryInputs[0] == null) {
+          console.log("ERROR")
+        };
         let agentImageRegistry = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.registry=' + registryInputs[0].value + ' \\ <br>';
         let agentImageRepository = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.repository=' + registryInputs[1].value + ' \\ <br>';
         let agentImagePullSecrets = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.pullSecrets=' + registryInputs[2].value + ' \\ <br>';
