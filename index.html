@@ -161,7 +161,7 @@
       const inputsContainer = document.getElementById(inputsContainerId);
 
       if (checkbox.checked) {
-        const registry_fields = ["Internal Registry", "Internal Sysdig Agent Image", "Internal Registry Pull Secret", "Internal Sysdig Runtime Scanner Image", "Sysdig Agent Tag", "Sysdig Runtime Scanner Tag"];
+        const registry_fields = ["Internal Registry", "Internal Sysdig Agent Image", "Internal Registry Pull Secret (Optional)", "Internal Sysdig Runtime Scanner Image", "Sysdig Agent Tag", "Sysdig Runtime Scanner Tag"];
         const registry_placeholders = ["ex: quay.io", "ex: sysdig/agent", "ex: mysecret", "ex: sysdig/vuln-runtime-scanner", "ex: 1.14.1", "ex: 1.5.0"];
         // Clear existing inputs
         inputsContainer.innerHTML = '';
@@ -298,7 +298,7 @@
       if (registryCheckbox.checked) {
         for (let i = 0; i < registryInputs.length; i++) {
           const input = registryInputs[i];
-          if (input.value.trim() === '') {
+          if (input.value.trim() === '' && i != 2) {
             alert('Please fill in all internal registry fields.');
             return;
           }
