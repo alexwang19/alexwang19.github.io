@@ -296,10 +296,13 @@
         outputText += agentHttpProxyHost;
       }
       if (registryCheckbox.checked) {
-        console.log(registryInputs[0].value)
-        if (registryInputs[0] == null) {
-          console.log("ERROR")
-        };
+        for (let i = 0; i < registryInputs.length; i++) {
+          const input = registryInputs[i];
+          if (input.value.trim() === '') {
+            alert('Please fill in all internal registry fields.');
+            return;
+          }
+        }
         let agentImageRegistry = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.registry=' + registryInputs[0].value + ' \\ <br>';
         let agentImageRepository = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.repository=' + registryInputs[1].value + ' \\ <br>';
         let agentImagePullSecrets = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.pullSecrets=' + registryInputs[2].value + ' \\ <br>';
