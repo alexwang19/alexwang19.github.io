@@ -447,12 +447,12 @@ nodeAnalyzer:
       link.click();
       
       // Create a Blob with the YAML content
-      const blob2 = new Blob([outputText], { type: 'text/yaml' });
+      const blob2 = new Blob([outputText], { type: 'text/html' });
       outputDiv.innerHTML = outputText;
       // Create a temporary <a> element to trigger the download
       const link2 = document.createElement('a');
       link2.href = URL.createObjectURL(blob2);
-      link2.download = 'deployment.yaml';
+      link2.download = 'deployment.html';
       link2.click();
     }
   </script>
