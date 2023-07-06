@@ -141,11 +141,11 @@
       <input type="text" id="namespace" placeholder="Enter k8s Namespace" required>
     </div> -->
 
-    <div id="accessKeyInput" class="form-section">
+<!--     <div id="accessKeyInput" class="form-section">
       <label for="accessKeyInput">Sysdig Access Key (Required)</label>
       <input type="text" id="accessKey" placeholder="Enter Sysdig Access Key" required>
     </div>
-
+ -->
 <!--     <div id="regionInput" class="form-section">
       <label for="regionInput">Sysdig Region</label>
       <input type="text" id="region" placeholder="Enter Sysdig Region" required>
@@ -381,7 +381,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       const environmentInput = document.querySelector('#environmentInput input');
       const vastInput = document.querySelector('#vastInput input');
       const vsadInput = document.querySelector('#vsadInput input');
-      const accessKeyInput = document.querySelector('#accessKeyInput input');
+      // const accessKeyInput = document.querySelector('#accessKeyInput input');
       const imageSizeInput = document.querySelector('#imageSizeInput input');
       // const regionInput = document.querySelector('#regionInput input');
       // const clusterNameInput = document.querySelector('#clusterNameInput input');
@@ -397,7 +397,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       const outputDiv = document.getElementById('output');
 
       // Validate required inputs
-      if (accessKeyInput.value.trim() === '' || businessUnitInput.value.trim() === '' || platformInput.value.trim() === '' || environmentInput.value.trim() === '' || vastInput.value.trim() === '' || vsadInput.value.trim() === '') {
+      if (businessUnitInput.value.trim() === '' || platformInput.value.trim() === '' || environmentInput.value.trim() === '' || vastInput.value.trim() === '' || vsadInput.value.trim() === '') {
         alert('Please fill in all required fields.');
         return;
       }
@@ -426,9 +426,16 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       }
 
       let regionInput;
+      let accessKeyInput;
       const regionSelect = document.getElementById('regionSelect');
       if (regionSelect.value === 'us2') {
         let regionText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.region=us2 \\<br>';
+        accessKeyInput = document.getElementById('testInput2').value;
+        let accessKeyText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput.value + ' \\ <br>';
+        outputText += regionText;
+      } else if (regionSelect.value === 'us3'){
+        accessKeyInput = document.getElementById('prodInput2').value;
+        let accessKeyText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput.value + ' \\ <br>';
         outputText += regionText;
       };
       // if (regionCheckbox.checked) {
