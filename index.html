@@ -409,7 +409,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       // let regionText = '--set global.sysdig.region=' + regionInput.value + ' \\ <br>';
       let clusterNameText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.clusterConfig.name=' + businessUnitInput.value + '-' + platformInput.value + '-' + environmentInput.value + '-' + vastInput.value + '-' + vsadInput.value + ' \\ <br>';
       let clusterTagsText = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.sysdig.settings.tags=cluster:' + businessUnitInput.value + '-' + platformInput.value + '-' + environmentInput.value + '-' + vastInput.value + '-' + vsadInput.value + '\\,' + 'vz-vsadid:' + vsadInput.value + '\\,' + 'vz-vastid:' + vastInput.value +' \\ <br>';
-      let outputText = helmQuickstartDocs + helmHeader + helmInitText + helmInstallText + accessKeyText + clusterNameText + clusterTagsText;
+      let outputText = helmQuickstartDocs + helmHeader + helmInitText + helmInstallText + clusterNameText + clusterTagsText;
 
       if (imageSizeInput.value > 2147483648) {
         let ephemeralStorageRequestBytes = 1.5 * imageSizeInput.value;
