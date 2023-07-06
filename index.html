@@ -56,7 +56,7 @@
     }
 
     .form-container {
-      max-width: 600px;
+      max-width: 700px;
       margin: 0 auto;
     }
 
@@ -316,7 +316,8 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
 
       if (imageSizeInput.value > 2147483648) {
         let ephemeralStorageBytes = 1.5 * imageSizeInput;
-        const ephemeralStorageGigabytes = convertBytesToGigabytes(ephemeralStorageBytes);
+        const ephemeralStorageBytesInteger = parseInt(ephemeralStorageBytes);
+        const ephemeralStorageGigabytes = convertBytesToGigabytes(ephemeralStorageBytesInteger);
         outputText += '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.settings.maxImageSizeAllowed=' + imageSizeInput.value + ' \\<br>'
         outputText += '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.requests.ephemeral-storage=' + ephemeralStorageGigabytes + ' \\<br>'
         outputText += '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.limits.ephemeral-storage=' + ephemeralStorageGigabytes + ' \\<br>'
