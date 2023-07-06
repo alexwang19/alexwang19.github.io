@@ -160,16 +160,16 @@
       <label for="regionInput">Deployment Type (Required)</label>
       <select id="regionSelect" onchange="handleRegionChange()" required>
         <option disabled selected value> -- select an option -- </option>
-        <option value="us2">Temporary Install Or Testing Deployment</option>
-        <option value="us3">Preprod or Prod Deployment</option>
+        <option value="us2">Temporary Install/Testing/POV Deployment</option>
+        <option value="us3">Standard Deployment</option>
       </select>
       <div id="testInput" class="form-section" style="display: none;">
-        <br><a target="_blank" href="https://us2.app.sysdig.com/secure/#/settings/agentInstallation">Retrieve Temp/Test Sysdig Access Key Here</a><br>
+        <br><a target="_blank" href="https://us2.app.sysdig.com/secure/#/settings/agentInstallation">Retrieve Temp/Test/POV Sysdig Access Key Here</a><br>
         <br><input type="text" id="testInput2" placeholder="Enter Temp/Test Deployment Sysdig Access Key" >
       </div>
       <div id="prodInput" class="form-section" style="display: none;">
         <br><a target="_blank" href="https://app.us3.sysdig.com/secure/#/settings/agentInstallation">Retrieve Preprod/Prod Sysdig Access Key Here</a><br>
-        <br><input type="text" id="prodInput2" placeholder="Enter Preprod/Prod Sysdig Access Key">
+        <br><input type="text" id="prodInput2" placeholder="Enter Standard Deployment Sysdig Access Key">
       </div>
     </div>
     
