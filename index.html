@@ -164,11 +164,11 @@
         <option value="us3">Preprod or Prod Deployment</option>
       </select>
       <div id="testInput" class="form-section" style="display: none;">
-        <a href="https://us2.app.sysdig.com/secure/#/settings/agentInstallation">Retrieve Access Key Here</a>
+        <br><a target="_blank" href="https://us2.app.sysdig.com/secure/#/settings/agentInstallation">Retrieve Access Key Here</a><br>
         <input type="text" id="testInput2" placeholder="Enter Temp/Test Deployment Sysdig Access Key" >
       </div>
       <div id="prodInput" class="form-section" style="display: none;">
-        <a href="https://app.us3.sysdig.com/secure/#/settings/agentInstallation">Retrieve Access Key Here</a>
+        <br><a target="_blank" href="https://app.us3.sysdig.com/secure/#/settings/agentInstallation">Retrieve Access Key Here</a><br>
         <input type="text" id="prodInput2" placeholder="Enter Preprod/Prod Sysdig Access Key">
       </div>
     </div>
@@ -214,12 +214,12 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       <input type="text" id="clusterTags" placeholder="Enter Cluster Tags" required>
     </div> -->
 
-    <div class="form-section">
+<!--     <div class="form-section">
       <label>
         <input type="checkbox" id="regionCheckbox">
         Temporary Install or Testing deployment?
       </label>
-    </div>
+    </div> -->
     
     <div class="form-section">
       <label>
@@ -375,7 +375,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       // const checkbox = document.getElementById('generateInputsCheckbox');
       // const inputsContainer = document.getElementById('dynamicInputs');
       // const namespaceInput = document.querySelector('#namespaceInput input');
-      const regionCheckbox = document.getElementById('regionCheckbox');
+      // const regionCheckbox = document.getElementById('regionCheckbox');
       const businessUnitInput = document.querySelector('#businessUnitInput input');
       const platformInput = document.querySelector('#platformInput input');
       const environmentInput = document.querySelector('#environmentInput input');
@@ -424,11 +424,17 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         outputText += '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.limits.memory=' + Math.ceil(memoryLimitGigabytes) + 'Gi \\<br>'
         outputText += '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.limits.ephemeral-storage=' + Math.ceil(ephemeralStorageLimitGigabytes) + 'Gi \\<br>';
       }
-      
-      if (regionCheckbox.checked) {
+
+      let regionInput;
+      const regionSelect = document.getElementById('regionSelect');
+      if (regionSelect.value === 'us2') {
         let regionText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.region=us2 \\<br>';
         outputText += regionText;
       };
+      // if (regionCheckbox.checked) {
+      //   let regionText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.region=us2 \\<br>';
+      //   outputText += regionText;
+      // };
       
       if (proxyCheckbox.checked) {
         for (let i = 0; i < inputs.length; i++) {
