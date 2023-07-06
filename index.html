@@ -386,6 +386,16 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
 
       outputText += '&nbsp;&nbsp;&nbsp;&nbsp; -f config.yaml \\<br>';
       outputText += 'sysdig/sysdig-deploy<br>';
+      outputText += '<br><br><b>Steps To Verify Installation</b><br>';
+      outputText += '- Ensure all sysdig pods are 1/1 Running state.<br>';
+      outputText += '- Double check the largest image size to make sure a new larger image is not encountered.<br>';
+      outputText += '- If a new and larger image is encountered, we may need to tune the runtime scanner to accommodate the larger size.<br>';
+      outputText += '- You can also watch for log messages with "too" that say image scans are being skipped due to size.<br>';
+      outputText += '- Grep all of the agent pod logs for "Error," and ensure there are no recurring errors of concern.<br>';
+      outputText += '- Grep all of the agent pod logs for "POLCIES_V2". You should see something like "Received command 22 (POLICIES_V2)" This signifies that the pod is up and running successfully.<br>';
+      outputText += '- Grep all of the agent node analyzer pod logs for "\"level\":\"error\"" and ensure there are no recurring errors of concern.<br>';
+      outputText += '- Sometimes you will see recurring errors if a scan is attempted for an application pod that has not come up or is failing.<br>';
+      outputText += '- Grep all of the agent node analyzer pods logs for "\"message\":\"startup sleep\"". This signifies that the pod is up and running successfully.<br>';
 
     // Create YAML content
     let yamlContent = `global:
