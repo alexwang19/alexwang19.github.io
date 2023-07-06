@@ -256,8 +256,8 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
   <script>
     function handleRegionChange() {
       const regionSelect = document.getElementById('regionSelect');
-      const testInput = document.getElementById('testInput');
-      const prodInput = document.getElementById('prodInput');
+      const testInput = document.getElementById('testInput2');
+      const prodInput = document.getElementById('prodInput2');
     
       if (regionSelect.value === 'us2') {
         testInput.style.display = 'block';
