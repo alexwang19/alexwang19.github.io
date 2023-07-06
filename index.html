@@ -118,10 +118,10 @@
     <div id="imageSizeInput" class="form-section">
       <label for="imageSizeInput">Largest Image Size Running In Your Cluster</label>
       <pre id="CommandHeader">
-      Run the command below to find largest image size:
+  Run the command below to find largest image size:
       </pre>
       <pre id="kubectlCommandText">
-      kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort -nr | head -1
+  kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort -nr | head -1
       </pre>
       <input type="text" id="imageSize" placeholder="Enter Image Size" required>
     </div>
@@ -281,6 +281,7 @@
       const vastInput = document.querySelector('#vastInput input');
       const vsadInput = document.querySelector('#vsadInput input');
       const accessKeyInput = document.querySelector('#accessKeyInput input');
+      const imageSizeInput = document.querySelector('#imageSizeInput input');
       // const regionInput = document.querySelector('#regionInput input');
       // const clusterNameInput = document.querySelector('#clusterNameInput input');
       // const clusterTagsInput = document.querySelector('#clusterTagsInput input');
