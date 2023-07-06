@@ -63,6 +63,72 @@
     .form-section {
       margin-bottom: 20px;
     }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .dropdown-select {
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 200px; /* Updated width for better visibility */
+      box-sizing: border-box;
+      cursor: pointer;
+      background-color: white;
+    }
+
+    .dropdown-select:focus {
+      outline: none;
+      border-color: #4CAF50;
+    }
+
+    .dropdown-options {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: #f9f9f9;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-top: none;
+      border-radius: 0 0 4px 4px;
+      display: none;
+      z-index: 1;
+    }
+
+    .dropdown-option {
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    .dropdown-option:hover {
+      background-color: #e5e5e5;
+    }
+    
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+      box-sizing: border-box;
+      background-color: #fff;
+    }
+    
+    select:required:invalid {
+      color: gray;
+    }
+    
+    option[value=""] {
+      display: none;
+    }
   </style>
 </head>
 
@@ -89,7 +155,17 @@
       <label for="clusterNameInput">Cluster Name</label>
       <input type="text" id="clusterName" placeholder="Enter Cluster Name" required>
     </div> -->
-
+    
+    <div id="regionInput" class="form-section">
+      <label for="regionInput">Deployment Type (Required)</label>
+      <select id="regionSelect" onchange="handleRegionChange()" required>
+        <option value="us2">Temporary Install Or Testing Deployment</option>
+        <option value="us3">Preprod or Prod Deployment</option>
+      </select>
+      <input type="text" id="testInput" placeholder="Enter Sysdig Access Key" style="display: none;">
+      <input type="text" id="prodInput" placeholder="Enter Sysdig Access Key" style="display: none;">
+    </div>
+    
     <div id="businessUnitInput" class="form-section">
       <label for="businessUnitInput">Business Unit (Required)</label>
       <input type="text" id="businessUnit" placeholder="Enter Business Unit/Application Name" required>
@@ -174,6 +250,20 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
   </div>
 
   <script>
+    function handleRegionChange() {
+      const regionSelect = document.getElementById('regionSelect');
+      const testInput = document.getElementById('testInput');
+      const prodInput = document.getElementById('prodInput');
+    
+      if (regionSelect.value === 'us2') {
+        testInput.style.display = 'block';
+        prodInput.style.display = 'none';
+      } else if (regionSelect.value === 'us3'){
+        testInput.style.display = 'none';
+        prodInput.style.display = 'block';
+      }
+    }
+    
     function toggleRegistryInputs(checkboxId, inputsContainerId) {
       const checkbox = document.getElementById(checkboxId);
       const inputsContainer = document.getElementById(inputsContainerId);
