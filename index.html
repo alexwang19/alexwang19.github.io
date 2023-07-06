@@ -122,6 +122,13 @@
 
     <div class="form-section">
       <label>
+        <input type="checkbox" id="regionCheckbox"
+        Temporary Install or Testing deployment?
+      </label>
+    </div>
+    
+    <div class="form-section">
+      <label>
         <input type="checkbox" id="proxyCheckbox"
           onchange="toggleProxyInputs('proxyCheckbox', 'proxyInput')">
         Is Proxy Required?
@@ -256,6 +263,7 @@
       // const checkbox = document.getElementById('generateInputsCheckbox');
       // const inputsContainer = document.getElementById('dynamicInputs');
       // const namespaceInput = document.querySelector('#namespaceInput input');
+      const regionCheckbox = document.getElementById('regionCheckbox');
       const businessUnitInput = document.querySelector('#businessUnitInput input');
       const platformInput = document.querySelector('#platformInput input');
       const environmentInput = document.querySelector('#environmentInput input');
@@ -289,6 +297,11 @@
       let clusterTagsText = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.sysdig.settings.tags=cluster:' + businessUnitInput.value + '-' + platformInput.value + '-' + environmentInput.value + '-' + vastInput.value + '-' + vsadInput.value + '\\,' + 'vz-vsadid:' + vsadInput.value + '\\,' + 'vz-vastid:' + vastInput.value +' \\ <br>';
       let outputText = helmHeader + helmInitText + helmInstallText + accessKeyText + clusterNameText + clusterTagsText;
 
+      if (regionCheckbox.checked) {
+        let regionText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.region=us2';
+        outputText += regionText;
+      };
+      
       if (proxyCheckbox.checked) {
         for (let i = 0; i < inputs.length; i++) {
           const input = inputs[i];
