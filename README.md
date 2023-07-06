@@ -1,17 +1,63 @@
-## Java Script Tool to create Agent Helm values.yaml
-### This can be used by SaaS and On-Prem
+## Helm Quickstart
 
-### Product
-* Agent and Node Analyzer for Sysdig Platform
+### Initialize Sysdig Helm Chart Repository
+```
+helm repo add sysdig https://charts.sysdig.com --force-update
+```
 
-### Version
-* 0.1
+### Install Sysdig Chart
+* [Helm Install Docs](https://helm.sh/docs/helm/helm_install/)
+```
+helm install sysdig-agent \
+--namespace <namespace> \
+--set global.sysdig.accessKey=<access-key> \
+...
+-f example-values-file.yaml \
+sysdig/sysdig-deploy
+```
 
-### Notes
-* Still in Alpha Creation
-* Will be presented to Engineering for integration in the Sysdig UI
-* Will be a tool available in the Customer Portal
+### Upgrade Sysdig Deployment or Override Values
+* Refer to these docs for additional params: [Helm Upgrade Docs](https://helm.sh/docs/helm/helm_upgrade/)
+* helm upgrade --force to override values
+```
+helm upgrade sysdig-agent \
+ --namespace <namespace> \
+ --set global.sysdig.accessKey=<access key> \
+ --set agent.image.tag=<version> \
+ --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=<version> \
+ ...
+ -f example-values-file.yaml \
+sysdig/sysdig-deploy
+```
 
-### Project can be forked from:
+```
+helm upgrade --force sysdig-agent \
+ --namespace <namespace> \
+ --set global.sysdig.accessKey=<access key> \
+ ...
+ -f example-values-file.yaml \
+sysdig/sysdig-deploy
+```
 
-[Git repo](https://github.com/alexwang19/alexwang19.github.io)
+### List Releases
+* [Helm List Docs](https://helm.sh/docs/helm/helm_list/)
+```
+helm list --namespace <namespace>
+```
+
+### View Status
+* [Helm Status Docs](https://helm.sh/docs/helm/helm_status/)
+```
+helm status sysdig-agent --namespace <namespace>
+```
+
+### Delete Sysdig Deployment (Uninstall)
+* [Helm Uninstall Docs](https://helm.sh/docs/helm/helm_uninstall/)
+```
+helm uninstall sysdig-agent --namespace <namespace>
+```
+
+### Delete Sysdig Deployment (Deprecated)
+```
+helm delete sysdig-agent --namespace <namespace>
+```
