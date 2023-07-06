@@ -270,6 +270,10 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       inputDiv.style.display = checkbox.checked ? 'block' : 'none';
     }
 
+    function convertBytesToGigabytes(bytes) {
+      return bytes / (1024 * 1024 * 1024);
+    }
+
     function displayOutput() {
       // const checkbox = document.getElementById('generateInputsCheckbox');
       // const inputsContainer = document.getElementById('dynamicInputs');
@@ -310,6 +314,14 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       let clusterTagsText = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.sysdig.settings.tags=cluster:' + businessUnitInput.value + '-' + platformInput.value + '-' + environmentInput.value + '-' + vastInput.value + '-' + vsadInput.value + '\\,' + 'vz-vsadid:' + vsadInput.value + '\\,' + 'vz-vastid:' + vastInput.value +' \\ <br>';
       let outputText = helmQuickstartDcos + helmHeader + helmInitText + helmInstallText + accessKeyText + clusterNameText + clusterTagsText;
 
+      if (imageSizeInput.value > 2147483648) {
+        let ephemeralStorageBytes = 1.5 * imageSizeInput;
+        const ephemeralStorageGigabytes = convertBytesToGigabytes(ephemeralStorageBytes);
+        outputText += '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.settings.maxImageSizeAllowed=' + imageSizeInput.value + ' \\<br>'
+        outputText += '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.requests.ephemeral-storage=' + ephemeralStorageGigabytes + ' \\<br>'
+        outputText += '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.limits.ephemeral-storage=' + ephemeralStorageGigabytes + ' \\<br>'
+      }
+      
       if (regionCheckbox.checked) {
         let regionText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.region=us2 \\<br>';
         outputText += regionText;
