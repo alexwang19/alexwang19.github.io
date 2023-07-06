@@ -315,11 +315,14 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       let outputText = helmQuickstartDcos + helmHeader + helmInitText + helmInstallText + accessKeyText + clusterNameText + clusterTagsText;
 
       if (imageSizeInput.value > 2147483648) {
-        let ephemeralStorageBytes = 1.5 * imageSizeInput.value;
-        const ephemeralStorageGigabytes = convertBytesToGigabytes(ephemeralStorageBytes);
+        let ephemeralStorageRequestBytes = 1.5 * imageSizeInput.value;
+        const ephemeralStorageRequestGigabytes = convertBytesToGigabytes(ephemeralStorageRequestBytes);
+        let ephemeralStorageLimitBytes = 3 * imageSizeInput.value;
+        const ephemeralStorageLimitGigabytes = convertBytesToGigabytes(ephemeralStorageLimitBytes);
+        
         outputText += '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.settings.maxImageSizeAllowed=' + imageSizeInput.value + ' \\<br>'
-        outputText += '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.requests.ephemeral-storage=' + ephemeralStorageGigabytes + ' \\<br>'
-        outputText += '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.limits.ephemeral-storage=' + ephemeralStorageGigabytes + ' \\<br>'
+        outputText += '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.requests.ephemeral-storage=' + Math.ceil(ephemeralStorageRequestGigabytes) + ' \\<br>'
+        outputText += '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.limits.ephemeral-storage=' + Math.ceil(ephemeralStorageLimitGigabytes) + ' \\<br>'
       }
       
       if (regionCheckbox.checked) {
