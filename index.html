@@ -115,6 +115,12 @@
       <input type="text" id="vsad" placeholder="Enter VSAD ID" required>
     </div>
 
+    <div id="imageSizeInput" class="form-section">
+      <label for="imageSizeInput">Largest Image Size Running In Your Cluster</label>
+      <label for="imageSizeInput">Run this command to find size: kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort -nr | head -1</label>
+      <input type="text" id="imageSize" placeholder="Enter Image Size" required>
+    </div>
+
 <!--     <div id="clusterTagsInput" class="form-section">
       <label for="clusterTagsInput">Cluster Tags</label>
       <input type="text" id="clusterTags" placeholder="Enter Cluster Tags" required>
