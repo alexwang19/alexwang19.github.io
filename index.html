@@ -409,7 +409,6 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         return;
       }
       if (accessKeyInput != null){
-        console.log("THIS IS ACCESSKEYINPUT: ", accessKeyInput);
         if (accessKeyInput.trim() === ''){
           alert('Please fill in required access key.');
           return;
