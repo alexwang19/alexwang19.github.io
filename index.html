@@ -397,9 +397,11 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         accessKeyInput = document.getElementById('sysdigAccessKey').value;
         let accessKeyText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput.value + ' \\ <br>';
         outputText += regionText;
+        outputText += accessKeyText;
       } else if (regionSelect.value === 'us3'){
         accessKeyInput = document.getElementById('sysdigAccessKey').value;
         let accessKeyText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput.value + ' \\ <br>';
+        outputText += accessKeyText;
       };
       // Validate required inputs
       if (accessKeyInput == null || businessUnitInput.value.trim() === '' || platformInput.value.trim() === '' || environmentInput.value.trim() === '' || vastInput.value.trim() === '' || vsadInput.value.trim() === '') {
