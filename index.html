@@ -145,11 +145,11 @@
       </select>
       <div id="testInput" class="form-section" style="display: none;">
         <br><a target="_blank" href="https://us2.app.sysdig.com/secure/#/settings/agentInstallation">Retrieve Sysdig Test Access Key Here</a><br>
-        <br><input type="text" id="sysdigAccessKey" placeholder="Enter Sysdig Test Access Key" >
+        <br><input type="text" id="testSysdigAccessKey" placeholder="Enter Sysdig Test Access Key" >
       </div>
       <div id="prodInput" class="form-section" style="display: none;">
         <br><a target="_blank" href="https://app.us3.sysdig.com/secure/#/settings/agentInstallation">Retrieve Standard Deployment Sysdig Access Key Here</a><br>
-        <br><input type="text" id="sysdigAccessKey" placeholder="Enter VZ Standard Deployment Sysdig Access Key">
+        <br><input type="text" id="standardSysdigAccessKey" placeholder="Enter VZ Standard Deployment Sysdig Access Key">
       </div>
     </div>
     
@@ -394,12 +394,12 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       const regionSelect = document.getElementById('regionSelect');
       if (regionSelect.value === 'us2') {
         let regionText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.region=us2 \\<br>';
-        accessKeyInput = document.getElementById('sysdigAccessKey').value;
+        accessKeyInput = document.getElementById('testSysdigAccessKey').value;
         let accessKeyText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput + ' \\ <br>';
         outputText += regionText;
         outputText += accessKeyText;
       } else if (regionSelect.value === 'us3'){
-        accessKeyInput = document.getElementById('sysdigAccessKey').value;
+        accessKeyInput = document.getElementById('standardSysdigAccessKey').value;
         let accessKeyText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput + ' \\ <br>';
         outputText += accessKeyText;
       };
