@@ -135,27 +135,7 @@
 <body>
   <div class="form-container">
     <h1>Sysdig Installation</h1>
-
-<!--     <div id="namespaceInput" class="form-section">
-      <label for="namespaceInput">Kubernetes Namespace</label>
-      <input type="text" id="namespace" placeholder="Enter k8s Namespace" required>
-    </div> -->
-
-<!--     <div id="accessKeyInput" class="form-section">
-      <label for="accessKeyInput">Sysdig Access Key (Required)</label>
-      <input type="text" id="accessKey" placeholder="Enter Sysdig Access Key" required>
-    </div>
- -->
-<!--     <div id="regionInput" class="form-section">
-      <label for="regionInput">Sysdig Region</label>
-      <input type="text" id="region" placeholder="Enter Sysdig Region" required>
-    </div> -->
-
-<!--     <div id="clusterNameInput" class="form-section">
-      <label for="clusterNameInput">Cluster Name</label>
-      <input type="text" id="clusterName" placeholder="Enter Cluster Name" required>
-    </div> -->
-    
+   
     <div id="regionInput" class="form-section">
       <label for="regionInput">Deployment Type (Required)</label>
       <select id="regionSelect" onchange="handleRegionChange()" required>
@@ -165,11 +145,11 @@
       </select>
       <div id="testInput" class="form-section" style="display: none;">
         <br><a target="_blank" href="https://us2.app.sysdig.com/secure/#/settings/agentInstallation">Retrieve Temp/Test/POV Sysdig Access Key Here</a><br>
-        <br><input type="text" id="testInput2" placeholder="Enter Temp/Test Deployment Sysdig Access Key" >
+        <br><input type="text" id="testInput2" placeholder="Enter Sysdig Test Access Key" >
       </div>
       <div id="prodInput" class="form-section" style="display: none;">
         <br><a target="_blank" href="https://app.us3.sysdig.com/secure/#/settings/agentInstallation">Retrieve Standard Deployment Sysdig Access Key Here</a><br>
-        <br><input type="text" id="prodInput2" placeholder="Enter Standard Deployment Sysdig Access Key">
+        <br><input type="text" id="prodInput2" placeholder="Enter VZ Standard Deployment Sysdig Access Key">
       </div>
     </div>
     
@@ -426,9 +406,15 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         alert('Please fill in all required fields.');
         return;
       }
-      if (accessKeyInput != null){
-        if (accessKeyInput.value === ''){
-          alert('Please fill in all required fields.');
+      if (testInput2 != null){
+        if (testInput2.value.trim() === ''){
+          alert('Please fill in required access key.');
+          return;
+        };
+      };
+      if (prodInput2 != null){
+        if (prodInput2.value.trim() === ''){
+          alert('Please fill in required access key.');
           return;
         };
       };
