@@ -381,11 +381,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       // const priorityInput = document.querySelector('#priorityInput input');
       const outputDiv = document.getElementById('output');
 
-      // Validate required inputs
-      if (businessUnitInput.value.trim() === '' || platformInput.value.trim() === '' || environmentInput.value.trim() === '' || vastInput.value.trim() === '' || vsadInput.value.trim() === '') {
-        alert('Please fill in all required fields.');
-        return;
-      }
+
       let helmQuickstartDocs = '<b>Refer to this link for additional Helm commands: https://github.com/alexwang19/alexwang19.github.io/blob/main/README.md</b><br><br>';
       let helmHeader = '<b>Helm Install Commands</b><br>';
       let helmInitText = 'helm repo add sysdig https://charts.sysdig.com --force-update <br><br>';
@@ -423,6 +419,11 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         let accessKeyText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput.value + ' \\ <br>';
         outputText += regionText;
       };
+      // Validate required inputs
+      if (accessKeyInput.value.trim() === '' || businessUnitInput.value.trim() === '' || platformInput.value.trim() === '' || environmentInput.value.trim() === '' || vastInput.value.trim() === '' || vsadInput.value.trim() === '') {
+        alert('Please fill in all required fields.');
+        return;
+      }
       // if (regionCheckbox.checked) {
       //   let regionText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.region=us2 \\<br>';
       //   outputText += regionText;
