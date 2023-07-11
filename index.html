@@ -145,11 +145,11 @@
       </select>
       <div id="testInput" class="form-section" style="display: none;">
         <br><a target="_blank" href="https://us2.app.sysdig.com/secure/#/settings/agentInstallation">Retrieve Temp/Test/POV Sysdig Access Key Here</a><br>
-        <br><input type="text" id="testInput2" placeholder="Enter Sysdig Test Access Key" >
+        <br><input type="text" id="sysdigAccessKey" placeholder="Enter Sysdig Test Access Key" >
       </div>
       <div id="prodInput" class="form-section" style="display: none;">
         <br><a target="_blank" href="https://app.us3.sysdig.com/secure/#/settings/agentInstallation">Retrieve Standard Deployment Sysdig Access Key Here</a><br>
-        <br><input type="text" id="prodInput2" placeholder="Enter VZ Standard Deployment Sysdig Access Key">
+        <br><input type="text" id="sysdigAccessKey" placeholder="Enter VZ Standard Deployment Sysdig Access Key">
       </div>
     </div>
     
@@ -394,11 +394,11 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       const regionSelect = document.getElementById('regionSelect');
       if (regionSelect.value === 'us2') {
         let regionText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.region=us2 \\<br>';
-        accessKeyInput = document.getElementById('testInput2').value;
+        accessKeyInput = document.getElementById('sysdigAccessKey').value;
         let accessKeyText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput.value + ' \\ <br>';
         outputText += regionText;
       } else if (regionSelect.value === 'us3'){
-        accessKeyInput = document.getElementById('prodInput2').value;
+        accessKeyInput = document.getElementById('sysdigAccessKey').value;
         let accessKeyText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput.value + ' \\ <br>';
       };
       // Validate required inputs
@@ -406,18 +406,18 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         alert('Please fill in all required fields.');
         return;
       }
-      if (testInput2 != null){
-        if (testInput2.value.trim() === ''){
+      if (sysdigAccessKey != null){
+        if (sysdigAccessKey.value.trim() === ''){
           alert('Please fill in required access key.');
           return;
         };
       };
-      if (prodInput2 != null){
-        if (prodInput2.value.trim() === ''){
-          alert('Please fill in required access key.');
-          return;
-        };
-      };
+      // if (prodInput2 != null){
+      //   if (prodInput2.value.trim() === ''){
+      //     alert('Please fill in required access key.');
+      //     return;
+      //   };
+      // };
       // if (regionCheckbox.checked) {
       //   let regionText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.region=us2 \\<br>';
       //   outputText += regionText;
