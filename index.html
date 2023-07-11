@@ -417,10 +417,9 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       } else if (regionSelect.value === 'us3'){
         accessKeyInput = document.getElementById('prodInput2').value;
         let accessKeyText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput.value + ' \\ <br>';
-        outputText += regionText;
       };
       // Validate required inputs
-      if (accessKeyInput.value.trim() === '' || businessUnitInput.value.trim() === '' || platformInput.value.trim() === '' || environmentInput.value.trim() === '' || vastInput.value.trim() === '' || vsadInput.value.trim() === '') {
+      if (accessKeyInput == null || businessUnitInput.value.trim() === '' || platformInput.value.trim() === '' || environmentInput.value.trim() === '' || vastInput.value.trim() === '' || vsadInput.value.trim() === '') {
         alert('Please fill in all required fields.');
         return;
       }
