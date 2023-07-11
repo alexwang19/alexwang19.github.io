@@ -407,7 +407,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         return;
       }
       if (sysdigAccessKey != null){
-        if (sysdigAccessKey.value.trim() === ''){
+        if (sysdigAccessKey.value === ''){
           alert('Please fill in required access key.');
           return;
         };
