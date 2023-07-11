@@ -395,12 +395,12 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       if (regionSelect.value === 'us2') {
         let regionText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.region=us2 \\<br>';
         accessKeyInput = document.getElementById('sysdigAccessKey').value;
-        let accessKeyText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput.value + ' \\ <br>';
+        let accessKeyText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput + ' \\ <br>';
         outputText += regionText;
         outputText += accessKeyText;
       } else if (regionSelect.value === 'us3'){
         accessKeyInput = document.getElementById('sysdigAccessKey').value;
-        let accessKeyText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput.value + ' \\ <br>';
+        let accessKeyText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput + ' \\ <br>';
         outputText += accessKeyText;
       };
       // Validate required inputs
