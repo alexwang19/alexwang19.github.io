@@ -160,8 +160,8 @@
       <label for="regionInput">Deployment Type (Required)</label>
       <select id="regionSelect" onchange="handleRegionChange()" required>
         <option disabled selected value> -- select an option -- </option>
-        <option value="us2">Temporary Install/Testing/POV Deployment</option>
-        <option value="us3">Standard Deployment</option>
+        <option value="us2">Sysdig Test Deployment</option>
+        <option value="us3">VZ Standard Deployment</option>
       </select>
       <div id="testInput" class="form-section" style="display: none;">
         <br><a target="_blank" href="https://us2.app.sysdig.com/secure/#/settings/agentInstallation">Retrieve Temp/Test/POV Sysdig Access Key Here</a><br>
@@ -180,7 +180,7 @@
 
     <div id="platformInput" class="form-section">
       <label for="platformInput">Platform (Required)</label>
-      <input type="text" id="platform" placeholder="Enter Platform" required>
+      <input type="text" id="platform" placeholder="ex: eks, gke, etc." required>
     </div>
 
     <div id="environmentInput" class="form-section">
@@ -200,26 +200,11 @@
 
     <div id="imageSizeInput" class="form-section">
       <label for="imageSizeInput">Largest Image Size Running In Your Cluster</label>
-<!--       <pre id="CommandHeader">
-  Run the command below to find largest image size:
-      </pre> -->
       <pre id="kubectlCommandText">
 kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort -nr | head -1
       </pre>
       <input type="text" id="imageSize" placeholder="Enter Image Size" required>
     </div>
-
-<!--     <div id="clusterTagsInput" class="form-section">
-      <label for="clusterTagsInput">Cluster Tags</label>
-      <input type="text" id="clusterTags" placeholder="Enter Cluster Tags" required>
-    </div> -->
-
-<!--     <div class="form-section">
-      <label>
-        <input type="checkbox" id="regionCheckbox">
-        Temporary Install or Testing deployment?
-      </label>
-    </div> -->
     
     <div class="form-section">
       <label>
