@@ -426,6 +426,12 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         alert('Please fill in all required fields.');
         return;
       }
+      if (accessKeyInput != null){
+        if (accessKeyInput.value.trim() === ''){
+          alert('Please fill in all required fields.');
+          return;
+        };
+      };
       // if (regionCheckbox.checked) {
       //   let regionText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.region=us2 \\<br>';
       //   outputText += regionText;
