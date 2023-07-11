@@ -427,7 +427,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         return;
       }
       if (accessKeyInput != null){
-        if (accessKeyInput.value.trim() === ''){
+        if (accessKeyInput.value === ''){
           alert('Please fill in all required fields.');
           return;
         };
@@ -440,7 +440,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       if (proxyCheckbox.checked) {
         for (let i = 0; i < inputs.length; i++) {
           const input = inputs[i];
-          if (input.value === '') {
+          if (input.value.trim() === '') {
             alert('Please fill in all proxy fields.');
             return;
           };
