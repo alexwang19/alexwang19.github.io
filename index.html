@@ -306,6 +306,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         input.type = 'text';
         input.name = 'proxy_host';
         input.required = true;
+        input.placeholder = 'ex: myproxyhost.proxy.com'
 
         inputWrapper.appendChild(label);
         inputWrapper.appendChild(input);
@@ -320,6 +321,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         input2.type = 'text';
         input2.name = 'proxy_port';
         input2.required = true;
+        input2.placeholder = 'ex: 8080'
 
         inputWrapper2.appendChild(label2);
         inputWrapper2.appendChild(input2);
@@ -334,6 +336,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         input3.type = 'text';
         input3.name = 'no_proxy_list';
         input3.required = true;
+        input3.placeholder = 'ex: 127.0.0.1,noproxyhost.com'
 
         inputWrapper3.appendChild(label3);
         inputWrapper3.appendChild(input3);
