@@ -13,7 +13,7 @@
     export http{s,}_proxy=http://myproxy.com:8080
     curl -sL ingest-us2.app.sysdig.com:6443 -v
     ```
-* [Agent Requirement Docs]([https://docs.sysdig.com/en/docs/installation/sysdig-secure/install-agent-components/installation-requirements/](https://docs.sysdig.com/en/docs/installation/sysdig-secure/install-agent-components/installation-requirements/sysdig-agent/)https://docs.sysdig.com/en/docs/installation/sysdig-secure/install-agent-components/installation-requirements/sysdig-agent/)
+* [Agent Requirement Docs](https://docs.sysdig.com/en/docs/installation/sysdig-secure/install-agent-components/installation-requirements/sysdig-agent/)
 * Access to kubernetes cluster. Ex: "kubectl get pods -A" returns list of pods running on cluster
 
 ## Installation
