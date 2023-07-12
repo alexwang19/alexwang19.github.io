@@ -257,15 +257,15 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
   <script>
     function clearAllFields() {
       const inputFields = document.querySelectorAll('.form-section input:not([type="file"])');
-      const checkboxInputs = document.querySelectorAll('.form-section input[type="checkbox"]');
-      
+      const fileInput = document.getElementById('fileInput');
+      const outputDiv = document.getElementById('output');
+    
       for (let i = 0; i < inputFields.length; i++) {
         inputFields[i].value = '';
       }
     
-      for (let i = 0; i < checkboxInputs.length; i++) {
-        checkboxInputs[i].checked = false;
-      }
+      fileInput.value = ''; // Clear file upload field
+      outputDiv.innerHTML = ''; // Clear output text
     }
 
     function handleFileUpload(event) {
