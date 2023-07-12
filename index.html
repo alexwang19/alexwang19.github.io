@@ -289,16 +289,45 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         if (line.includes(':')) {
           const [label, value] = line.split(':').map(entry => entry.trim());
           const field = Array.from(inputFields).find(input => input.name === label);
-          
+    
           if (field) {
             if (field.type === 'checkbox') {
               field.checked = (value.toLowerCase() === 'on');
             } else {
               field.value = value;
             }
+          } else if (label === 'httpProxy') {
+            const proxyCheckbox = document.getElementById('proxyCheckbox');
+            proxyCheckbox.checked = true;
+    
+            const proxyInputsContainer = document.getElementById('proxyInput');
+            proxyInputsContainer.innerHTML = '';
+    
+            const proxyFields = value.split(',');
+            for (let j = 0; j < proxyFields.length; j++) {
+              const [fieldName, fieldValue] = proxyFields[j].split('=').map(entry => entry.trim());
+    
+              const inputWrapper = document.createElement('div');
+              inputWrapper.classList.add('dynamic-input-wrapper');
+    
+              const label = document.createElement('label');
+              label.textContent = fieldName;
+    
+              const input = document.createElement('input');
+              input.type = 'text';
+              input.name = fieldName;
+              input.value = fieldValue;
+    
+              inputWrapper.appendChild(label);
+              inputWrapper.appendChild(input);
+    
+              proxyInputsContainer.appendChild(inputWrapper);
+            }
           }
         }
       }
+    }
+
 
       // Check if proxy checkbox is checked and toggle proxy inputs
       const proxyCheckbox = document.getElementById('proxyCheckbox');
