@@ -295,6 +295,20 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
               let proxyCheckbox = document.getElementById('proxyCheckbox');
               if (proxyCheckbox.checked) {
                 toggleProxyInputs('proxyCheckbox', 'proxyInput');
+                  const lines2 = content.split('\n');
+                  const inputFields2 = document.querySelectorAll('.form-section input:not([type="file"])');
+                
+                  for (let i = 0; i < inputFields2.length && i < lines2.length; i++) {
+                    const line2 = lines2[i].trim();
+                
+                    if (line2.includes(':')) {
+                      const [label, value] = line2.split(':').map(entry => entry.trim());
+                      const field2 = Array.from(inputFields).find(input => input.name === label);
+                      if (field2) {
+                        field2.value = value;
+      }
+    }
+  }
               }
             } else {
               field.value = value;
