@@ -239,6 +239,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       <button id="generateInstallCmdBtn" onclick="displayOutput()">Generate Install Commands</button>
 <!--       <button onclick="downloadConfigYAML()">Download Config YAML</button> -->
       <button id="downloadOutputBtn" onclick="downloadOutputText()" style="display: none;">Download Copy of Install Commands</button>
+      <br>
       <button id="downloadInputValuesBtn" onclick="downloadInputValues()" style="display: none;">Download Input Values</button>
     </div>
 
