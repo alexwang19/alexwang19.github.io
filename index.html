@@ -554,7 +554,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       // let accessKeyText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput.value + ' \\ <br>';
       // let regionText = '--set global.sysdig.region=' + regionInput.value + ' \\ <br>';
       let clusterNameText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.clusterConfig.name=' + businessUnitInput.value + '-' + platformInput.value + '-' + environmentInput.value + '-' + vastInput.value + '-' + vsadInput.value + ' \\ <br>';
-      let clusterTagsText = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.sysdig.settings.tags=cluster:' + businessUnitInput.value + '-' + platformInput.value + '-' + environmentInput.value + '-' + vastInput.value + '-' + vsadInput.value + '\\,' + 'vz-vsadid:' + vsadInput.value + '\\,' + 'vz-vastid:' + vastInput.value +' \\ <br>';
+      let clusterTagsText = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.sysdig.settings.tags="cluster:' + businessUnitInput.value + '-' + platformInput.value + '-' + environmentInput.value + '-' + vastInput.value + '-' + vsadInput.value + '\\,' + 'vz-vsadid:' + vsadInput.value + '\\,' + 'vz-vastid:' + vastInput.value +'" \\ <br>';
       let outputText = helmQuickstartDocs + helmHeader + helmInitText + helmInstallText + clusterNameText + clusterTagsText;
       // valuesEnteredByUser += 'businessUnitInput: ' + businessUnitInput.value;
       // valuesEnteredByUser += 'platformInput: ' + platformInput.value;
@@ -624,7 +624,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         };
         let httpProxy = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.proxy.httpProxy=' + inputs[0].value + ':' + inputs[1].value + ' \\ <br>';
         let httpsProxy = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.proxy.httpsProxy=' + inputs[0].value + ':' + inputs[1].value + ' \\ <br>';
-        let noProxy = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.proxy.noProxy=' + inputs[2].value + ' \\ <br>';
+        let noProxy = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.proxy.noProxy=' + '"' + inputs[2].value + '"' + ' \\ <br>';
         let agentHttpProxyPort = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.sysdig.settings.http_proxy.proxy_port=' + inputs[1].value + ' \\ <br>';
         let agentHttpProxyHost = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.sysdig.settings.http_proxy.proxy_host=' + inputs[0].value + ' \\ <br>';
         outputText += httpProxy;
