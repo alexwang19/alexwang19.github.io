@@ -51,7 +51,7 @@
       cursor: pointer;
     }
 
-    button:hover {
+    button#generateInstallCmdBtn:hover {
       background-color: #45a049;
     }
 
@@ -64,7 +64,7 @@
     margin-top: 20px;
   }
 
-  .form-section button {
+  .form-section button#generateInstallCmdBtn {
     padding: 8px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -74,13 +74,13 @@
     margin-bottom: 10px;
   }
 
-  .form-section button#downloadOutputBtn {
+  .form-section button {
     background-color: #f2f2f2;
     color: #333;
     border-color: #333;
   }
 
-  .form-section button#downloadOutputBtn:hover {
+  .form-section button:hover {
     background-color: #333;
     color: #f2f2f2;
   }
@@ -236,7 +236,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
     </div> -->
 
     <div class="form-section">
-      <button onclick="displayOutput()">Generate Install Commands</button>
+      <button id="generateInstallCmdBtn" onclick="displayOutput()">Generate Install Commands</button>
 <!--       <button onclick="downloadConfigYAML()">Download Config YAML</button> -->
       <button id="downloadOutputBtn" onclick="downloadOutputText()" style="display: none;">Download Copy of Install Commands</button>
       <button id="downloadInputValuesBtn" onclick="downloadInputValues()" style="display: none;">Download Input Values</button>
