@@ -60,9 +60,30 @@
       margin: 0 auto;
     }
 
-    .form-section {
-      margin-bottom: 20px;
-    }
+  .form-section {
+    margin-top: 20px;
+  }
+
+  .form-section button {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+
+  .form-section button#downloadOutputBtn {
+    background-color: #f2f2f2;
+    color: #333;
+    border-color: #333;
+  }
+
+  .form-section button#downloadOutputBtn:hover {
+    background-color: #333;
+    color: #f2f2f2;
+  }
 
     .dropdown {
       position: relative;
@@ -217,7 +238,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
     <div class="form-section">
       <button onclick="displayOutput()">Generate Install Commands</button>
 <!--       <button onclick="downloadConfigYAML()">Download Config YAML</button> -->
-      <button onclick="downloadOutputText()">Download Output Text</button>
+      <button id="downloadOutputBtn" onclick="downloadOutputText()" style="display: none;">Download Output Text</button>
     </div>
 
     <div id="output"></div>
@@ -566,15 +587,15 @@ nodeAnalyzer:
       link.href = URL.createObjectURL(blob);
       link.download = 'config.yaml';
       link.click();
+      document.getElementById('downloadOutputBtn').style.display = 'inline-block';
       
       // Create a Blob with the YAML content
-      const blob2 = new Blob([outputText], { type: 'text/html' });
-      outputDiv.innerHTML = outputText;
-      // Create a temporary <a> element to trigger the download
-      const link2 = document.createElement('a');
-      link2.href = URL.createObjectURL(blob2);
-      link2.download = 'deployment.html';
-      link2.innerHTML = "Download Copy of Helm Command";
+      // const blob2 = new Blob([outputText], { type: 'text/html' });
+      // outputDiv.innerHTML = outputText;
+      // // Create a temporary <a> element to trigger the download
+      // const link2 = document.createElement('a');
+      // link2.href = URL.createObjectURL(blob2);
+      // link2.download = 'deployment.html';
       // link2.click();
     }
   </script>
