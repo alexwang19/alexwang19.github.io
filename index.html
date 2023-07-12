@@ -264,7 +264,10 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
 
     function downloadInputValues() {
       const inputFields = document.querySelectorAll('.form-section input:not([type="file"])');
-      const values = Array.from(inputFields).map(field => field.name + ': ' + field.value);
+      const values = Array.from(inputFields).map(field => {
+        const label = field.previousElementSibling.textContent.trim();
+        return label + ': ' + field.value;
+      });
     
       const content = values.join('\n');
       const blob = new Blob([content], { type: 'text/plain' });
