@@ -268,6 +268,18 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       }
     }
 
+    function handleFileUpload(event) {
+      clearAllFields(); // Clear all fields before populating from the uploaded file
+    
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const content = e.target.result;
+        populateFields(content);
+      };
+      reader.readAsText(file);
+    }
+
     function populateFields(content) {
       const lines = content.split('\n');
       const inputFields = document.querySelectorAll('.form-section input:not([type="file"])');
