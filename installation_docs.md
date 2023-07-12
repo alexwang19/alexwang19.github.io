@@ -6,8 +6,13 @@
 
 ## Requirements
 
-* kubectl version must be +-1 of kubernetes cluster. Ex: K8s cluster v1.21, kubectl version can be 1.20,1.21,1.22
-* Port 6443 open for outbound traffic The Sysdig Agent communicates with the collector on port 6443. If you’re using a firewall, make sure to open port 6443 for outbound traffic so that the agent can communicate with the collector
+* kubectl version must be +-1 of kubernetes cluster. Ex: K8s cluster v1.24, kubectl version is recommended to be no lower than v1.23
+* Port 6443 open for outbound traffic The Sysdig Agent communicates with the collector on port 6443. If you’re using a firewall, make sure to open port 6443 for outbound traffic so that the agent can communicate with the collector. This also applies to proxies. Ensure that port 6443 is open on your proxy.
+  * Validate connection using commands below:
+  * ```
+    export http{s,}_proxy=http://myproxy.com:8080
+    curl -sL ingest-us2.app.sysdig.com:6443 -v
+    ```
 * [Agent Requirement Docs]([https://docs.sysdig.com/en/docs/installation/sysdig-secure/install-agent-components/installation-requirements/](https://docs.sysdig.com/en/docs/installation/sysdig-secure/install-agent-components/installation-requirements/sysdig-agent/)https://docs.sysdig.com/en/docs/installation/sysdig-secure/install-agent-components/installation-requirements/sysdig-agent/)
 * Access to kubernetes cluster. Ex: "kubectl get pods -A" returns list of pods running on cluster
 
