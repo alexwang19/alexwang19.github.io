@@ -167,17 +167,17 @@
       </select>
       <div id="testInput" class="form-section" style="display: none;">
         <br><a target="_blank" href="https://us2.app.sysdig.com/secure/#/settings/agentInstallation">Retrieve Sysdig Test Access Key Here</a><br>
-        <br><input type="text" id="testSysdigAccessKey" placeholder="Enter Sysdig Test Access Key" >
+        <br><input type="text" name="testSysdigAccessKeyID" id="testSysdigAccessKey" placeholder="Enter Sysdig Test Access Key" >
       </div>
       <div id="prodInput" class="form-section" style="display: none;">
-        <br><a target="_blank" href="https://app.us3.sysdig.com/secure/#/settings/agentInstallation">Retrieve Standard Deployment Sysdig Access Key Here</a><br>
-        <br><input type="text" id="standardSysdigAccessKey" placeholder="Enter VZ Standard Deployment Sysdig Access Key">
+        <br><a target="_blank" href="https://app.us3.sysdig.com/secure/#/settings/agentInstallation">Retrieve VZ Standard Deployment Sysdig Access Key Here</a><br>
+        <br><input type="text" name="standardSysdigAccessKeyID" id="standardSysdigAccessKey" placeholder="Enter VZ Standard Deployment Sysdig Access Key">
       </div>
     </div>
     
     <div id="businessUnitInput" class="form-section">
       <label for="businessUnitInput">Business Unit (Required)</label>
-      <input type="text" name="businessUnit id="businessUnit" placeholder="Enter Business Unit/Application Name" required>
+      <input type="text" name="businessUnitID" id="businessUnit" placeholder="Enter Business Unit/Application Name" required>
     </div>
 
     <div id="platformInput" class="form-section">
@@ -205,7 +205,7 @@
       <pre id="kubectlCommandText">
 kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort -nr | head -1
       </pre>
-      <input type="text" id="imageSize" placeholder="ex: 3147483648" required>
+      <input type="text" name="imageSizeID" id="imageSize" placeholder="ex: 3147483648" required>
     </div>
     
     <div class="form-section">
