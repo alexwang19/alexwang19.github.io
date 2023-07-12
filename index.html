@@ -267,8 +267,6 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
     //   URL.revokeObjectURL(url);
     // }
 
-    // ... existing JavaScript code ...
-
     // Function to handle file upload and populate input fields
     function handleFileUpload(event) {
       const file = event.target.files[0];
@@ -300,6 +298,12 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
             }
           }
         }
+      }
+
+      // Check if proxy checkbox is checked and toggle proxy inputs
+      const proxyCheckbox = document.getElementById('proxyCheckbox');
+      if (proxyCheckbox.checked) {
+        toggleProxyInputs('proxyCheckbox', 'proxyInput');
       }
     }
     
