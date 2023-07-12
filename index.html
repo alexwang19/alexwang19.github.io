@@ -334,7 +334,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       const registryCheckbox = document.getElementById('registryCheckbox');
       if (registryCheckbox.checked) {
         console.log("Toggling registryCheckbox ");
-        toggleProxyInputs('registryCheckbox', 'registryInput');
+        toggleRegistryInputs('registryCheckbox', 'registryInput');
         const lines2 = content.split('\n');
         const inputFields2 = document.querySelectorAll('.form-section input:not([type="file"])');
       
