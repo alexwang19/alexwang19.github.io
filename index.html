@@ -238,7 +238,9 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
     <div class="form-section">
       <button onclick="displayOutput()">Generate Install Commands</button>
 <!--       <button onclick="downloadConfigYAML()">Download Config YAML</button> -->
+      <button id="downloadOutputBtn" onclick="downloadOutputText()" style="display: none;">Download Copy of Install Commands</button>
       <button id="downloadOutputBtn" onclick="downloadOutputText()" style="display: none;">Download Output Text</button>
+      <button id="downloadOutputBtn" onclick="downloadInputValues()" style="display: none;">Download Input Values</button>
     </div>
 
     <div id="output"></div>
@@ -258,6 +260,22 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
     
     //   URL.revokeObjectURL(url);
     // }
+
+    function downloadInputValues() {
+      const inputFields = document.querySelectorAll('.form-section input:not([type="file"])');
+      const values = Array.from(inputFields).map(field => field.value);
+    
+      const content = values.join('\n');
+      const blob = new Blob([content], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+    
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'input_values.txt';
+      link.click();
+    
+      URL.revokeObjectURL(url);
+    }
 
     function downloadOutputText() {
       const outputText = document.getElementById('output').textContent;
@@ -413,6 +431,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       // const priorityCheckbox = document.getElementById('priorityCheckbox');
       // const priorityInput = document.querySelector('#priorityInput input');
       const outputDiv = document.getElementById('output');
+      // let valuesEnteredByUser;
 
 
       let helmQuickstartDocs = '<b>Refer to this link for additional Helm commands: https://github.com/alexwang19/alexwang19.github.io/blob/main/README.md</b><br><br>';
@@ -424,6 +443,12 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       let clusterNameText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.clusterConfig.name=' + businessUnitInput.value + '-' + platformInput.value + '-' + environmentInput.value + '-' + vastInput.value + '-' + vsadInput.value + ' \\ <br>';
       let clusterTagsText = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.sysdig.settings.tags=cluster:' + businessUnitInput.value + '-' + platformInput.value + '-' + environmentInput.value + '-' + vastInput.value + '-' + vsadInput.value + '\\,' + 'vz-vsadid:' + vsadInput.value + '\\,' + 'vz-vastid:' + vastInput.value +' \\ <br>';
       let outputText = helmQuickstartDocs + helmHeader + helmInitText + helmInstallText + clusterNameText + clusterTagsText;
+      // valuesEnteredByUser += 'businessUnitInput: ' + businessUnitInput.value;
+      // valuesEnteredByUser += 'platformInput: ' + platformInput.value;
+      // valuesEnteredByUser += 'environmentInput: ' + environmentInput.value;
+      // valuesEnteredByUser += 'vastInput: ' + vastInput.value;
+      // valuesEnteredByUser += 'vsadInput: ' + vsadInput.value;
+      // valuesEnteredByUser += 'imageSizeInput: ' + imageSizeInput.value;
 
       if (imageSizeInput.value > 2147483648) {
         let ephemeralStorageRequestBytes = 1.5 * imageSizeInput.value;
@@ -432,7 +457,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         const ephemeralStorageLimitGigabytes = convertBytesToGigabytes(ephemeralStorageLimitBytes);
         let memoryLimitBytes = 2 * imageSizeInput.value;
         const memoryLimitGigabytes = convertBytesToGigabytes(memoryLimitBytes);
-        
+
         outputText += '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.settings.maxImageSizeAllowed=' + imageSizeInput.value + ' \\<br>';
         outputText += '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.requests.ephemeral-storage=' + Math.ceil(ephemeralStorageRequestGigabytes) + 'Gi \\<br>';
         outputText += '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.limits.memory=' + Math.ceil(memoryLimitGigabytes) + 'Gi \\<br>'
@@ -453,6 +478,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         let accessKeyText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput + ' \\ <br>';
         outputText += accessKeyText;
       };
+      // valuesEnteredByUser += 'accessKeyInput: ' + accessKeyInput;
       // Validate required inputs
       if (accessKeyInput == null || businessUnitInput.value.trim() === '' || platformInput.value.trim() === '' || environmentInput.value.trim() === '' || vastInput.value.trim() === '' || vsadInput.value.trim() === '') {
         alert('Please fill in all required fields.');
@@ -493,6 +519,9 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         outputText += noProxy;
         outputText += agentHttpProxyPort;
         outputText += agentHttpProxyHost;
+        // valuesEnteredByUser += 'proxyHostInput: ' + inputs[0].value;
+        // valuesEnteredByUser += 'proxyPortInput: ' + inputs[1].value;
+        // valuesEnteredByUser += 'noProxyInput: ' + inputs[2].value;
       }
       if (registryCheckbox.checked) {
         for (let i = 0; i < registryInputs.length; i++) {
@@ -520,6 +549,11 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository;
         outputText += agentImageTag;
         outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag;
+        // valuesEnteredByUser += 'internalRegistryInput: ' + registryInputs[0].value;
+        // valuesEnteredByUser += 'internalSysdigAgentImageInput: ' + registryInputs[1].value;
+        // valuesEnteredByUser += 'internalSysdigRuntimeScannerImageInput: ' + registryInputs[3].value;
+        // valuesEnteredByUser += 'internalAgentTagInput: ' + registryInputs[4].value;
+        // valuesEnteredByUser += 'internalRuntimeScannerTagInput: ' + registryInputs[5].value;
       }
 
       // if (priorityCheckbox.checked) {
