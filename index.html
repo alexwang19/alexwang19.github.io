@@ -260,7 +260,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
     }
 
     function handleFileUpload(event) {
-      clearAllFields(); // Clear all fields before populating from the uploaded file
+      refreshPage(); // Clear all fields before populating from the uploaded file
     
       const file = event.target.files[0];
       const reader = new FileReader();
