@@ -237,6 +237,11 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
     </div> -->
 
     <div class="form-section">
+      <label for="fileInput">Upload Input Values File:</label>
+      <input type="file" id="fileInput" accept=".txt">
+    </div>
+    
+    <div class="form-section">
       <button id="generateInstallCmdBtn" onclick="displayOutput()">Generate Install Commands</button>
 <!--       <button onclick="downloadConfigYAML()">Download Config YAML</button> -->
       <button id="downloadOutputBtn" onclick="downloadOutputText()" style="display: none;">Download Copy of Install Commands</button>
@@ -261,6 +266,42 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
     
     //   URL.revokeObjectURL(url);
     // }
+
+    // ... existing JavaScript code ...
+
+    // Function to handle file upload and populate input fields
+    function handleFileUpload(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const content = e.target.result;
+        populateFields(content);
+      };
+      reader.readAsText(file);
+    }
+
+    // Function to populate input fields with file content
+    function populateFields(content) {
+      const lines = content.split('\n');
+      const inputFields = document.querySelectorAll('.form-section input:not([type="file"])');
+    
+      for (let i = 0; i < inputFields.length && i < lines.length; i++) {
+        const line = lines[i].trim();
+    
+        if (line.includes(':')) {
+          const [label, value] = line.split(':').map(entry => entry.trim());
+          const field = Array.from(inputFields).find(input => input.name === label);
+          if (field) {
+            field.value = value;
+          }
+        }
+      }
+    }
+    
+    // Add event listener to file input
+    const fileInput = document.getElementById('fileInput');
+    fileInput.addEventListener('change', handleFileUpload);
+
 
     function downloadInputValues() {
       const inputFields = document.querySelectorAll('.form-section input:not([type="file"])');
