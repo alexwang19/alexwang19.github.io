@@ -290,20 +290,19 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
           const field = Array.from(inputFields).find(input => input.name === label);
     
           if (field) {
-            if (field.type === 'checkbox') {
+            if (field.name === 'proxyCheckBoxID' && field.type === 'checkbox') {
               field.checked = (value.toLowerCase() === 'on');
+              let proxyCheckbox = document.getElementById('proxyCheckbox');
+              if (proxyCheckbox.checked) {
+                toggleProxyInputs('proxyCheckbox', 'proxyInput');
+              }
             } else {
               field.value = value;
             }
           }
         }
       }
-    
-      // Check if proxy checkbox is checked and toggle proxy inputs
-      const proxyCheckbox = document.getElementById('proxyCheckbox');
-      if (proxyCheckbox.checked) {
-        toggleProxyInputs('proxyCheckbox', 'proxyInput');
-      }
+  
     }
 
 
