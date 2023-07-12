@@ -210,7 +210,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
     
     <div class="form-section">
       <label>
-        <input type="checkbox" id="proxyCheckbox"
+        <input type="checkbox" name="proxyCheckBoxID" id="proxyCheckbox"
           onchange="toggleProxyInputs('proxyCheckbox', 'proxyInput')">
         Is Proxy Required?
       </label>
@@ -219,7 +219,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
 
     <div class="form-section">
       <label>
-        <input type="checkbox" id="registryCheckbox"
+        <input type="checkbox" name="registryCheckboxID" id="registryCheckbox"
           onchange="toggleRegistryInputs('registryCheckbox', 'registryInput')">
         Is Internal Registry Required?
       </label>
