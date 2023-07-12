@@ -291,8 +291,13 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         if (line.includes(':')) {
           const [label, value] = line.split(':').map(entry => entry.trim());
           const field = Array.from(inputFields).find(input => input.name === label);
+          
           if (field) {
-            field.value = value;
+            if (field.type === 'checkbox') {
+              field.checked = (value.toLowerCase() === 'true');
+            } else {
+              field.value = value;
+            }
           }
         }
       }
