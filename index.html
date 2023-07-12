@@ -177,27 +177,27 @@
     
     <div id="businessUnitInput" class="form-section">
       <label for="businessUnitInput">Business Unit (Required)</label>
-      <input type="text" id="businessUnit" placeholder="Enter Business Unit/Application Name" required>
+      <input type="text" name="businessUnit id="businessUnit" placeholder="Enter Business Unit/Application Name" required>
     </div>
 
     <div id="platformInput" class="form-section">
       <label for="platformInput">Platform (Required)</label>
-      <input type="text" id="platform" placeholder="ex: eks, gke, etc." required>
+      <input type="text" name="platformID" id="platform" placeholder="ex: eks, gke, etc." required>
     </div>
 
     <div id="environmentInput" class="form-section">
       <label for="environmentInput">Environment (Required)</label>
-      <input type="text" id="environment" placeholder="ex: dev, qa, preprod, prod, etc." required>
+      <input type="text" name="environmentID" id="environment" placeholder="ex: dev, qa, preprod, prod, etc." required>
     </div>
 
     <div id="vastInput" class="form-section">
       <label for="vastInput">VASTID (Required)</label>
-      <input type="text" id="vast" placeholder="Enter VAST ID" required>
+      <input type="text" name="vastID" id="vast" placeholder="Enter VAST ID" required>
     </div>
 
     <div id="vsadInput" class="form-section">
       <label for="vsadInput">VSADID (Required)</label>
-      <input type="text" id="vsad" placeholder="Enter VSAD ID" required>
+      <input type="text" name="vsadID" id="vsad" placeholder="Enter VSAD ID" required>
     </div>
 
     <div id="imageSizeInput" class="form-section">
@@ -264,10 +264,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
 
     function downloadInputValues() {
       const inputFields = document.querySelectorAll('.form-section input:not([type="file"])');
-      const values = Array.from(inputFields).map(field => {
-        const label = field.previousElementSibling.textContent.trim();
-        return label + ': ' + field.value;
-      });
+      const values = Array.from(inputFields).map(field => field.value);
     
       const content = values.join('\n');
       const blob = new Blob([content], { type: 'text/plain' });
@@ -280,6 +277,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
     
       URL.revokeObjectURL(url);
     }
+
 
     function downloadOutputText() {
       const outputText = document.getElementById('output').textContent;
