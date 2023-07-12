@@ -306,6 +306,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       // Check if proxy checkbox is checked and toggle proxy inputs
       const proxyCheckbox = document.getElementById('proxyCheckbox');
       console.log("This is is proxycheckbox: ", proxyCheckbox);
+      console.log("This is is proxycheckbox.checked: ", proxyCheckbox.checked);
       if (proxyCheckbox.checked) {
         console.log("Toggling proxy checkbox");
         toggleProxyInputs('proxyCheckbox', 'proxyInput');
@@ -334,6 +335,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       // Check if proxy checkbox is checked and toggle proxy inputs
       const registryCheckbox = document.getElementById('registryCheckbox');
       console.log("This is is registrycheckbox: ", registryCheckbox);
+      console.log("This is is registrycheckbox.checked: ", registryCheckbox.checked);
       if (registryCheckbox.checked) {
         console.log("Toggling registryCheckbox ");
         toggleRegistryInputs('registryCheckbox', 'registryInput');
