@@ -239,6 +239,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
     <div class="form-section">
       <label for="fileInput">Upload Input Values File:</label>
       <input type="file" id="fileInput" accept=".txt">
+      <button id="clearFileButton" onclick="clearFile()">Clear</button>
     </div>
     
     <div class="form-section">
@@ -253,19 +254,10 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
   </div>
 
   <script>
-    // function downloadConfigYAML() {
-    //   const yamlContent = generateConfigYAML(); // Replace this with the actual function to generate the YAML content
-    
-    //   const blob = new Blob([yamlContent], { type: 'text/yaml' });
-    //   const url = URL.createObjectURL(blob);
-    
-    //   const link = document.createElement('a');
-    //   link.href = url;
-    //   link.download = 'config.yaml';
-    //   link.click();
-    
-    //   URL.revokeObjectURL(url);
-    // }
+    function clearFile() {
+      const fileInput = document.getElementById('fileInput');
+      fileInput.value = '';
+    }
 
     // Function to handle file upload and populate input fields
     function handleFileUpload(event) {
@@ -530,11 +522,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       const environmentInput = document.querySelector('#environmentInput input');
       const vastInput = document.querySelector('#vastInput input');
       const vsadInput = document.querySelector('#vsadInput input');
-      // const accessKeyInput = document.querySelector('#accessKeyInput input');
       const imageSizeInput = document.querySelector('#imageSizeInput input');
-      // const regionInput = document.querySelector('#regionInput input');
-      // const clusterNameInput = document.querySelector('#clusterNameInput input');
-      // const clusterTagsInput = document.querySelector('#clusterTagsInput input');
       const proxyCheckbox = document.getElementById('proxyCheckbox');
       const proxyInput = document.getElementById('proxyInput');
       const inputs = proxyInput.getElementsByTagName('input');
@@ -544,24 +532,15 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       // const priorityCheckbox = document.getElementById('priorityCheckbox');
       // const priorityInput = document.querySelector('#priorityInput input');
       const outputDiv = document.getElementById('output');
-      // let valuesEnteredByUser;
-
 
       let helmQuickstartDocs = '<b>Refer to this link for additional Helm commands: https://github.com/alexwang19/alexwang19.github.io/blob/main/README.md</b><br><br>';
       let helmHeader = '<b>Helm Install Commands</b><br>';
       let helmInitText = 'helm repo add sysdig https://charts.sysdig.com --force-update <br><br>';
       let helmInstallText = 'helm install sysdig-agent \\<br>&nbsp;&nbsp;&nbsp;&nbsp; --namespace kube-system \\<br>';
-      // let accessKeyText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput.value + ' \\ <br>';
-      // let regionText = '--set global.sysdig.region=' + regionInput.value + ' \\ <br>';
       let clusterNameText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.clusterConfig.name=' + businessUnitInput.value + '-' + platformInput.value + '-' + environmentInput.value + '-' + vastInput.value + '-' + vsadInput.value + ' \\ <br>';
       let clusterTagsText = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.sysdig.settings.tags="cluster:' + businessUnitInput.value + '-' + platformInput.value + '-' + environmentInput.value + '-' + vastInput.value + '-' + vsadInput.value + '\\,' + 'vz-vsadid:' + vsadInput.value + '\\,' + 'vz-vastid:' + vastInput.value +'" \\ <br>';
       let outputText = helmQuickstartDocs + helmHeader + helmInitText + helmInstallText + clusterNameText + clusterTagsText;
-      // valuesEnteredByUser += 'businessUnitInput: ' + businessUnitInput.value;
-      // valuesEnteredByUser += 'platformInput: ' + platformInput.value;
-      // valuesEnteredByUser += 'environmentInput: ' + environmentInput.value;
-      // valuesEnteredByUser += 'vastInput: ' + vastInput.value;
-      // valuesEnteredByUser += 'vsadInput: ' + vsadInput.value;
-      // valuesEnteredByUser += 'imageSizeInput: ' + imageSizeInput.value;
+
 
       if (imageSizeInput.value > 2147483648) {
         let ephemeralStorageRequestBytes = 1.5 * imageSizeInput.value;
@@ -591,7 +570,6 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         let accessKeyText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput + ' \\ <br>';
         outputText += accessKeyText;
       };
-      // valuesEnteredByUser += 'accessKeyInput: ' + accessKeyInput;
       // Validate required inputs
       if (accessKeyInput == null || businessUnitInput.value.trim() === '' || platformInput.value.trim() === '' || environmentInput.value.trim() === '' || vastInput.value.trim() === '' || vsadInput.value.trim() === '') {
         alert('Please fill in all required fields.');
@@ -603,16 +581,6 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
           return;
         };
       };
-      // if (prodInput2 != null){
-      //   if (prodInput2.value.trim() === ''){
-      //     alert('Please fill in required access key.');
-      //     return;
-      //   };
-      // };
-      // if (regionCheckbox.checked) {
-      //   let regionText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.region=us2 \\<br>';
-      //   outputText += regionText;
-      // };
       
       if (proxyCheckbox.checked) {
         for (let i = 0; i < inputs.length; i++) {
@@ -632,9 +600,6 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         outputText += noProxy;
         outputText += agentHttpProxyPort;
         outputText += agentHttpProxyHost;
-        // valuesEnteredByUser += 'proxyHostInput: ' + inputs[0].value;
-        // valuesEnteredByUser += 'proxyPortInput: ' + inputs[1].value;
-        // valuesEnteredByUser += 'noProxyInput: ' + inputs[2].value;
       }
       if (registryCheckbox.checked) {
         for (let i = 0; i < registryInputs.length; i++) {
@@ -662,11 +627,6 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository;
         outputText += agentImageTag;
         outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag;
-        // valuesEnteredByUser += 'internalRegistryInput: ' + registryInputs[0].value;
-        // valuesEnteredByUser += 'internalSysdigAgentImageInput: ' + registryInputs[1].value;
-        // valuesEnteredByUser += 'internalSysdigRuntimeScannerImageInput: ' + registryInputs[3].value;
-        // valuesEnteredByUser += 'internalAgentTagInput: ' + registryInputs[4].value;
-        // valuesEnteredByUser += 'internalRuntimeScannerTagInput: ' + registryInputs[5].value;
       }
 
       // if (priorityCheckbox.checked) {
