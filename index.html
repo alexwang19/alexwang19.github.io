@@ -278,7 +278,6 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       reader.readAsText(file);
     }
 
-    // Function to populate input fields with file content
     function populateFields(content) {
       const lines = content.split('\n');
       const inputFields = document.querySelectorAll('.form-section input:not([type="file"])');
@@ -296,35 +295,14 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
             } else {
               field.value = value;
             }
-          } else if (label === 'httpProxy') {
-            const proxyCheckbox = document.getElementById('proxyCheckbox');
-            proxyCheckbox.checked = true;
-    
-            const proxyInputsContainer = document.getElementById('proxyInput');
-            proxyInputsContainer.innerHTML = '';
-    
-            const proxyFields = value.split(',');
-            for (let j = 0; j < proxyFields.length; j++) {
-              const [fieldName, fieldValue] = proxyFields[j].split('=').map(entry => entry.trim());
-    
-              const inputWrapper = document.createElement('div');
-              inputWrapper.classList.add('dynamic-input-wrapper');
-    
-              const label = document.createElement('label');
-              label.textContent = fieldName;
-    
-              const input = document.createElement('input');
-              input.type = 'text';
-              input.name = fieldName;
-              input.value = fieldValue;
-    
-              inputWrapper.appendChild(label);
-              inputWrapper.appendChild(input);
-    
-              proxyInputsContainer.appendChild(inputWrapper);
-            }
           }
         }
+      }
+    
+      // Check if proxy checkbox is checked and toggle proxy inputs
+      const proxyCheckbox = document.getElementById('proxyCheckbox');
+      if (proxyCheckbox.checked) {
+        toggleProxyInputs('proxyCheckbox', 'proxyInput');
       }
     }
 
