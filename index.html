@@ -239,7 +239,8 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
     <div class="form-section">
       <label for="fileInput">Upload Input Values File:</label>
       <input type="file" id="fileInput" accept=".txt">
-      <button id="clearFileButton" onclick="clearFile()">Clear</button>
+      <br>
+      <button onclick="clearAllFields()">Clear All Fields</button>
     </div>
     
     <div class="form-section">
@@ -254,20 +255,17 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
   </div>
 
   <script>
-    function clearFile() {
-      const fileInput = document.getElementById('fileInput');
-      fileInput.value = '';
-    }
-
-    // Function to handle file upload and populate input fields
-    function handleFileUpload(event) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const content = e.target.result;
-        populateFields(content);
-      };
-      reader.readAsText(file);
+    function clearAllFields() {
+      const inputFields = document.querySelectorAll('.form-section input:not([type="file"])');
+      const checkboxInputs = document.querySelectorAll('.form-section input[type="checkbox"]');
+      
+      for (let i = 0; i < inputFields.length; i++) {
+        inputFields[i].value = '';
+      }
+    
+      for (let i = 0; i < checkboxInputs.length; i++) {
+        checkboxInputs[i].checked = false;
+      }
     }
 
     function populateFields(content) {
