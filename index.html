@@ -294,7 +294,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
           
           if (field) {
             if (field.type === 'checkbox') {
-              field.checked = (value.toLowerCase() === 'true');
+              field.checked = (value.toLowerCase() === 'on');
             } else {
               field.value = value;
             }
