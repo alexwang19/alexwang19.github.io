@@ -405,7 +405,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
 
       if (checkbox.checked) {
         // Clear existing inputs
-        inputsContainer.innerHTML = '';
+        // inputsContainer.innerHTML = '';
         const inputWrapper = document.createElement('div');
         inputWrapper.classList.add('dynamic-input-wrapper');
 
