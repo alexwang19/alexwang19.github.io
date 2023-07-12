@@ -239,8 +239,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       <button onclick="displayOutput()">Generate Install Commands</button>
 <!--       <button onclick="downloadConfigYAML()">Download Config YAML</button> -->
       <button id="downloadOutputBtn" onclick="downloadOutputText()" style="display: none;">Download Copy of Install Commands</button>
-      <button id="downloadOutputBtn" onclick="downloadOutputText()" style="display: none;">Download Output Text</button>
-      <button id="downloadOutputBtn" onclick="downloadInputValues()" style="display: none;">Download Input Values</button>
+      <button id="downloadInputValuesBtn" onclick="downloadInputValues()" style="display: none;">Download Input Values</button>
     </div>
 
     <div id="output"></div>
@@ -622,6 +621,7 @@ nodeAnalyzer:
       link.download = 'config.yaml';
       link.click();
       document.getElementById('downloadOutputBtn').style.display = 'inline-block';
+      document.getElementById('downloadInputValuesBtn').style.display = 'inline-block';
       
       // Create a Blob with the YAML content
       // const blob2 = new Blob([outputText], { type: 'text/html' });
