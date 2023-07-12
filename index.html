@@ -305,7 +305,27 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       // Check if proxy checkbox is checked and toggle proxy inputs
       const proxyCheckbox = document.getElementById('proxyCheckbox');
       if (proxyCheckbox.checked) {
+        console.log("Toggling proxy checkbox");
         toggleProxyInputs('proxyCheckbox', 'proxyInput');
+        const lines2 = content.split('\n');
+        const inputFields2 = document.querySelectorAll('.form-section input:not([type="file"])');
+      
+        for (let i = 0; i < inputFields2.length && i < lines2.length; i++) {
+          const line2 = lines2[i].trim();
+      
+          if (line.includes(':')) {
+            const [label2, value2] = line2.split(':').map(entry2 => entry2.trim());
+            const field2 = Array.from(inputFields2).find(input2 => input2.name === label2);
+  
+            console.log("Label2: ", label2)
+            console.log("Value2: ", value2)
+            console.log("Field2: ", field2)
+      
+            if (field2) {
+                field.value = value;
+            }
+          }
+        }
       }
     }
     
