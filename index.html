@@ -325,7 +325,11 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
             console.log("Field2: ", field2)
       
             if (field2) {
+              if (field2.type === 'checkbox') {
+                field2.checked = (value2.toLowerCase() === 'on');
+              } else {
                 field2.value = value2;
+              }
             }
           }
         }
@@ -354,7 +358,11 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
             console.log("Field2: ", field2)
       
             if (field2) {
+              if (field2.type === 'checkbox') {
+                field2.checked = (value2.toLowerCase() === 'on');
+              } else {
                 field2.value = value2;
+              }
             }
           }
         }
