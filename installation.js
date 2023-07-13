@@ -59,6 +59,8 @@ function downloadYamlFile(outputDiv, outputText) {
     // Convert the YAML data back to YAML content
     // const yamlContent = yaml.safeDump(importedYamlData);
 
+    console.log("Test");
+    
     // Create a Blob with the YAML content
     const blob = new Blob([importedYamlData], { type: 'text/yaml' });
     outputDiv.innerHTML = outputText;
