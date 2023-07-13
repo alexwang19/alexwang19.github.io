@@ -180,14 +180,14 @@
       <input type="text" name="businessUnitID" id="businessUnit" placeholder="Enter Business Unit/Application Name" required>
     </div>
 
-    <div id="platformInput" class="form-section">
-      <label for="platformInput">Platform (Required)</label>
-      <input type="text" name="platformID" id="platform" placeholder="ex: eks, gke, etc." required>
-    </div>
-
     <div id="environmentInput" class="form-section">
       <label for="environmentInput">Environment (Required)</label>
       <input type="text" name="environmentID" id="environment" placeholder="ex: dev, qa, preprod, prod, etc." required>
+    </div>
+    
+    <div id="platformInput" class="form-section">
+      <label for="platformInput">Platform (Required)</label>
+      <input type="text" name="platformID" id="platform" placeholder="ex: eks, gke, etc." required>
     </div>
 
     <div id="vastInput" class="form-section">
@@ -203,6 +203,11 @@
     <div id="clusterNameInput" class="form-section">
       <label for="clusterNameInput">Cluster Name</label>
       <input type="text" id="clusterName" placeholder="Enter Cluster Name" oninput="autoPopulateClusterName()" required>
+    </div>
+
+    <div id="clusterTagsInput" class="form-section">
+      <label for="clusterTagsInput">Cluster Tags</label>
+      <input type="text" id="clusterTags" placeholder="Enter Cluster Tags" oninput="autoPopulateClusterTags()" required>
     </div>
 
     <div id="imageSizeInput" class="form-section">
@@ -260,6 +265,42 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
   </div>
 
   <script>
+    // // Function to auto-populate cluster tags
+    // function autoPopulateClusterTags() {
+    //   const businessUnit = document.getElementById('businessUnit').value;
+    //   const environment = document.getElementById('environment').value;
+    //   const platform = document.getElementById('platform').value;
+    //   const vsadId = document.getElementById('vsad').value;
+    //   const vastId = document.getElementById('vast').value;
+    
+    //   const clusterTagsInput = document.getElementById('clusterTags');
+    //   const tags = [];
+    
+    //   if (businessUnit) {
+    //     tags.push(`business_unit:${businessUnit}`);
+    //   }
+    //   if (environment) {
+    //     tags.push(`environment:${environment}`);
+    //   }
+    //   if (platform) {
+    //     tags.push(`platform:${platform}`);
+    //   }
+    //   if (vsadId) {
+    //     tags.push(`vsad_id:${vsadId}`);
+    //   }
+    //   if (vastId) {
+    //     tags.push(`vast_id:${vastId}`);
+    //   }
+    
+    //   clusterTagsInput.value = tags.join(',');
+    // }
+    
+    // // Add input event listeners to related input fields
+    // const inputFields = document.querySelectorAll('#businessUnit, #environment, #platform, #vsadId, #vastId');
+    // inputFields.forEach(function (inputField) {
+    //   inputField.addEventListener('input', autoPopulateClusterTags);
+    // });
+    
     // Function to auto-populate cluster name
     function autoPopulateClusterName() {
       const businessUnit = document.getElementById('businessUnit').value;
