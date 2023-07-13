@@ -60,7 +60,7 @@ function downloadYamlFile(outputDiv) {
     // const yamlContent = yaml.safeDump(importedYamlData);
 
     // Create a Blob with the YAML content
-    const blob = new Blob([yamlContent], { type: 'text/yaml' });
+    const blob = new Blob([importedYamlData], { type: 'text/yaml' });
     outputDiv.innerHTML = outputText;
     // Create a temporary <a> element to trigger the download
     const link = document.createElement('a');
