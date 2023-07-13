@@ -200,6 +200,11 @@
       <input type="text" name="vsadID" id="vsad" placeholder="Enter VSAD ID" required>
     </div>
 
+    <div id="clusterTagsInput" class="form-section">
+      <label for="clusterTagsInput">Cluster Tags</label>
+      <input type="text" id="clusterTags" placeholder="Enter Cluster Tags" oninput="autoPopulateTags()" required>
+    </div>
+
     <div id="imageSizeInput" class="form-section">
       <label for="imageSizeInput">Largest Image Size Running In Your Cluster (Bytes)</label>
       <pre id="kubectlCommandText">
@@ -255,6 +260,36 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
   </div>
 
   <script>
+    // Function to auto-populate cluster tags
+    function autoPopulateTags() {
+      const businessUnit = document.getElementById('businessUnit').value;
+      const environment = document.getElementById('environment').value;
+      const platform = document.getElementById('platform').value;
+      const vsadId = document.getElementById('vsadId').value;
+      const vastId = document.getElementById('vastId').value;
+    
+      const clusterTagsInput = document.getElementById('clusterTags');
+      const tags = [];
+    
+      if (businessUnit) {
+        tags.push(`business_unit:${businessUnit}`);
+      }
+      if (environment) {
+        tags.push(`environment:${environment}`);
+      }
+      if (platform) {
+        tags.push(`platform:${platform}`);
+      }
+      if (vsadId) {
+        tags.push(`vsad_id:${vsadId}`);
+      }
+      if (vastId) {
+        tags.push(`vast_id:${vastId}`);
+      }
+    
+      clusterTagsInput.value = tags.join(',');
+    }
+    
     function refreshPage() {
       window.location.reload();
     }
