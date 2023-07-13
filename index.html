@@ -205,6 +205,13 @@
       <input type="text" id="clusterName" placeholder="Enter Cluster Name" oninput="autoPopulateClusterName()" required>
     </div>
 
+    <div id="agentTagsInput" class="form-section">
+      <label for="agentTagsInput">Agent Tags</label>
+      <select id="agentTags" required>
+        <option value="">Select Tag</option>
+      </select>
+    </div>
+
 <!--     <div id="clusterTagsInput" class="form-section">
       <label for="clusterTagsInput">Cluster Tags</label>
       <input type="text" id="clusterTags" placeholder="Enter Cluster Tags" oninput="autoPopulateClusterTags()" required>
@@ -300,6 +307,36 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
     // inputFields.forEach(function (inputField) {
     //   inputField.addEventListener('input', autoPopulateClusterTags);
     // });
+
+    function populateTagOptions() {
+      const dropdown = document.getElementById('agentTags');
+    
+      fetch('https://quay.io/api/v1/repository/sysdig/agent/tag/')
+        .then(response => response.json())
+        .then(data => {
+          const tags = data.tags.map(tag => tag.name);
+          const lastFiveVersions = tags.slice(-5).reverse();
+          lastFiveVersions.forEach(tag => {
+            const option = document.createElement('option');
+            option.value = tag;
+            option.textContent = formatTagVersion(tag);
+            dropdown.appendChild(option);
+          });
+        })
+        .catch(error => {
+          console.error('Error fetching tags:', error);
+        });
+    }
+    
+    // Function to format the tag version in "1.14.1" format
+    function formatTagVersion(tag) {
+      const versionParts = tag.split('-');
+      return versionParts[0];
+    }
+    
+    // Call the populateTagOptions() function to populate the dropdown on page load
+    window.addEventListener('DOMContentLoaded', populateTagOptions);
+    
     
     // Function to auto-populate cluster name
     function autoPopulateClusterName() {
