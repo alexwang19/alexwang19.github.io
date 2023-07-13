@@ -1,0 +1,35 @@
+---
+global:
+  sysdig:
+    region: "us3"
+agent:
+  slim:
+    enabled: false
+  auditLog:
+    enabled: false
+nodeAnalyzer:
+  nodeAnalyzer:
+    sslVerifyCertificate: false
+    imageAnalyzer:
+      deploy: false
+    benchmarkRunner:
+      deploy: false
+    hostAnalyzer:
+      deploy: false
+    hostScanner:
+      deploy: false
+    runtimeScanner:
+      deploy: true
+      settings:
+        eveEnabled: false
+        maxImageSizeAllowed: "2147483648"
+        maxFileSizeAllowed: "262144000"
+      eveConnector:
+        deploy: false
+      resources:
+        requests:
+          ephemeral-storage: 3Gi
+        limits:
+          cpu: 1000m
+          memory: 4Gi
+          ephemeral-storage: 6Gi
