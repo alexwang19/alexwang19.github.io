@@ -34,6 +34,55 @@
 //   inputField.addEventListener('input', autoPopulateClusterTags);
 // });
 
+// Define a variable to hold the imported YAML data
+let importedYamlData = null;
+
+// Function to fetch and import the YAML file
+function importYamlFile() {
+  fetch('./static-configs.yaml')
+    .then(response => response.text())
+    .then(yamlContent => {
+      // Parse the YAML content
+      importedYamlData = yaml.safeLoad(yamlContent);
+    })
+    .catch(error => {
+      console.error('Error importing YAML file:', error);
+    });
+}
+
+// Call the importYamlFile function to import the YAML file
+importYamlFile();
+
+// Function to download the imported YAML file
+function downloadYamlFile(outputDiv) {
+  if (importedYamlData) {
+    // Convert the YAML data back to YAML content
+    const yamlContent = yaml.safeDump(importedYamlData);
+
+    // Create a Blob with the YAML content
+    const blob = new Blob([yamlContent], { type: 'text/yaml' });
+    outputDiv.innerHTML = outputText;
+    // Create a temporary <a> element to trigger the download
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'static-helm-values.yaml';
+    link.click();
+  } else {
+    console.error('No imported YAML data available.');
+  }
+}
+
+  // // Create a Blob with the YAML content
+  // const blob = new Blob([yamlContent], { type: 'text/yaml' });
+  // outputDiv.innerHTML = outputText;
+  // // Create a temporary <a> element to trigger the download
+  // const link = document.createElement('a');
+  // link.href = URL.createObjectURL(blob);
+  // link.download = 'config.yaml';
+  // link.click();
+
+
+
 // Function to fetch the tags from the Quay.io repository and populate the dropdown
 function populateTagOptions() {
   const dropdown = document.getElementById('agentTags');
@@ -486,7 +535,7 @@ function displayOutput() {
   //   outputText += '--set agent.priorityClassName=' + priorityInput.value + ' \\ <br>';
   // }
 
-  outputText += '&nbsp;&nbsp;&nbsp;&nbsp; -f config.yaml \\<br>';
+  outputText += '&nbsp;&nbsp;&nbsp;&nbsp; -f static-helm-values.yaml \\<br>';
   outputText += 'sysdig/sysdig-deploy<br>';
   // outputText += '<br><br><b>Steps To Verify Installation</b><br>';
   // outputText += '- Ensure all sysdig pods are 1/1 Running state.<br>';
@@ -499,54 +548,56 @@ function displayOutput() {
   // outputText += '- Sometimes you will see recurring errors if a scan is attempted for an application pod that has not come up or is failing.<br>';
   // outputText += '- Grep all of the agent node analyzer pods logs for "\"message\":\"startup sleep\"". This signifies that the pod is up and running successfully.<br>';
 
-// Create YAML content
-let yamlContent = `global:
-sysdig:
-region: "us3"
-agent:
-slim:
-enabled: false
-auditLog:
-enabled: false
-sysdig:
-settings:
-  prometheus:
-    enabled: false
-nodeAnalyzer:
-nodeAnalyzer:
-sslVerifyCertificate: false
-imageAnalyzer:
-  deploy: false
-benchmarkRunner:
-  deploy: false
-hostAnalyzer:
-  deploy: false
-hostScanner:
-  deploy: false
-runtimeScanner:
-  deploy: true
-  settings:
-    eveEnabled: false
-    maxImageSizeAllowed: "4194304000"
-    maxFileSizeAllowed: "262144000"
-  eveConnector:
-    deploy: false
-  resources:
-    requests:
-      ephemeral-storage: 3Gi
-    limits:
-      cpu: 1000m
-      memory: 4Gi
-      ephemeral-storage: 6Gi`;
+// // Create YAML content
+// let yamlContent = `global:
+// sysdig:
+// region: "us3"
+// agent:
+// slim:
+// enabled: false
+// auditLog:
+// enabled: false
+// sysdig:
+// settings:
+//   prometheus:
+//     enabled: false
+// nodeAnalyzer:
+// nodeAnalyzer:
+// sslVerifyCertificate: false
+// imageAnalyzer:
+//   deploy: false
+// benchmarkRunner:
+//   deploy: false
+// hostAnalyzer:
+//   deploy: false
+// hostScanner:
+//   deploy: false
+// runtimeScanner:
+//   deploy: true
+//   settings:
+//     eveEnabled: false
+//     maxImageSizeAllowed: "4194304000"
+//     maxFileSizeAllowed: "262144000"
+//   eveConnector:
+//     deploy: false
+//   resources:
+//     requests:
+//       ephemeral-storage: 3Gi
+//     limits:
+//       cpu: 1000m
+//       memory: 4Gi
+//       ephemeral-storage: 6Gi`;
 
-  // Create a Blob with the YAML content
-  const blob = new Blob([yamlContent], { type: 'text/yaml' });
-  outputDiv.innerHTML = outputText;
-  // Create a temporary <a> element to trigger the download
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = 'config.yaml';
-  link.click();
+  // // Create a Blob with the YAML content
+  // const blob = new Blob([yamlContent], { type: 'text/yaml' });
+  // outputDiv.innerHTML = outputText;
+  // // Create a temporary <a> element to trigger the download
+  // const link = document.createElement('a');
+  // link.href = URL.createObjectURL(blob);
+  // link.download = 'config.yaml';
+  // link.click();
+
+  downloadYamlFile(outputDiv);
   document.getElementById('downloadOutputBtn').style.display = 'inline-block';
   document.getElementById('downloadInputValuesBtn').style.display = 'inline-block';
   
