@@ -321,7 +321,8 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
         .then(data => {
           const tags = data.tags.map(tag => tag.name);
           const uniqueTags = Array.from(new Set(tags));
-          const lastFiveUniqueTags = uniqueTags.slice(5);
+          console.log("This is unique tags: ", uniqueTags);
+          const lastFiveUniqueTags = uniqueTags.slice(0,5);
           lastFiveUniqueTags.forEach(tag => {
             const option = document.createElement('option');
             option.value = tag;
