@@ -43,7 +43,7 @@ function importYamlFile() {
     .then(response => response.text())
     .then(yamlContent => {
       // Parse the YAML content
-      importedYamlData = yaml.safeLoad(yamlContent);
+      importedYamlData = yamlContent;
     })
     .catch(error => {
       console.error('Error importing YAML file:', error);
@@ -57,7 +57,7 @@ importYamlFile();
 function downloadYamlFile(outputDiv) {
   if (importedYamlData) {
     // Convert the YAML data back to YAML content
-    const yamlContent = yaml.safeDump(importedYamlData);
+    // const yamlContent = yaml.safeDump(importedYamlData);
 
     // Create a Blob with the YAML content
     const blob = new Blob([yamlContent], { type: 'text/yaml' });
@@ -588,14 +588,14 @@ function displayOutput() {
 //       memory: 4Gi
 //       ephemeral-storage: 6Gi`;
 
-  // // Create a Blob with the YAML content
-  // const blob = new Blob([yamlContent], { type: 'text/yaml' });
-  // outputDiv.innerHTML = outputText;
-  // // Create a temporary <a> element to trigger the download
-  // const link = document.createElement('a');
-  // link.href = URL.createObjectURL(blob);
-  // link.download = 'config.yaml';
-  // link.click();
+//   // Create a Blob with the YAML content
+//   const blob = new Blob([yamlContent], { type: 'text/yaml' });
+//   outputDiv.innerHTML = outputText;
+//   // Create a temporary <a> element to trigger the download
+//   const link = document.createElement('a');
+//   link.href = URL.createObjectURL(blob);
+//   link.download = 'static-configs.yaml';
+//   link.click();
 
   downloadYamlFile(outputDiv);
   document.getElementById('downloadOutputBtn').style.display = 'inline-block';
