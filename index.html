@@ -312,16 +312,13 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
     function populateTagOptions() {
       const dropdown = document.getElementById('agentTags');
     
-      fetch('https://quay.io/api/v1/repository/sysdig/agent/tag/', {
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest'
-        }
-      })
+      fetch('https://quay.io/api/v1/repository/sysdig/agent/tag/')
         .then(response => response.json())
         .then(data => {
           const tags = data.tags.map(tag => tag.name);
-          const lastFiveVersions = tags.slice(5);
-          lastFiveVersions.forEach(tag => {
+          const uniqueTags = Array.from(new Set(tags));
+          const lastFiveUniqueTags = uniqueTags.slice(-5);
+          lastFiveUniqueTags.forEach(tag => {
             const option = document.createElement('option');
             option.value = tag;
             option.textContent = formatTagVersion(tag);
