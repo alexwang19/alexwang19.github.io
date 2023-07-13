@@ -319,14 +319,14 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       })
         .then(response => response.json())
         .then(data => {
-          const tags = data.tags.map(tag => tag.name);
-          const uniqueTags = Array.from(new Set(tags));
+          const tags = data.tags.map(tag => formatTagVersion(tag.name));
+          const uniqueTags = Array.from(new Set(tags.filter(tag => !isNaN(tag))));
           console.log("This is unique tags: ", uniqueTags);
-          const lastFiveUniqueTags = uniqueTags.slice(0,5);
+          const lastFiveUniqueTags = uniqueTags.slice(0,4);
           lastFiveUniqueTags.forEach(tag => {
             const option = document.createElement('option');
             option.value = tag;
-            option.textContent = formatTagVersion(tag);
+            option.textContent = tag;
             dropdown.appendChild(option);
           });
         })
