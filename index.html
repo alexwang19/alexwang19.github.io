@@ -312,7 +312,11 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
     function populateTagOptions() {
       const dropdown = document.getElementById('agentTags');
     
-      fetch('https://quay.io/api/v1/repository/sysdig/agent/tag/')
+      fetch('https://quay.io/api/v1/repository/sysdig/agent/tag/', {
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      })
         .then(response => response.json())
         .then(data => {
           const tags = data.tags.map(tag => tag.name);
