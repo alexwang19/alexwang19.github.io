@@ -1,4 +1,3 @@
----
 global:
   sysdig:
     region: "us3"
@@ -7,6 +6,10 @@ agent:
     enabled: false
   auditLog:
     enabled: false
+  sysdig:
+    settings:
+      prometheus:
+        enabled: false
 nodeAnalyzer:
   nodeAnalyzer:
     sslVerifyCertificate: false
@@ -22,7 +25,7 @@ nodeAnalyzer:
       deploy: true
       settings:
         eveEnabled: false
-        maxImageSizeAllowed: "2147483648"
+        maxImageSizeAllowed: "4194304000"
         maxFileSizeAllowed: "262144000"
       eveConnector:
         deploy: false
