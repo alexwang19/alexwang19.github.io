@@ -261,11 +261,11 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
 
   <script>
     function autoPopulateClusterName() {
-      const businessUnit = document.getElementById('businessUnitID').value;
-      const environment = document.getElementById('environmentID').value;
-      const platform = document.getElementById('platformID').value;
-      const vsadId = document.getElementById('vsadID').value;
-      const vastId = document.getElementById('vastID').value;
+      const businessUnit = document.getElementById('businessUnit').value;
+      const environment = document.getElementById('environment').value;
+      const platform = document.getElementById('platform').value;
+      const vsadId = document.getElementById('vsad').value;
+      const vastId = document.getElementById('vast').value;
     
       const clusterNameInput = document.getElementById('clusterName');
       const nameParts = [];
