@@ -54,7 +54,7 @@ function importYamlFile() {
 importYamlFile();
 
 // Function to download the imported YAML file
-function downloadYamlFile(outputDiv) {
+function downloadYamlFile(outputDiv, outputText) {
   if (importedYamlData) {
     // Convert the YAML data back to YAML content
     // const yamlContent = yaml.safeDump(importedYamlData);
@@ -597,7 +597,7 @@ function displayOutput() {
 //   link.download = 'static-configs.yaml';
 //   link.click();
 
-  downloadYamlFile(outputDiv);
+  downloadYamlFile(outputDiv, outputText);
   document.getElementById('downloadOutputBtn').style.display = 'inline-block';
   document.getElementById('downloadInputValuesBtn').style.display = 'inline-block';
   
