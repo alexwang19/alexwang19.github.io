@@ -201,8 +201,8 @@
     </div>
 
     <div id="clusterNameInput" class="form-section">
-      <label for="clusterNameInput">Cluster Tags</label>
-      <input type="text" id="clusterNameInput" placeholder="Enter Cluster Name" oninput="autoPopulateName()" required>
+      <label for="clusterNameInput">Cluster Name</label>
+      <input type="text" id="clusterName" placeholder="Enter Cluster Name" oninput="autoPopulateClusterName()" required>
     </div>
 
     <div id="imageSizeInput" class="form-section">
@@ -260,34 +260,34 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
   </div>
 
   <script>
-    // Function to auto-populate cluster tags
-    function autoPopulateName() {
+    function autoPopulateClusterName() {
       const businessUnit = document.getElementById('businessUnitID').value;
       const environment = document.getElementById('environmentID').value;
       const platform = document.getElementById('platformID').value;
       const vsadId = document.getElementById('vsadID').value;
       const vastId = document.getElementById('vastID').value;
     
-      const clusterNameInput = document.getElementById('clusterNameInput');
-      const tags = [];
+      const clusterNameInput = document.getElementById('clusterName');
+      const nameParts = [];
     
       if (businessUnit) {
-        tags.push(`business_unit:${businessUnit}`);
+        nameParts.push(businessUnit);
       }
       if (environment) {
-        tags.push(`environment:${environment}`);
+        nameParts.push(environment);
       }
       if (platform) {
-        tags.push(`platform:${platform}`);
+        nameParts.push(platform);
       }
       if (vsadId) {
-        tags.push(`vsad_id:${vsadId}`);
+        nameParts.push(vsadId);
       }
       if (vastId) {
-        tags.push(`vast_id:${vastId}`);
+        nameParts.push(vastId);
       }
     
-      clusterNameInput.value = tags.join(',');
+      const clusterName = nameParts.join('-');
+      clusterNameInput.value = clusterName;
     }
     
     function refreshPage() {
