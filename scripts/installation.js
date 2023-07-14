@@ -361,8 +361,6 @@ function handleRegionChange() {
   const prodInput = document.getElementById('prodInput');
   const agentTagsInput = document.getElementById('agentTagsInput');
   const runtimeScannerTagsInput = document.getElementById('runtimeScannerTagsInput');
-  const agentTagsSelect = document.getElementById('agentTags');
-  const runtimeScannerTagsSelect = document.getElementById('runtimeScannerTags');
 
   if (regionSelect.value === 'us2') {
     testInput.style.display = 'block';
@@ -502,6 +500,8 @@ function displayOutput() {
   const outputDiv = document.getElementById('output');
   const agentTagsInput = document.getElementById('agentTagsInput');
   const runtimeScannerTagsInput = document.getElementById('runtimeScannerTagsInput');
+  const agentTagsSelect = document.getElementById('agentTags');
+  const runtimeScannerTagsSelect = document.getElementById('runtimeScannerTags');
 
   let helmQuickstartDocs = '<b>Link for installation instructions <a href="https://github.com/alexwang19/alexwang19.github.io/blob/main/docs/installation_docs.md">here</a></b><br><br>';
   let helmHeader = '<b>Helm Install Commands</b><br>';
