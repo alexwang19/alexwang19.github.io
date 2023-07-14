@@ -105,6 +105,7 @@ function populateTagOptions() {
         option.textContent = tag;
         dropdown.appendChild(option);
       });
+      dropdown.selectedIndex = 0;
     })
     .catch(error => {
       console.error('Error fetching tags:', error);
@@ -143,6 +144,7 @@ function populateRuntimeScannerTagOptions() {
         option.textContent = tag;
         dropdown.appendChild(option);
       });
+      dropdown.selectedIndex = 0;
     })
     .catch(error => {
       console.error('Error fetching tags:', error);
