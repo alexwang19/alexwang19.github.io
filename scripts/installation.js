@@ -589,7 +589,7 @@ function displayOutput() {
     let nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + registryInputs[5].value + ' \\ <br>';
     outputText += agentImageRegistry;
     outputText += agentImageRepository;
-    if (registryInputs[2].value.trim () != '') {
+    if (registryInputs[2].value.trim() != '') {
       outputText += agentImagePullSecrets;
       outputText += nodeAnalyzerNodeAnalyzerPullSecrets;
     };
@@ -598,9 +598,9 @@ function displayOutput() {
     outputText += agentImageTag;
     outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag;
   } else {
-    console.log("Agent tags : ", agentTagsSelect);
-    console.log("Runtime scanner tags input: ", runtimeScannerTagsSelect);
-    if (agentTagsSelect == null || runtimeScannerTagsSelect == null) {
+    console.log("Agent tags : ", agentTagsSelect.value);
+    console.log("Runtime scanner tags input: ", runtimeScannerTagsSelect.value);
+    if (agentTagsSelect.value.trim() == '' || runtimeScannerTagsSelect.value.trim() == '') {
       alert('Please select agent tag and runtime scanner versions.');
       return;
     } else {
