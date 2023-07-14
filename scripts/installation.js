@@ -500,6 +500,8 @@ function displayOutput() {
   // const priorityCheckbox = document.getElementById('priorityCheckbox');
   // const priorityInput = document.querySelector('#priorityInput input');
   const outputDiv = document.getElementById('output');
+  const agentTagsInput = document.getElementById('agentTagsInput');
+  const runtimeScannerTagsInput = document.getElementById('runtimeScannerTagsInput');
 
   let helmQuickstartDocs = '<b>Link for installation instructions <a href="https://github.com/alexwang19/alexwang19.github.io/blob/main/docs/installation_docs.md">here</a></b><br><br>';
   let helmHeader = '<b>Helm Install Commands</b><br>';
@@ -595,7 +597,15 @@ function displayOutput() {
     outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository;
     outputText += agentImageTag;
     outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag;
-  }
+  } else {
+    if (agentTagsInput == null || runtimeScannerTagsInput == null) {
+      alert('Please select agent tag and runtime scanner versions.');
+      return;
+    } else {
+      let agentImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.tag=' + agentTagsInput.value + ' \\<br>';
+      let runtimeScannerTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + runtimeScannerTagsInput.value + ' \\ <br>';
+    };
+  };
 
   // if (priorityCheckbox.checked) {
   //   outputText += '--set agent.priorityClassName=' + priorityInput.value + ' \\ <br>';
