@@ -259,8 +259,6 @@ function populateFields(content) {
   }
   // Check if proxy checkbox is checked and toggle proxy inputs
   const proxyCheckbox = document.getElementById('proxyCheckbox');
-  console.log("This is is proxycheckbox: ", proxyCheckbox);
-  console.log("This is is proxycheckbox.checked: ", proxyCheckbox.checked);
   if (proxyCheckbox.checked) {
     console.log("Toggling proxy checkbox");
     toggleProxyInputs('proxyCheckbox', 'proxyInput');
@@ -598,6 +596,8 @@ function displayOutput() {
     outputText += agentImageTag;
     outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag;
   } else {
+    console.log("Agent tags input: ", agentTagsInput);
+    console.log("Runtime scanner tags input: ", runtimeScannerTagsInput);
     if (agentTagsInput == null || runtimeScannerTagsInput == null) {
       alert('Please select agent tag and runtime scanner versions.');
       return;
