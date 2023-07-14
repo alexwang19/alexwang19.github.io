@@ -406,6 +406,8 @@ function toggleRegistryInputs(checkboxId, inputsContainerId) {
   } else {
     // Clear inputs when unchecked
     inputsContainer.innerHTML = '';
+    agentTagsInput.style.display = 'block';
+    runtimeScannerTagsInput.style.display = 'block';
   }
 }
 function toggleProxyInputs(checkboxId, inputsContainerId) {
