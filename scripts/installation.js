@@ -133,7 +133,7 @@ function populateRuntimeScannerTagOptions() {
     .then(response => response.json())
     .then(data => {
       const tags = data.tags
-        .filter(tag => compareVersions(tag.name, '1.4.12') >= 0)
+        .filter(tag => compareVersions(formatTagVersion(tag.name), '1.4.12') >= 0)
         .map(tag => tag.name);
       const uniqueTags = Array.from(new Set(tags));
       const lastFiveUniqueTags = uniqueTags.slice(1,5);
@@ -170,10 +170,10 @@ function compareVersions(a, b) {
 }
 
 // Function to format the tag version in "1.5.1" format
-function formatRuntimeScannerTagVersion(tag) {
-  const versionParts = tag.split('-');
-  return versionParts[0];
-}
+// function formatRuntimeScannerTagVersion(tag) {
+//   const versionParts = tag.split('-');
+//   return versionParts[0];
+// }
 
 // Call the populateTagOptions() function to populate the dropdown on page load
 window.addEventListener('DOMContentLoaded', populateRuntimeScannerTagOptions);
