@@ -133,8 +133,8 @@ function populateRuntimeScannerTagOptions() {
     .then(response => response.json())
     .then(data => {
       const tags = data.tags
-        .filter(tag => compareVersions(formatTagVersion(tag.name), '1.4.12') >= 0)
-        .map(tag => tag.name);
+        .filter(tag => compareVersions(tag.name, '1.4.12') >= 0)
+        .map(tag => formatTagVersion(tag.name));
       const uniqueTags = Array.from(new Set(tags));
       const lastFiveUniqueTags = uniqueTags.slice(1,5);
       lastFiveUniqueTags.forEach(tag => {
