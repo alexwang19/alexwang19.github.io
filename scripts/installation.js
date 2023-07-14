@@ -105,11 +105,13 @@ function populateTagOptions() {
         option.textContent = tag;
         dropdown.appendChild(option);
       });
-      dropdown.selectedIndex = 0;
     })
     .catch(error => {
       console.error('Error fetching tags:', error);
     });
+  setTimeout(() => {
+    dropdown.selectedIndex = 0; // Set the default selection to the first tag
+  }, 100);
 }
 
 // Function to format the tag version in "1.14.1" format
@@ -144,11 +146,14 @@ function populateRuntimeScannerTagOptions() {
         option.textContent = tag;
         dropdown.appendChild(option);
       });
-      dropdown.selectedIndex = 0;
+      // dropdown.selectedIndex = 0;
     })
     .catch(error => {
       console.error('Error fetching tags:', error);
     });
+  setTimeout(() => {
+    dropdown.selectedIndex = 0; // Set the default selection to the first tag
+  }, 100);
 }
 
 // Comparison function for version strings
