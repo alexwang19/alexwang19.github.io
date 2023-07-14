@@ -604,6 +604,8 @@ function displayOutput() {
     } else {
       let agentImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.tag=' + agentTagsInput.value + ' \\<br>';
       let runtimeScannerTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + runtimeScannerTagsInput.value + ' \\ <br>';
+      outputText += agentImageTag;
+      outputText += runtimeScannerTag;
     };
   };
 
