@@ -39,7 +39,7 @@ let importedYamlData = null;
 
 // Function to fetch and import the YAML file
 function importYamlFile() {
-  fetch('./static-configs.yaml')
+  fetch('files/static-configs.yaml')
     .then(response => response.text())
     .then(yamlContent => {
       // Parse the YAML content
@@ -437,7 +437,7 @@ function displayOutput() {
   // const priorityInput = document.querySelector('#priorityInput input');
   const outputDiv = document.getElementById('output');
 
-  let helmQuickstartDocs = '<b>Link for installation instructions <a href="https://github.com/alexwang19/alexwang19.github.io/blob/main/installation_docs.md">here</a></b><br><br>';
+  let helmQuickstartDocs = '<b>Link for installation instructions <a href="https://github.com/alexwang19/alexwang19.github.io/blob/main/docs/installation_docs.md">here</a></b><br><br>';
   let helmHeader = '<b>Helm Install Commands</b><br>';
   let helmInitText = 'helm repo add sysdig https://charts.sysdig.com --force-update <br><br>';
   let helmInstallText = 'helm install sysdig-agent \\<br>&nbsp;&nbsp;&nbsp;&nbsp; --namespace kube-system \\<br>';
