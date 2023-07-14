@@ -136,7 +136,7 @@ function populateRuntimeScannerTagOptions() {
         .filter(tag => compareVersions(tag.name, '1.4.12') >= 0)
         .map(tag => formatTagVersion(tag.name));
       const uniqueTags = Array.from(new Set(tags));
-      const lastFiveUniqueTags = uniqueTags.slice(1,5);
+      const lastFiveUniqueTags = uniqueTags.slice(0,3);
       lastFiveUniqueTags.forEach(tag => {
         const option = document.createElement('option');
         option.value = tag;
