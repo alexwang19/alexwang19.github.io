@@ -109,9 +109,6 @@ function populateTagOptions() {
     .catch(error => {
       console.error('Error fetching tags:', error);
     });
-  setTimeout(() => {
-    dropdown.selectedIndex = 0; // Set the default selection to the first tag
-  }, 100);
 }
 
 // Function to format the tag version in "1.14.1" format
@@ -151,9 +148,6 @@ function populateRuntimeScannerTagOptions() {
     .catch(error => {
       console.error('Error fetching tags:', error);
     });
-  setTimeout(() => {
-    dropdown.selectedIndex = 0; // Set the default selection to the first tag
-  }, 100);
 }
 
 // Comparison function for version strings
