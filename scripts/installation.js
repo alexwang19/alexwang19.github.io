@@ -34,7 +34,7 @@
 //   inputField.addEventListener('input', autoPopulateClusterTags);
 // });
 
-// Define a variable to hold the imported YAML data
+
 let importedYamlData = null;
 
 // Function to fetch and import the YAML file
