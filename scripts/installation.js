@@ -147,7 +147,7 @@ function populateRuntimeScannerTagOptions() {
     });
 }
 
-// Function to format the tag version in "1.14.1" format
+// Function to format the tag version in "1.5.1" format
 function formatRuntimeScannerTagVersion(tag) {
   const versionParts = tag.split('-');
   return versionParts[0];
