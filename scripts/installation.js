@@ -361,6 +361,8 @@ function handleRegionChange() {
   const prodInput = document.getElementById('prodInput');
   const agentTagsInput = document.getElementById('agentTagsInput');
   const runtimeScannerTagsInput = document.getElementById('runtimeScannerTagsInput');
+  const agentTagsSelect = document.getElementById('agentTags');
+  const runtimeScannerTagsSelect = document.getElementById('runtimeScannerTags');
 
   if (regionSelect.value === 'us2') {
     testInput.style.display = 'block';
@@ -596,14 +598,14 @@ function displayOutput() {
     outputText += agentImageTag;
     outputText += nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag;
   } else {
-    console.log("Agent tags input: ", agentTagsInput);
-    console.log("Runtime scanner tags input: ", runtimeScannerTagsInput);
-    if (agentTagsInput == null || runtimeScannerTagsInput == null) {
+    console.log("Agent tags : ", agentTagsSelect);
+    console.log("Runtime scanner tags input: ", runtimeScannerTagsSelect);
+    if (agentTagsSelect == null || runtimeScannerTagsSelect == null) {
       alert('Please select agent tag and runtime scanner versions.');
       return;
     } else {
-      let agentImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.tag=' + agentTagsInput.value + ' \\<br>';
-      let runtimeScannerTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + runtimeScannerTagsInput.value + ' \\ <br>';
+      let agentImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.tag=' + agentTagsSelect.value + ' \\<br>';
+      let runtimeScannerTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + runtimeScannerTagsSelect.value + ' \\ <br>';
       outputText += agentImageTag;
       outputText += runtimeScannerTag;
     };
