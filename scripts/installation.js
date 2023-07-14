@@ -98,7 +98,6 @@ function populateTagOptions() {
     .then(data => {
       const tags = data.tags.map(tag => formatTagVersion(tag.name));
       const uniqueTags = Array.from(new Set(tags));
-      console.log("This is unique tags: ", uniqueTags);
       const lastFiveUniqueTags = uniqueTags.slice(1,5);
       lastFiveUniqueTags.forEach(tag => {
         const option = document.createElement('option');
@@ -120,6 +119,42 @@ function formatTagVersion(tag) {
 
 // Call the populateTagOptions() function to populate the dropdown on page load
 window.addEventListener('DOMContentLoaded', populateTagOptions);
+
+
+// Function to fetch the tags from the Quay.io repository and populate the dropdown
+function populateRuntimeScannerTagOptions() {
+  const dropdown = document.getElementById('runtimeScannerTags');
+
+  fetch('https://quay.io/api/v1/repository/sysdig/vuln-runtime-scanner/tag/', {
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest'
+    }
+  })
+    .then(response => response.json())
+    .then(data => {
+      const tags = data.tags.map(tag => formatRuntimeScannerTagVersion(tag.name));
+      const uniqueTags = Array.from(new Set(tags));
+      const lastFiveUniqueTags = uniqueTags.slice(1,5);
+      lastFiveUniqueTags.forEach(tag => {
+        const option = document.createElement('option');
+        option.value = tag;
+        option.textContent = tag;
+        dropdown.appendChild(option);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching tags:', error);
+    });
+}
+
+// Function to format the tag version in "1.14.1" format
+function formatRuntimeScannerTagVersion(tag) {
+  const versionParts = tag.split('-');
+  return versionParts[0];
+}
+
+// Call the populateTagOptions() function to populate the dropdown on page load
+window.addEventListener('DOMContentLoaded', populateRuntimeScannerTagOptions);
 
 
 // Function to auto-populate cluster name
