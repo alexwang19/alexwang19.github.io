@@ -132,7 +132,9 @@ function populateRuntimeScannerTagOptions() {
   })
     .then(response => response.json())
     .then(data => {
-      const tags = data.tags.map(tag => formatRuntimeScannerTagVersion(tag.name));
+      const tags = data.tags
+        .filter(tag => compareVersions(tag.name, '1.4.12') >= 0)
+        .map(tag => tag.name);
       const uniqueTags = Array.from(new Set(tags));
       const lastFiveUniqueTags = uniqueTags.slice(1,5);
       lastFiveUniqueTags.forEach(tag => {
@@ -145,6 +147,26 @@ function populateRuntimeScannerTagOptions() {
     .catch(error => {
       console.error('Error fetching tags:', error);
     });
+}
+
+// Comparison function for version strings
+function compareVersions(a, b) {
+  const partsA = a.split('.').map(Number);
+  const partsB = b.split('.').map(Number);
+
+  for (let i = 0; i < Math.max(partsA.length, partsB.length); i++) {
+    const partA = partsA[i] || 0;
+    const partB = partsB[i] || 0;
+
+    if (partA < partB) {
+      return -1;
+    }
+    if (partA > partB) {
+      return 1;
+    }
+  }
+
+  return 0;
 }
 
 // Function to format the tag version in "1.5.1" format
