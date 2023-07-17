@@ -263,7 +263,6 @@ function populateFields(content) {
     // Set the selected value in the dropdown field
     field.value = selectedValue;
   });
-}
 
   // Check if proxy checkbox is checked and toggle proxy inputs
   const proxyCheckbox = document.getElementById('proxyCheckbox');
@@ -297,7 +296,6 @@ function populateFields(content) {
   }
 
 
-  // Check if proxy checkbox is checked and toggle proxy inputs
   const registryCheckbox = document.getElementById('registryCheckbox');
   console.log("This is is registrycheckbox: ", registryCheckbox);
   console.log("This is is registrycheckbox.checked: ", registryCheckbox.checked);
