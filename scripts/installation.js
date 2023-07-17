@@ -182,11 +182,11 @@ window.addEventListener('DOMContentLoaded', populateRuntimeScannerTagOptions);
 
 // Function to auto-populate cluster name
 function autoPopulateClusterName() {
-  const businessUnit = document.getElementById('businessUnit').value;
-  const environment = document.getElementById('environmentSelect').value;
-  const platform = document.getElementById('platform').value;
-  const vsadId = document.getElementById('vsad').value;
-  const vastId = document.getElementById('vast').value;
+  const businessUnit = document.getElementById('businessUnit').value.toLowerCase();
+  const environment = document.getElementById('environmentSelect').value.toLowerCase();
+  const platform = document.getElementById('platform').value.toLowerCase();
+  const vsadId = document.getElementById('vsad').value.toLowerCase();
+  const vastId = document.getElementById('vast').value.toLowerCase();
 
   const clusterNameInput = document.getElementById('clusterName');
   const nameParts = [];
@@ -483,12 +483,12 @@ function displayOutput() {
   // const inputsContainer = document.getElementById('dynamicInputs');
   // const namespaceInput = document.querySelector('#namespaceInput input');
   // const regionCheckbox = document.getElementById('regionCheckbox');
-  const businessUnitInput = document.querySelector('#businessUnitInput input');
-  const platformInput = document.querySelector('#platformInput input');
+  const businessUnitInput = document.querySelector('#businessUnitInput input').value.toLowerCase();
+  const platformInput = document.querySelector('#platformInput input').value.toLowerCase();
   // const environmentInput = document.querySelector('#environmentInput input');
-  const environmentInput = document.getElementById('environmentSelect')
-  const vastInput = document.querySelector('#vastInput input');
-  const vsadInput = document.querySelector('#vsadInput input');
+  const environmentInput = document.getElementById('environmentSelect').value.toLowerCase();
+  const vastInput = document.querySelector('#vastInput input').value.toLowerCase();
+  const vsadInput = document.querySelector('#vsadInput input').value.toLowerCase();
   const imageSizeInput = document.querySelector('#imageSizeInput input');
   const proxyCheckbox = document.getElementById('proxyCheckbox');
   const proxyInput = document.getElementById('proxyInput');
@@ -508,8 +508,8 @@ function displayOutput() {
   let helmHeader = '<b>Helm Install Commands</b><br>';
   let helmInitText = 'helm repo add sysdig https://charts.sysdig.com --force-update <br><br>';
   let helmInstallText = 'helm install sysdig-agent \\<br>&nbsp;&nbsp;&nbsp;&nbsp; --namespace kube-system \\<br>';
-  let clusterNameText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.clusterConfig.name=' + businessUnitInput.value + '-' + platformInput.value + '-' + environmentInput.value + '-' + vastInput.value + '-' + vsadInput.value + ' \\ <br>';
-  let clusterTagsText = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.sysdig.settings.tags="cluster:' + businessUnitInput.value + '-' + platformInput.value + '-' + environmentInput.value + '-' + vastInput.value + '-' + vsadInput.value + '\\,' + 'vz-vsadid:' + vsadInput.value + '\\,' + 'vz-vastid:' + vastInput.value +'" \\ <br>';
+  let clusterNameText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.clusterConfig.name=' + businessUnitInput + '-' + platformInput + '-' + environmentInput + '-' + vastInput + '-' + vsadInput + ' \\ <br>';
+  let clusterTagsText = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.sysdig.settings.tags="cluster:' + businessUnitInput + '-' + platformInput + '-' + environmentInput + '-' + vastInput + '-' + vsadInput + '\\,' + 'vz-vsadid:' + vsadInput + '\\,' + 'vz-vastid:' + vastInput +'" \\ <br>';
   let outputText = helmQuickstartDocs + helmHeader + helmInitText + helmInstallText + clusterNameText + clusterTagsText;
 
 
