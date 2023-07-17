@@ -183,7 +183,7 @@ window.addEventListener('DOMContentLoaded', populateRuntimeScannerTagOptions);
 // Function to auto-populate cluster name
 function autoPopulateClusterName() {
   const businessUnit = document.getElementById('businessUnit').value;
-  const environment = document.getElementById('environment').value;
+  const environment = document.getElementById('environmentSelect').value;
   const platform = document.getElementById('platform').value;
   const vsadId = document.getElementById('vsad').value;
   const vastId = document.getElementById('vast').value;
