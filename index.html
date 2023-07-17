@@ -34,9 +34,22 @@
       <input type="text" name="businessUnitID" id="businessUnit" placeholder="Enter Business Unit/Application Name" required>
     </div>
 
-    <div id="environmentInput" class="form-section">
+<!--     <div id="environmentInput" class="form-section">
       <label for="environmentInput">Environment (Required)</label>
       <input type="text" name="environmentID" id="environment" placeholder="ex: dev, qa, preprod, prod, etc." required>
+    </div> -->
+
+    <div id="environmentInput" class="form-section">
+      <label for="environmentInput">Environment (Required)</label>
+      <select id="environmentSelect" required>
+        <option disabled selected value> -- select an option -- </option>
+        <option value="sandbox">sandbox</option>
+        <option value="dev">dev</option>
+        <option value="qa">qa</option>
+        <option value="stage">stage</option>
+        <option value="preprod">preprod</option>
+        <option value="prod">prod</option>
+      </select>
     </div>
     
     <div id="platformInput" class="form-section">
