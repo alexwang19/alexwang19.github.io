@@ -542,7 +542,7 @@ function displayOutput() {
     outputText += accessKeyText;
   };
   // Validate required inputs
-  if (accessKeyInput == null || businessUnitInput.value.trim() === '' || platformInput.value.trim() === '' || environmentInput.value.trim() === '' || vastInput.value.trim() === '' || vsadInput.value.trim() === '') {
+  if (accessKeyInput == null || businessUnitInput.trim() === '' || platformInput.trim() === '' || environmentInput.trim() === '' || vastInput.trim() === '' || vsadInput.trim() === '') {
     alert('Please fill in all required fields.');
     return;
   }
