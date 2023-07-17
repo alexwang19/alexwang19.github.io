@@ -128,7 +128,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
     </div> -->
 
     <div class="form-section">
-      <label for="fileInput">Upload Input Values File:</label>
+      <label for="fileInput">Upload Existing Input Values File To Pre-populate Fields:</label>
       <input type="file" id="fileInput" accept=".txt">
       <br>
       <button onclick="refreshPage()()">Clear All Fields</button>
