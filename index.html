@@ -14,7 +14,7 @@
     
     <div id="regionInput" class="form-section">
       <label for="regionInput">Deployment Type (Required)</label>
-      <select id="regionSelect" onchange="handleRegionChange()" required>
+      <select name="regionID" id="regionSelect" onchange="handleRegionChange()" required>
         <option disabled selected value> -- select an option -- </option>
         <option value="us2">Sysdig Test Deployment</option>
         <option value="us3">VZ Standard Deployment</option>
@@ -41,7 +41,7 @@
 
     <div id="environmentInput" class="form-section">
       <label for="environmentInput">Environment (Required)</label>
-      <select id="environmentSelect" required>
+      <select name="environmentID" id="environmentSelect" required>
         <option disabled selected value> -- select an option -- </option>
         <option value="sandbox">sandbox</option>
         <option value="dev">dev</option>
