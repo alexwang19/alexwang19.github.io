@@ -235,7 +235,6 @@ function handleFileUpload(event) {
 function populateFields(content) {
   const lines = content.split('\n');
   const inputFields = document.querySelectorAll('.form-section input:not([type="file"])');
-  const dropdownFields = document.querySelectorAll('.form-section select');
 
   for (let i = 0; i < inputFields.length && i < lines.length; i++) {
     const line = lines[i].trim();
@@ -244,26 +243,21 @@ function populateFields(content) {
       const [label, value] = line.split(':').map(entry => entry.trim());
       const field = Array.from(inputFields).find(input => input.name === label);
 
+      console.log("Label: ", label)
+      console.log("Value: ", value)
+      console.log("Field: ", field)
+      console.log("Field Checked: ", field.checked)
+
       if (field) {
         if (field.type === 'checkbox') {
           field.checked = (value.toLowerCase() === 'true');
+          // field.checked = true;
         } else {
           field.value = value;
         }
       }
     }
   }
-
-  // Process dropdown fields separately
-  dropdownFields.forEach(field => {
-    const label = field.name;
-    const value = lines.find(line => line.startsWith(`${label}:`));
-    const selectedValue = value ? value.split(':')[1].trim() : '';
-
-    // Set the selected value in the dropdown field
-    field.value = selectedValue;
-  });
-
   // Check if proxy checkbox is checked and toggle proxy inputs
   const proxyCheckbox = document.getElementById('proxyCheckbox');
   if (proxyCheckbox.checked) {
@@ -296,6 +290,7 @@ function populateFields(content) {
   }
 
 
+  // Check if proxy checkbox is checked and toggle proxy inputs
   const registryCheckbox = document.getElementById('registryCheckbox');
   console.log("This is is registrycheckbox: ", registryCheckbox);
   console.log("This is is registrycheckbox.checked: ", registryCheckbox.checked);
@@ -328,6 +323,7 @@ function populateFields(content) {
     }
   }
 }
+
 
 // Add event listener to file input
 const fileInput = document.getElementById('fileInput');
