@@ -331,7 +331,19 @@ fileInput.addEventListener('change', handleFileUpload);
 
 function downloadInputValues() {
   const inputFields = document.querySelectorAll('.form-section input:not([type="file"])');
-  const values = Array.from(inputFields).map(field => field.name + ': ' + field.value);
+  const dropdownFields = document.querySelectorAll('.form-section select');
+  const values = [];
+
+  // Process regular input fields
+  inputFields.forEach(field => {
+    values.push(`${field.name}: ${field.value}`);
+  });
+
+  // Process dropdown fields
+  dropdownFields.forEach(field => {
+    const selectedValue = field.options[field.selectedIndex].value;
+    values.push(`${field.name}: ${selectedValue}`);
+  });
 
   const content = values.join('\n');
   const blob = new Blob([content], { type: 'text/plain' });
@@ -344,6 +356,7 @@ function downloadInputValues() {
 
   URL.revokeObjectURL(url);
 }
+
 
 function downloadOutputText() {
   const outputText = document.getElementById('output').textContent;
