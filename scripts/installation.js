@@ -485,7 +485,8 @@ function displayOutput() {
   // const regionCheckbox = document.getElementById('regionCheckbox');
   const businessUnitInput = document.querySelector('#businessUnitInput input');
   const platformInput = document.querySelector('#platformInput input');
-  const environmentInput = document.querySelector('#environmentInput input');
+  // const environmentInput = document.querySelector('#environmentInput input');
+  const environmentInput = document.getElementById('environmentSelect')
   const vastInput = document.querySelector('#vastInput input');
   const vsadInput = document.querySelector('#vsadInput input');
   const imageSizeInput = document.querySelector('#imageSizeInput input');
