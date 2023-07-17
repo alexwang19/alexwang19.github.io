@@ -246,10 +246,11 @@ function populateFields(content) {
       console.log("Label: ", label)
       console.log("Value: ", value)
       console.log("Field: ", field)
+      console.log("Field Checked: ", field.checked)
 
       if (field) {
         if (field.type === 'checkbox') {
-          field.checked = (value.toLowerCase() === 'on');
+          field.checked = (value.toLowerCase() === 'true');
           // field.checked = true;
         } else {
           field.value = value;
@@ -275,10 +276,11 @@ function populateFields(content) {
         console.log("Label2: ", label2)
         console.log("Value2: ", value2)
         console.log("Field2: ", field2)
+        console.log("Field2 Checked: ", field2.checked)
   
         if (field2) {
           if (field2.type === 'checkbox') {
-            field2.checked = (value2.toLowerCase() === 'on');
+            field2.checked = (value2.toLowerCase() === 'true');
           } else {
             field2.value = value2;
           }
@@ -308,10 +310,11 @@ function populateFields(content) {
         console.log("Label2: ", label2)
         console.log("Value2: ", value2)
         console.log("Field2: ", field2)
+        console.log("Field2 Checked: ", field2.checked)
   
         if (field2) {
           if (field2.type === 'checkbox') {
-            field2.checked = (value2.toLowerCase() === 'on');
+            field2.checked = (value2.toLowerCase() === 'true');
           } else {
             field2.value = value2;
           }
