@@ -235,6 +235,7 @@ function handleFileUpload(event) {
 function populateFields(content) {
   const lines = content.split('\n');
   const inputFields = document.querySelectorAll('.form-section input:not([type="file"])');
+  const dropdownFields = document.querySelectorAll('.form-section select');
 
   for (let i = 0; i < inputFields.length && i < lines.length; i++) {
     const line = lines[i].trim();
@@ -258,6 +259,17 @@ function populateFields(content) {
       }
     }
   }
+
+  // Process dropdown fields separately
+  dropdownFields.forEach(field => {
+    const label = field.name;
+    const value = lines.find(line => line.startsWith(`${label}:`));
+    const selectedValue = value ? value.split(':')[1].trim() : '';
+
+    // Set the selected value in the dropdown field
+    field.value = selectedValue;
+  });
+  
   // Check if proxy checkbox is checked and toggle proxy inputs
   const proxyCheckbox = document.getElementById('proxyCheckbox');
   if (proxyCheckbox.checked) {
