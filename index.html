@@ -3,6 +3,7 @@
 
 <head>
   <link rel="stylesheet" href="styles/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <title>Configuration Options</title>
 </head>
 
@@ -134,7 +135,11 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
     </div> -->
 
     <div class="form-section">
-      <label for="fileInput" title="Only use this once you've generated install commands and downloaded input values file.">Upload Existing Input Values File To Pre-populate Fields:</label>
+      <label for="fileInput">Upload Existing Input Values File To Pre-populate Fields:</label>
+        <div class="tooltip-container">
+          <i class="tooltip-icon fas fa-question-circle"></i>
+          <div class="tooltip-text">Only use this once you've generated install commands</div>
+        </div>
       <input type="file" id="fileInput" accept=".txt">
       <br>
       <button onclick="refreshPage()()">Clear All Fields</button>
