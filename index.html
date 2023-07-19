@@ -92,7 +92,7 @@
     </div> -->
 
     <div id="imageSizeInput" class="form-section">
-      <label for="imageSizeInput">Largest Image Size Running In Your Cluster (Bytes)</label>
+      <label for="imageSizeInput">Find Largest Image Size Running In Your Cluster (Bytes)</label>
       <pre id="kubectlCommandText">
 kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort -nr | head -1
       </pre>
