@@ -652,7 +652,7 @@ function displayOutput() {
   //   outputText += '--set agent.priorityClassName=' + priorityInput.value + ' \\ <br>';
   // }
 
-  outputText += '&nbsp;&nbsp;&nbsp;&nbsp; -f static-helm-values.yaml \\<br>';
+  outputText += '&nbsp;&nbsp;&nbsp;&nbsp; -f <my-path>/static-helm-values.yaml \\<br>';
   outputText += 'sysdig/sysdig-deploy<br>';
   // outputText += '<br><br><b>Steps To Verify Installation</b><br>';
   // outputText += '- Ensure all sysdig pods are 1/1 Running state.<br>';
