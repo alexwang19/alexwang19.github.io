@@ -155,6 +155,12 @@ header {
   height: 65px;
 }
 
+header img {
+  height: 30px;
+  margin-top: 17px;
+  margin-left: 26px;
+}
+
 .logo img {
   height: 50px;
 }
