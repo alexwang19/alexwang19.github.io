@@ -145,3 +145,15 @@ select:required:invalid {
 option[value=""] {
   display: none;
 }
+
+header {
+  background-color: #007BFF;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo img {
+  height: 50px;
+}
