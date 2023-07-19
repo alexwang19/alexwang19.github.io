@@ -247,10 +247,10 @@ function populateFields(content) {
       console.log("Label: ", label)
       console.log("Value: ", value)
       console.log("Field: ", field)
-      console.log("Field Checked: ", field.checked)
 
       if (field) {
         if (field.type === 'checkbox') {
+          console.log("Field Checked: ", field.checked)
           field.checked = (value.toLowerCase() === 'true');
           // field.checked = true;
         } else {
