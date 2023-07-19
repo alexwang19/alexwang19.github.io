@@ -147,11 +147,12 @@ option[value=""] {
 }
 
 header {
-  background-color: #007BFF;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  background-color: #253746;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 65px;
 }
 
 .logo img {
