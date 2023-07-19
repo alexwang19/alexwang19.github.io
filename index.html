@@ -136,11 +136,12 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
 
     <div class="form-section">
 <!--       <label for="fileInput">Upload Existing Input Values File To Pre-populate Fields:</label> -->
-        <div class="tooltip-container">Upload Existing Input Values File To Pre-populate Fields 
+        <div class="tooltip-container"><b>Upload Existing Input Values File To Pre-populate Fields</b>
           <i class="tooltip-icon fas fa-question-circle"></i>
           <div class="tooltip-text">Only use this once you've generated install commands</div>
         </div>
-      <input type="file" id="fileInput" accept=".txt">
+      <br><br>
+      <input type="file" id="fileInput" accept=".txt"><br>
       <br>
       <button onclick="refreshPage()()">Clear All Fields</button>
     </div>
