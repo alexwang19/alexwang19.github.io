@@ -349,7 +349,11 @@ function downloadInputValues() {
 
   // Process regular input fields
   inputFields.forEach(field => {
-    values.push(`${field.name}: ${field.value}`);
+    if (field.type === 'checkbox') {
+      values.push(`${field.name}: ${field.checked}`);
+    } else {
+      values.push(`${field.name}: ${field.value}`);
+    }
   });
 
   // Process dropdown fields
