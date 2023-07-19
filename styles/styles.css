@@ -170,11 +170,12 @@ header {
 }
 
 
-header img {
+/* header img {
   height: 30px;
   margin-left: 26px;
-}
+} */
 
 .logo img {
-  height: 25px;
+  height: 30px;
+  margin-left: 26px;
 }
