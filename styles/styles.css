@@ -48,8 +48,7 @@ button#generateInstallCmdBtn {
 }
 
 button#generateInstallCmdBtn:hover {
-  background-color: #FFD80D;
-/*   background-color: brightness(#ffe24d, 85%); */
+  background-color: #F4CD00;
 }
 
 .form-container {
