@@ -1,8 +1,8 @@
 body {
   font-family: Arial, sans-serif;
-  margin: 20px;
   margin: 0;
   padding: 0;
+  margin-top: 80px; /* Add top margin to create space for the header */
 }
 
 h1 {
