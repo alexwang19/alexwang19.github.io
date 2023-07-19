@@ -272,6 +272,7 @@ function populateFields(content) {
   
   // Check if proxy checkbox is checked and toggle proxy inputs
   const proxyCheckbox = document.getElementById('proxyCheckbox');
+  console.log("Proxycheckbox: ", proxyCheckbox.checked);
   if (proxyCheckbox.checked) {
     console.log("Toggling proxy checkbox");
     toggleProxyInputs('proxyCheckbox', 'proxyInput');
@@ -288,10 +289,11 @@ function populateFields(content) {
         console.log("Label2: ", label2)
         console.log("Value2: ", value2)
         console.log("Field2: ", field2)
-        console.log("Field2 Checked: ", field2.checked)
+        
   
         if (field2) {
           if (field2.type === 'checkbox') {
+            console.log("Field2 Checked: ", field2.checked)
             field2.checked = (value2.toLowerCase() === 'true');
           } else {
             field2.value = value2;
@@ -322,10 +324,11 @@ function populateFields(content) {
         console.log("Label2: ", label2)
         console.log("Value2: ", value2)
         console.log("Field2: ", field2)
-        console.log("Field2 Checked: ", field2.checked)
+        
   
         if (field2) {
           if (field2.type === 'checkbox') {
+            console.log("Field2 Checked: ", field2.checked)
             field2.checked = (value2.toLowerCase() === 'true');
           } else {
             field2.value = value2;
