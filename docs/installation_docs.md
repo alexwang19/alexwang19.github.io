@@ -7,16 +7,47 @@
 
 ## Requirements
 
-* kubectl version must be +-1 of kubernetes cluster. Ex: K8s cluster v1.24, kubectl version is recommended to be no lower than v1.23
+* Access to kubernetes cluster. Ex: "kubectl get pods -A" returns list of pods running on cluster
+* kubectl version must be +-1 of kubernetes cluster. Ex: K8s cluster v1.25, kubectl(client) version is recommended to be no lower than v1.24
+  * ```
+    kubectl version --short
+    
+    Client Version: v1.26.0
+    Kustomize Version: v4.5.7
+    Server Version: v1.25.11-eks-a5565ad
+    ```
 * Appropriate helm version installed. Compatibility table found [here](https://helm.sh/docs/topics/version_skew/).
+  * ```
+     helm version
+    
+     version.BuildInfo{Version:"v3.12.1", GitCommit:"f32a527a060157990e2aa86bf45010dfb3cc8b8d", GitTreeState:"clean", GoVersion:"go1.20.5"}
+    ```
+* Ensure adequate resources on nodes are available:
+  * ```
+    kubectl describe nodes
+
+    Allocated resources:
+     Resource                    Requests      Limits
+     --------                    --------      ------
+     cpu                         1525m (38%)   2150m (54%)
+     memory                      1756Mi (11%)  5440Mi (36%)
+     ephemeral-storage           3322Mi (19%)  6394Mi (36%)
+     hugepages-1Gi               0 (0%)        0 (0%)
+     hugepages-2Mi               0 (0%)        0 (0%)
+     attachable-volumes-aws-ebs  0             0
+    ```
 * Port 6443 open for outbound traffic The Sysdig Agent communicates with the collector on port 6443. If you’re using a firewall, make sure to open port 6443 for outbound traffic so that the agent can communicate with the collector. This also applies to proxies. Ensure that port 6443 is open on your proxy.
   * Validate connection using commands below:
-  * ```
+    ```
     export http{s,}_proxy=http://myproxy.com:8080
     curl -sL ingest-us2.app.sysdig.com:6443 -v
     ```
+* If using a proxy, make sure to include clusterIP in the no_proxy list in the onboarding form.
+  * Command to find clusterIP: 
+    ```
+    kubectl get service kubernetes -o jsonpath='{.spec.clusterIP}'; echo
+    ```
 * [Agent Requirement Docs](https://docs.sysdig.com/en/docs/installation/sysdig-secure/install-agent-components/installation-requirements/sysdig-agent/)
-* Access to kubernetes cluster. Ex: "kubectl get pods -A" returns list of pods running on cluster
 
 ## Installation
 
