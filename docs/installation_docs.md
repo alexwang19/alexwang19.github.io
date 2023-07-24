@@ -7,6 +7,10 @@
 
 ## Requirements
 
+* Confirm correct kubernetes cluster is targeted
+  * ```
+    kubectl config get-contexts
+    ```
 * Access to kubernetes cluster. Ex: "kubectl get pods -A" returns list of pods running on cluster
 * kubectl version must be +-1 of kubernetes cluster. Ex: K8s cluster v1.25, kubectl(client) version is recommended to be no lower than v1.24
   * ```
