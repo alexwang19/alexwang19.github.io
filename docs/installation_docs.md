@@ -27,6 +27,13 @@
      version.BuildInfo{Version:"v3.12.1", GitCommit:"f32a527a060157990e2aa86bf45010dfb3cc8b8d", GitTreeState:"clean", GoVersion:"go1.20.5"}
     ```
 * Ensure adequate resources on nodes are available:
+  * Minimum sysdig resources:
+    * Limits
+      * CPU: 1000m
+      * Memory: 4Gi
+      * Ephemeral-storage: 6Gi
+    * Requests
+      * Ephemeral-storage: 3Gi
   * ```
     kubectl describe nodes
 
