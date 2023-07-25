@@ -448,39 +448,37 @@ function toggleRegistryInputs(checkboxId, inputsContainerId) {
     // agentTagsInput.style.display = 'block';
     // runtimeScannerTagsInput.style.display = 'block';
   }
-}
-
-// Function to auto-populate cluster name
-function autoPopulateSysdigAgentPullstring() {
-  // const internalRegistry = document.querySelector('input[name="Internal Registry"]').value;
-  const agentTagsSelect = document.getElementById('agentTags').value;
-  const runtimeScannerTagsSelect = document.getElementById('runtimeScannerTags').value;
-  const sysdigAgentPullString = document.querySelector('input[name="Sysdig Agent Pullstring"]');
-
-  // const clusterNameInput = document.getElementById('clusterName');
-  const nameParts = [];
-
-  // if (internalRegistry) {
-  //   nameParts.push(internalRegistry);
-  // }
-  if (agentTagsSelect) {
-    nameParts.push(agentTagsSelect);
+  // Function to auto-populate cluster name
+  function autoPopulateSysdigAgentPullstring() {
+    const internalRegistry = document.querySelector('input[name="Internal Registry"]').value;
+    const agentTagsSelect = document.getElementById('agentTags').value;
+    const runtimeScannerTagsSelect = document.getElementById('runtimeScannerTags').value;
+    const sysdigAgentPullString = document.querySelector('input[name="Sysdig Agent Pullstring"]');
+  
+    // const clusterNameInput = document.getElementById('clusterName');
+    const nameParts = [];
+  
+    if (internalRegistry) {
+      nameParts.push(internalRegistry);
+    }
+    if (agentTagsSelect) {
+      nameParts.push(agentTagsSelect);
+    }
+    if (runtimeScannerTagsSelect) {
+      nameParts.push(runtimeScannerTagsSelect);
+    }
+  
+    const agentPullString = nameParts.join('-');
+    sysdigAgentPullString.value = agentPullString;
   }
-  if (runtimeScannerTagsSelect) {
-    nameParts.push(runtimeScannerTagsSelect);
-  }
-
-  const agentPullString = nameParts.join('-');
-  sysdigAgentPullString.value = agentPullString;
+  
+  // Add input event listeners to related input fields
+  const inputFieldsRegistry = document.querySelectorAll('#input[name="Internal Registry"], #agentTags, #runtimeScannerTags');
+  // const inputFieldsRegistry = document.querySelectorAll('#agentTags, #runtimeScannerTags');
+  inputFieldsRegistry.forEach(function (inputField) {
+    inputField.addEventListener('input', autoPopulateSysdigAgentPullstring);
+  });
 }
-
-// Add input event listeners to related input fields
-// const inputFieldsRegistry = document.querySelectorAll('#input[name="Internal Registry"], #agentTags, #runtimeScannerTags');
-const inputFieldsRegistry = document.querySelectorAll('#agentTags, #runtimeScannerTags');
-inputFieldsRegistry.forEach(function (inputField) {
-  inputField.addEventListener('input', autoPopulateSysdigAgentPullstring);
-});
-
 
 // function updatePullString() {
 //   const internalRegistry = document.querySelector('input[name="Internal Registry"]').value;
