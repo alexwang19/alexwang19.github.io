@@ -502,20 +502,20 @@ inputFieldsRegistry.forEach(function (inputField) {
 // }
 
 
-function generatePullString() {
-  const internalRegistry = document.getElementByName('Internal Registry').value;
-  const agentTag = document.getElementById('agentTags').value;
-  const runtimeScanner = document.getElementById('runtimeScannerTags').value;
-  const outputDiv = document.getElementById('output');
+// function generatePullString() {
+//   const internalRegistry = document.getElementByName('Internal Registry').value;
+//   const agentTag = document.getElementById('agentTags').value;
+//   const runtimeScanner = document.getElementById('runtimeScannerTags').value;
+//   const outputDiv = document.getElementById('output');
 
-  if (!internalRegistry || !agentTag) {
-    outputDiv.innerHTML = '<span style="color: red;">Please fill in all the fields.</span>';
-    return;
-  }
+//   if (!internalRegistry || !agentTag) {
+//     outputDiv.innerHTML = '<span style="color: red;">Please fill in all the fields.</span>';
+//     return;
+//   }
 
-  const pullString = `${internalRegistry}/sysdig/agent:${agentTag}`;
-  outputDiv.innerHTML = `Generated Pull String:<br>${pullString}`;
-}
+//   const pullString = `${internalRegistry}/sysdig/agent:${agentTag}`;
+//   outputDiv.innerHTML = `Generated Pull String:<br>${pullString}`;
+// }
 
 function toggleProxyInputs(checkboxId, inputsContainerId) {
   const checkbox = document.getElementById(checkboxId);
