@@ -478,7 +478,7 @@ function autoPopulateSysdigAgentPullstring() {
 // Add input event listeners to related input fields
 const inputFieldsRegistry = document.querySelectorAll('#input[name="Internal Registry"], #agentTags, #runtimeScannerTags');
 inputFieldsRegistry.forEach(function (inputField) {
-  inputFieldsRegistry.addEventListener('input', autoPopulateSysdigAgentPullstring);
+  inputField.addEventListener('input', autoPopulateSysdigAgentPullstring);
 });
 
 
