@@ -457,22 +457,32 @@ function toggleRegistryInputs(checkboxId, inputsContainerId) {
     const agentTagsSelect = document.getElementById('agentTags').value;
     const runtimeScannerTagsSelect = document.getElementById('runtimeScannerTags').value;
     const sysdigAgentPullString = document.querySelector('input[name="Sysdig Agent Pullstring"]');
+    const sysdigRuntimeScannerPullString = document.querySelector('input[name="Sysdig Runtime Scanner Pullstring"]');
   
     // const clusterNameInput = document.getElementById('clusterName');
-    const nameParts = [];
+    // quay.io/sysdig/agent:1.14.1
+    const sysdigAgentNameParts = [];
+    const sysdigRuntimeScannerNameParts = [];
   
     if (internalRegistry) {
-      nameParts.push(internalRegistry);
+      sysdigAgentNameParts.push(internalRegistry + "/sysdig/");
+      sysdigRuntimeScannerNameParts.push(internalRegistry + "/sysdig/");
+      // nameParts.push(internalRegistry);
+      // nameParts.push("/sysdig/");
     }
     if (agentTagsSelect) {
-      nameParts.push(agentTagsSelect);
+      sysdigAgentNameParts.push("agent:" + agentTagsSelect);
+      // nameParts.push(agentTagsSelect);
     }
     if (runtimeScannerTagsSelect) {
-      nameParts.push(runtimeScannerTagsSelect);
+      // nameParts.push(runtimeScannerTagsSelect);
+      sysdigRuntimeScannerNameParts.push("vuln-runtime-scanner:" + runtimeScannerTagsSelect);
     }
   
-    const agentPullString = nameParts.join('-');
+    const agentPullString = sysdigAgentNameParts.join('');
+    const runtimePullString = sysdigRuntimeScannerNameParts.join('');
     sysdigAgentPullString.value = agentPullString;
+    sysdigRuntimeScannerPullString.value = runtimePullString;
   }
   
   // Add input event listeners to related input fields
@@ -482,41 +492,6 @@ function toggleRegistryInputs(checkboxId, inputsContainerId) {
     inputField.addEventListener('input', autoPopulateSysdigAgentPullstring);
   });
 }
-
-// function updatePullString() {
-//   const internalRegistry = document.querySelector('input[name="Internal Registry"]').value;
-//   const internalRegistrySecret = document.querySelector('input[name="Internal Registry Pull Secret (Optional)"]').value;
-//   const agentTag = document.querySelector('input[name="Sysdig Agent Tag"]');
-//   const runtimeScannerTag = document.querySelector('input[name="Sysdig Runtime Scanner Tag"]');
-//   const outputDiv = document.getElementById('pullStringOutput');
-
-//   if (!internalRegistry) {
-//     outputDiv.innerHTML = '';
-//     return;
-//   }
-
-//   let pullString = `${internalRegistry}/sysdig/agent:${agentTag}`;
-//   // pullString += `;${internalRegistry}/sysdig/vuln-runtime-scanner:${runtimeScannerTag}`;
-
-//   // outputDiv.innerHTML = `Generated Pull String:<br>${pullString}`;
-//   agentTag.value = agentTag;
-// }
-
-
-// function generatePullString() {
-//   const internalRegistry = document.getElementByName('Internal Registry').value;
-//   const agentTag = document.getElementById('agentTags').value;
-//   const runtimeScanner = document.getElementById('runtimeScannerTags').value;
-//   const outputDiv = document.getElementById('output');
-
-//   if (!internalRegistry || !agentTag) {
-//     outputDiv.innerHTML = '<span style="color: red;">Please fill in all the fields.</span>';
-//     return;
-//   }
-
-//   const pullString = `${internalRegistry}/sysdig/agent:${agentTag}`;
-//   outputDiv.innerHTML = `Generated Pull String:<br>${pullString}`;
-// }
 
 function toggleProxyInputs(checkboxId, inputsContainerId) {
   const checkbox = document.getElementById(checkboxId);
