@@ -430,6 +430,9 @@ function toggleRegistryInputs(checkboxId, inputsContainerId) {
       label.textContent = registry_fields[i];
 
       const input = document.createElement('input');
+      if (i == 0) {
+        input.id = 'internalRegistryID';
+      }
       input.type = 'text';
       input.name = registry_fields[i];
       input.placeholder = registry_placeholders[i];
@@ -473,7 +476,7 @@ function toggleRegistryInputs(checkboxId, inputsContainerId) {
   }
   
   // Add input event listeners to related input fields
-  const inputFieldsRegistry = document.querySelectorAll('#input[name="Internal Registry"], #agentTags, #runtimeScannerTags');
+  const inputFieldsRegistry = document.querySelectorAll('#internalRegistryID, #agentTags, #runtimeScannerTags');
   // const inputFieldsRegistry = document.querySelectorAll('#agentTags, #runtimeScannerTags');
   inputFieldsRegistry.forEach(function (inputField) {
     inputField.addEventListener('input', autoPopulateSysdigAgentPullstring);
