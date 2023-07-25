@@ -413,7 +413,7 @@ function toggleRegistryInputs(checkboxId, inputsContainerId) {
 
   if (checkbox.checked) {
     const registry_fields = ["Internal Registry", "Internal Registry Pull Secret (Optional)", "Sysdig Agent Pullstring", "Sysdig Runtime Scanner Pullstring"];
-    const registry_placeholders = ["ex: quay.io", "ex: mysecret", "auto-generated", "ex: 1.5.0"];
+    const registry_placeholders = ["ex: quay.io", "ex: mysecret", "auto-generated", "auto-generated"];
     // const registry_fields = ["Internal Registry", "Internal Sysdig Agent Image", "Internal Registry Pull Secret (Optional)", "Internal Sysdig Runtime Scanner Image", "Sysdig Agent Tag", "Sysdig Runtime Scanner Tag"];
     // const registry_placeholders = ["ex: quay.io", "ex: sysdig/agent", "ex: mysecret", "ex: sysdig/vuln-runtime-scanner", "ex: 1.14.1", "ex: 1.5.0"];
     // agentTagsInput.style.display = 'none';
@@ -666,13 +666,17 @@ function displayOutput() {
       };
     };
     let agentImageRegistry = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.registry=' + registryInputs[0].value + ' \\ <br>';
-    let agentImageRepository = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.repository=' + registryInputs[1].value + ' \\ <br>';
-    let agentImagePullSecrets = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.pullSecrets=' + registryInputs[2].value + ' \\ <br>';
+    let agentImageRepository = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.repository=sysdig/agent \\ <br>';
+    // let agentImageRepository = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.repository=' + registryInputs[1].value + ' \\ <br>';
+    let agentImagePullSecrets = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.pullSecrets=' + registryInputs[1].value + ' \\ <br>';
     let nodeAnalyzerImageRegistry = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.image.registry=' + registryInputs[0].value + ' \\ <br>';
-    let nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.repository=' + registryInputs[3].value + ' \\ <br>';
-    let nodeAnalyzerNodeAnalyzerPullSecrets = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.pullSecrets=' + registryInputs[2].value + ' \\ <br>';
-    let agentImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.tag=' + registryInputs[4].value + ' \\<br>';
-    let nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + registryInputs[5].value + ' \\ <br>';
+    // let nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.repository=' + registryInputs[3].value + ' \\ <br>';
+    let nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.repository=sysdig/vuln-runtime-scanner \\ <br>';
+    let nodeAnalyzerNodeAnalyzerPullSecrets = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.pullSecrets=' + registryInputs[1].value + ' \\ <br>';
+    let agentImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.tag=' + agentTagsSelect.value + ' \\<br>';
+    let nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + runtimeScannerTagsSelect.value + ' \\ <br>';
+    // let agentImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.tag=' + registryInputs[4].value + ' \\<br>';
+    // let nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + registryInputs[5].value + ' \\ <br>';
     outputText += agentImageRegistry;
     outputText += agentImageRepository;
     if (registryInputs[2].value.trim() != '') {
