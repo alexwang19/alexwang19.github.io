@@ -413,7 +413,7 @@ function toggleRegistryInputs(checkboxId, inputsContainerId) {
 
   if (checkbox.checked) {
     const registry_fields = ["Internal Registry", "Internal Registry Pull Secret (Optional)", "Sysdig Agent Pullstring", "Sysdig Runtime Scanner Pullstring"];
-    const registry_placeholders = ["ex: quay.io", "ex: mysecret", "ex: 1.14.1", "ex: 1.5.0"];
+    const registry_placeholders = ["ex: quay.io", "ex: mysecret", "auto-generated", "ex: 1.5.0"];
     // const registry_fields = ["Internal Registry", "Internal Sysdig Agent Image", "Internal Registry Pull Secret (Optional)", "Internal Sysdig Runtime Scanner Image", "Sysdig Agent Tag", "Sysdig Runtime Scanner Tag"];
     // const registry_placeholders = ["ex: quay.io", "ex: sysdig/agent", "ex: mysecret", "ex: sysdig/vuln-runtime-scanner", "ex: 1.14.1", "ex: 1.5.0"];
     // agentTagsInput.style.display = 'none';
@@ -433,7 +433,7 @@ function toggleRegistryInputs(checkboxId, inputsContainerId) {
       input.type = 'text';
       input.name = registry_fields[i];
       input.placeholder = registry_placeholders[i];
-      input.addEventListener('input', updatePullString);
+      // input.addEventListener('input', updatePullString);
 
       inputWrapper.appendChild(label);
       inputWrapper.appendChild(input);
@@ -443,33 +443,57 @@ function toggleRegistryInputs(checkboxId, inputsContainerId) {
   } else {
     // Clear inputs when unchecked
     inputsContainer.innerHTML = '';
-    document.querySelector('input[name="Sysdig Agent Tag"]').value = '';
-    document.querySelector('input[name="Sysdig Runtime Scanner Tag"]').value = '';
+    // document.querySelector('input[name="Sysdig Agent Tag"]').value = '';
+    // document.querySelector('input[name="Sysdig Runtime Scanner Tag"]').value = '';
     // agentTagsInput.style.display = 'block';
     // runtimeScannerTagsInput.style.display = 'block';
   }
 }
 
 
-
-function updatePullString() {
+// Function to auto-populate cluster name
+function autoPopulateSysdigAgentPullstring() {
   const internalRegistry = document.querySelector('input[name="Internal Registry"]').value;
-  const internalRegistrySecret = document.querySelector('input[name="Internal Registry Pull Secret (Optional)"]').value;
-  const agentTag = document.querySelector('input[name="Sysdig Agent Tag"]');
-  const runtimeScannerTag = document.querySelector('input[name="Sysdig Runtime Scanner Tag"]');
-  const outputDiv = document.getElementById('pullStringOutput');
+  const agentTagsSelect = document.getElementById('agentTags').value;
+  const runtimeScannerTagsSelect = document.getElementById('runtimeScannerTags').value;
+  const sysdigAgentPullString = document.querySelector('input[name="Sysdig Agent Pullstring"]');
 
-  if (!internalRegistry) {
-    outputDiv.innerHTML = '';
-    return;
+  // const clusterNameInput = document.getElementById('clusterName');
+  const nameParts = [];
+
+  if (internalRegistry) {
+    nameParts.push(internalRegistry);
+  }
+  if (agentTagsSelect) {
+    nameParts.push(agentTagsSelect);
+  }
+  if (runtimeScannerTagsSelect) {
+    nameParts.push(runtimeScannerTagsSelect);
   }
 
-  let pullString = `${internalRegistry}/sysdig/agent:${agentTag}`;
-  // pullString += `;${internalRegistry}/sysdig/vuln-runtime-scanner:${runtimeScannerTag}`;
-
-  // outputDiv.innerHTML = `Generated Pull String:<br>${pullString}`;
-  agentTag.value = agentTag;
+  const agentPullString = nameParts.join('-');
+  sysdigAgentPullString.value = agentPullString;
 }
+
+
+// function updatePullString() {
+//   const internalRegistry = document.querySelector('input[name="Internal Registry"]').value;
+//   const internalRegistrySecret = document.querySelector('input[name="Internal Registry Pull Secret (Optional)"]').value;
+//   const agentTag = document.querySelector('input[name="Sysdig Agent Tag"]');
+//   const runtimeScannerTag = document.querySelector('input[name="Sysdig Runtime Scanner Tag"]');
+//   const outputDiv = document.getElementById('pullStringOutput');
+
+//   if (!internalRegistry) {
+//     outputDiv.innerHTML = '';
+//     return;
+//   }
+
+//   let pullString = `${internalRegistry}/sysdig/agent:${agentTag}`;
+//   // pullString += `;${internalRegistry}/sysdig/vuln-runtime-scanner:${runtimeScannerTag}`;
+
+//   // outputDiv.innerHTML = `Generated Pull String:<br>${pullString}`;
+//   agentTag.value = agentTag;
+// }
 
 
 function generatePullString() {
