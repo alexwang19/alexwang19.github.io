@@ -1,11 +1,13 @@
 ## Table of Contents
-* [Requirements](#requirements)
-* [Verify Installation](#verify-installation)
-* [Helm Quickstart](#helm-quickstart)
+* [Sysdig Installation Pre-Reqs](#sysdig-installation-pre-reqs)
+* [Sysdig Installation](#sysdig-installation)
+* [Verify Sysdig Installation](#verify-sysdig-installation)
+* [Commonly Used Helm Commands To Deploy And Manage Sysdig](#commonly-used-helm-commands-to-deploy-and-manage-sysdig)
 
 
-## Requirements
+## Sysdig Installation Pre-Reqs
 
+* If unfamiliar with helm, please reference the helm quickstart page [here](Need to put link here)
 * Confirm correct kubernetes cluster is targeted
   * ```
     kubectl config get-contexts
@@ -61,7 +63,12 @@
     ```
 * [Agent Requirement Docs](https://docs.sysdig.com/en/docs/installation/sysdig-secure/install-agent-components/installation-requirements/sysdig-agent/)
 
-## Verify Installation
+## Sysdig Installation
+
+Form description with link to it
+
+
+## Verify Sysdig Installation
 
 * Ensure all sysdig pods are 1/1 Running state.
   * ```
@@ -79,7 +86,7 @@
 * Sometimes you will see recurring errors if a scan is attempted for an application pod that has not come up or is failing.
 * Grep all of the agent node analyzer pods logs for "\"message\":\"startup sleep\"". This signifies that the pod is up and running successfully.
 
-## Helm Quickstart
+## Commonly Used Helm Commands To Deploy And Manage Sysdig
 
 ### Initialize Sysdig Helm Chart Repository
 ```
