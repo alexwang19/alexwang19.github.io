@@ -41,8 +41,10 @@
      attachable-volumes-aws-ebs  0             0
     ```
 * Port 6443 open for outbound traffic The Sysdig Agent communicates with the collector on port 6443. If you’re using a firewall, make sure to open port 6443 for outbound traffic so that the agent can communicate with the collector. This also applies to proxies. Ensure that port 6443 is open on your proxy.
-  * Validate connection using commands below:
+  * Validate connection from kubernetes worker node using commands below:
     ```
+    ssh myuser@k8s_worker_node
+    
     export http{s,}_proxy=http://myproxy.com:8080
     curl -sL ingest-us2.app.sysdig.com:6443 -v
     ```
@@ -68,7 +70,13 @@
 ## Verify Installation
 
 * Ensure all sysdig pods are 1/1 Running state.
+  * ```
+    kubectl -n kube-system get pods
+    ``` 
 * Double check the largest image size to make sure a new larger image is not encountered.
+  * ```
+    kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort -nr | head -1
+    ```
 * If a new and larger image is encountered, we may need to tune the runtime scanner to accommodate the larger size.
 * You can also watch for log messages with "too" that say image scans are being skipped due to size.
 * Grep all of the agent pod logs for "Error," and ensure there are no recurring errors of concern.
