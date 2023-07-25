@@ -433,6 +433,7 @@ function toggleRegistryInputs(checkboxId, inputsContainerId) {
       input.type = 'text';
       input.name = registry_fields[i];
       input.placeholder = registry_placeholders[i];
+      input.addEventListener('input', updatePullString);
 
       inputWrapper.appendChild(label);
       inputWrapper.appendChild(input);
@@ -442,10 +443,50 @@ function toggleRegistryInputs(checkboxId, inputsContainerId) {
   } else {
     // Clear inputs when unchecked
     inputsContainer.innerHTML = '';
-    agentTagsInput.style.display = 'block';
-    runtimeScannerTagsInput.style.display = 'block';
+    document.querySelector('input[name="Sysdig Agent Tag"]').value = '';
+    document.querySelector('input[name="Sysdig Runtime Scanner Tag"]').value = '';
+    // agentTagsInput.style.display = 'block';
+    // runtimeScannerTagsInput.style.display = 'block';
   }
 }
+
+
+
+function updatePullString() {
+  const internalRegistry = document.querySelector('input[name="Internal Registry"]').value;
+  const internalRegistrySecret = document.querySelector('input[name="Internal Registry Pull Secret (Optional)"]').value;
+  const agentTag = document.querySelector('input[name="Sysdig Agent Tag"]');
+  const runtimeScannerTag = document.querySelector('input[name="Sysdig Runtime Scanner Tag"]');
+  const outputDiv = document.getElementById('pullStringOutput');
+
+  if (!internalRegistry) {
+    outputDiv.innerHTML = '';
+    return;
+  }
+
+  let pullString = `${internalRegistry}/sysdig/agent:${agentTag}`;
+  // pullString += `;${internalRegistry}/sysdig/vuln-runtime-scanner:${runtimeScannerTag}`;
+
+  // outputDiv.innerHTML = `Generated Pull String:<br>${pullString}`;
+  agentTag.value = agentTag;
+}
+
+
+function generatePullString() {
+  const internalRegistry = document.getElementByName('Internal Registry').value;
+  const agentTag = document.getElementById('agentTags').value;
+  const runtimeScanner = document.getElementById('runtimeScannerTags').value;
+  const outputDiv = document.getElementById('output');
+
+  if (!internalRegistry || !agentTag) {
+    outputDiv.innerHTML = '<span style="color: red;">Please fill in all the fields.</span>';
+    return;
+  }
+
+  const pullString = `${internalRegistry}/sysdig/agent:${agentTag}`;
+  outputDiv.innerHTML = `Generated Pull String:<br>${pullString}`;
+}
+
 function toggleProxyInputs(checkboxId, inputsContainerId) {
   const checkbox = document.getElementById(checkboxId);
   const inputsContainer = document.getElementById(inputsContainerId);
