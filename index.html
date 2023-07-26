@@ -151,7 +151,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
           <div class="tooltip-text">Only use this once you've generated install commands and download input values.</div>
         </div>
       <br><br>
-      <input type="file" id="fileInput" accept=".txt"><br>
+      <input type="file" id="fileInput" name="test" accept=".txt"><br>
       <br>
       <button onclick="refreshPage()()">Clear All Fields</button>
     </div>
@@ -161,7 +161,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
 <!--       <button onclick="downloadConfigYAML()">Download Config YAML</button> -->
       <button id="downloadOutputBtn" onclick="downloadOutputText()" style="display: none;">Download Copy of Install Commands</button>
       <br>
-      <button id="downloadInputValuesBtn" onclick="downloadInputValues()" style="display: none;">Download Input Values</button>
+      <button id="downloadInputValuesBtn" onclick="downloadInputValues()" style="display: none;">Download Form Input Values</button>
     </div>
 
     <div id="output"></div>
