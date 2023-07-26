@@ -433,6 +433,9 @@ function toggleRegistryInputs(checkboxId, inputsContainerId) {
       if (i == 0) {
         input.id = 'internalRegistryID';
       }
+      else if (i == 2 || i == 3) {
+        input.readOnly = true;
+      }
       input.type = 'text';
       input.name = registry_fields[i];
       input.placeholder = registry_placeholders[i];
