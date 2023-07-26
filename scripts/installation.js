@@ -544,11 +544,8 @@ function toggleProxyInputs(checkboxId, inputsContainerId) {
     tooltipdiv.id = "tooltipdiv";
     tooltipdiv.className = "tooltip-container";
     const boldstyling = document.createElement("b");
-    boldstyling.textContent = 'No Proxy List(Comma delimited)';
+    boldstyling.textContent = 'No Proxy List (Comma delimited)';
     tooltipdiv.appendChild(boldstyling);
-    const clusterIPCommand = document.createElement("pre");
-    clusterIPCommand.textContent = "kubectl get service kubernetes -o jsonpath='{.spec.clusterIP}'; echo";
-    tooltipdiv.appendChild(clusterIPCommand);
     const tooltip = document.createElement("i");
     tooltip.className = "tooltip-icon fas fa-question-circle";
     const tooltiptextdiv = document.createElement("div");
@@ -556,6 +553,9 @@ function toggleProxyInputs(checkboxId, inputsContainerId) {
     tooltiptextdiv.textContent = "Make sure to include clusterip as first ip in the no_proxy list.";
     tooltipdiv.appendChild(tooltip);
     tooltipdiv.appendChild(tooltiptextdiv);
+    const clusterIPCommand = document.createElement("pre");
+    clusterIPCommand.textContent = "kubectl get service kubernetes -o jsonpath='{.spec.clusterIP}'; echo";
+    tooltipdiv.appendChild(clusterIPCommand);
 
     const input3 = document.createElement('input');
     input3.type = 'text';
