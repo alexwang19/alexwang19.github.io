@@ -119,10 +119,11 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       <label>
         <input type="checkbox" name="registryCheckboxID" id="registryCheckbox"
           onchange="toggleRegistryInputs('registryCheckbox', 'registryInput')">
-        Is Internal Registry Required?
+        <div class="tooltip-container"><b>Is Internal Registry Required?</b>
+            <i class="tooltip-icon fas fa-question-circle"></i>
+            <div class="tooltip-text">Testing</div>
+        </div>
       </label>
-      <i class="tooltip-icon fas fa-question-circle"></i>
-      <div class="tooltip-text">Only use this once you've generated install commands and download input values.</div>
       <div id="registryInput" class="form-section"></div>
     </div>
 
@@ -137,7 +138,6 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
     </div> -->
 
     <div class="form-section">
-<!--       <label for="fileInput">Upload Existing Input Values File To Pre-populate Fields:</label> -->
         <div class="tooltip-container"><b>Upload Existing Input Values File To Pre-populate Fields</b>
           <i class="tooltip-icon fas fa-question-circle"></i>
           <div class="tooltip-text">Only use this once you've generated install commands and download input values.</div>
