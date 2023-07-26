@@ -190,12 +190,12 @@ header {
   visibility: hidden;
   background-color: #007BFF; /* Customize the background color of the tooltip */
   color: #fff; /* Customize the text color of the tooltip */
-  text-align: right;
-  border-radius: 4px;
-  padding: 8px;
+  text-align: center;
+  border-radius: 1px;
+  padding: 2px;
   position: absolute;
   top: 100%;
-  left: 50%;
+  left: 100%;
   transform: translateX(-50%);
   white-space: nowrap;
 }
