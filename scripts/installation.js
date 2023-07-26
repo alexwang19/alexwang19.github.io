@@ -537,20 +537,20 @@ function toggleProxyInputs(checkboxId, inputsContainerId) {
     const inputWrapper3 = document.createElement('div');
     inputWrapper3.classList.add('dynamic-input-wrapper');
 
-    const label3 = document.createElement('label');
+    // const label3 = document.createElement('label');
     // label3.textContent = 'No Proxy List(Comma delimited)';
 
     const tooltipdiv = document.createElement('div');
     tooltipdiv.id = "tooltipdiv";
     tooltipdiv.className = "tooltip-container";
     const boldstyling = document.createElement("b");
-    boldstyling.textContent = 'No Proxy List';
+    boldstyling.textContent = 'No Proxy List(Comma delimited';
     tooltipdiv.appendChild(boldstyling);
     const tooltip = document.createElement("i");
     tooltip.className = "tooltip-icon fas fa-question-circle";
     const tooltiptextdiv = document.createElement("div");
     tooltiptextdiv.className = "tooltip-text";
-    tooltiptextdiv.textContent = "testing content";
+    tooltiptextdiv.textContent = "Make sure to include clusterip as first ip in the no_proxy list.";
     tooltip.appendChild(tooltiptextdiv);
     tooltipdiv.appendChild(tooltip);
 
