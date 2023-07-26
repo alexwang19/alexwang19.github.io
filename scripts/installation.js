@@ -560,7 +560,7 @@ function toggleProxyInputs(checkboxId, inputsContainerId) {
     input3.required = true;
     input3.placeholder = 'ex: 127.0.0.1,noproxyhost.com'
 
-    inputWrapper3.appendChild(label3);
+    // inputWrapper3.appendChild(label3);
     inputWrapper3.appendChild(tooltipdiv);
     // inputWrapper3.appendChild(para);
     inputWrapper3.appendChild(input3);
