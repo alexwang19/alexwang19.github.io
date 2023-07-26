@@ -2,12 +2,11 @@
 * [Sysdig Installation Pre-Reqs](#sysdig-installation-pre-reqs)
 * [Sysdig Installation](#sysdig-installation)
 * [Verify Sysdig Installation](#verify-sysdig-installation)
-* [Commonly Used Helm Commands To Deploy And Manage Sysdig](#commonly-used-helm-commands-to-deploy-and-manage-sysdig)
 
 
 ## Sysdig Installation Pre-Reqs
 
-* If unfamiliar with helm, please reference the helm quickstart page [here](Need to put link here)
+* If unfamiliar with helm, please reference the helm quickstart page [here](https://github.com/alexwang19/alexwang19.github.io/edit/main/docs/sysdig_helm_quickstart.md)
 * Confirm correct kubernetes cluster is targeted
   * ```
     kubectl config get-contexts
