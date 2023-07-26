@@ -434,6 +434,7 @@ function toggleRegistryInputs(checkboxId, inputsContainerId) {
         input.id = 'internalRegistryID';
       }
       else if (i == 2 || i == 3) {
+        input.class = "non-editable-input"
         input.readOnly = true;
       }
       input.type = 'text';
