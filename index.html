@@ -129,7 +129,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
           onchange="toggleRegistryInputs('registryCheckbox', 'registryInput')">
         <div class="tooltip-container"><b>Is Internal Registry Required?</b>
             <i class="tooltip-icon fas fa-question-circle"></i>
-            <div class="tooltip-text">Specify internal registry url. Image pullstrings are auto-generated based on registry url and image versions.</div>
+            <div class="tooltip-text">Allows you to specify internal registry url. Image pullstrings are auto-generated based on registry url input and image versions selected.</div>
         </div>
       </label>
       <div id="registryInput" class="form-section"></div>
