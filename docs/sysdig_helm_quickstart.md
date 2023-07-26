@@ -1,5 +1,7 @@
 ## Commonly Used Helm Commands To Deploy And Manage Sysdig
 
+* Add reference to helm quickstart page
+
 ### Initialize Sysdig Helm Chart Repository
 ```
 helm repo add sysdig https://charts.sysdig.com --force-update
