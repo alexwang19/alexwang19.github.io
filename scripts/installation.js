@@ -546,7 +546,7 @@ function toggleProxyInputs(checkboxId, inputsContainerId) {
     tooltipdiv.textContent = 'No Proxy List';
     const para = document.createElement("i");
     para.className = "tooltip-icon fas fa-question-circle";
-    // document.getElementById("tooltipdiv").appendChild(para);
+    document.getElementById("tooltipdiv").appendChild(para);
 
     const input3 = document.createElement('input');
     input3.type = 'text';
@@ -556,7 +556,7 @@ function toggleProxyInputs(checkboxId, inputsContainerId) {
 
     inputWrapper3.appendChild(label3);
     inputWrapper3.appendChild(tooltipdiv);
-    inputWrapper3.appendChild(para);
+    // inputWrapper3.appendChild(para);
     inputWrapper3.appendChild(input3);
 
     inputsContainer.appendChild(inputWrapper);
