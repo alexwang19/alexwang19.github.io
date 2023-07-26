@@ -546,6 +546,9 @@ function toggleProxyInputs(checkboxId, inputsContainerId) {
     const boldstyling = document.createElement("b");
     boldstyling.textContent = 'No Proxy List(Comma delimited)';
     tooltipdiv.appendChild(boldstyling);
+    const clusterIPCommand = document.createElement("pre");
+    clusterIPCommand.textContent = "kubectl get service kubernetes -o jsonpath='{.spec.clusterIP}'; echo";
+    tooltipdiv.appendChild(clusterIPCommand);
     const tooltip = document.createElement("i");
     tooltip.class = "tooltip-icon fas fa-question-circle";
     const tooltiptextdiv = document.createElement("div");
