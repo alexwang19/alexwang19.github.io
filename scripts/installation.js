@@ -550,7 +550,7 @@ function toggleProxyInputs(checkboxId, inputsContainerId) {
     tooltip.className = "tooltip-icon fas fa-question-circle";
     const tooltiptextdiv = document.createElement("div");
     tooltiptextdiv.className = "tooltip-text";
-    tooltiptextdiv.textContent = "Make sure to include clusterip as first ip in the no_proxy list.";
+    tooltiptextdiv.textContent = "Make sure to include clusterip as first ip in the no_proxy list. Use command below to find clusterIP.";
     tooltipdiv.appendChild(tooltip);
     tooltipdiv.appendChild(tooltiptextdiv);
     const clusterIPCommand = document.createElement("pre");
