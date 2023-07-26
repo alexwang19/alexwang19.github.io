@@ -6,7 +6,7 @@
 
 ## Sysdig Installation Pre-Reqs
 
-* If unfamiliar with helm, please reference the helm quickstart page [here](https://github.com/alexwang19/alexwang19.github.io/edit/main/docs/sysdig_helm_quickstart.md).
+* If unfamiliar with helm, please reference the helm quickstart page [here](sysdig_helm_quickstart.md).
 * Confirm correct kubernetes cluster is targeted
   * ```
     kubectl config get-contexts
