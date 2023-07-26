@@ -190,7 +190,7 @@ header {
   visibility: hidden;
   background-color: #007BFF; /* Customize the background color of the tooltip */
   color: #fff; /* Customize the text color of the tooltip */
-  text-align: center;
+  text-align: right;
   border-radius: 4px;
   padding: 8px;
   position: absolute;
