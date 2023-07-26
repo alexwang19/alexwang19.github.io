@@ -203,3 +203,7 @@ header {
 .tooltip-container:hover .tooltip-text {
   visibility: visible;
 }
+
+.non-editable-input {
+  color: #808080; /* Grey out the text color */
+}
