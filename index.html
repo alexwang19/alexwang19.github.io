@@ -99,7 +99,12 @@
     </div> -->
 
     <div id="imageSizeInput" class="form-section">
-      <label for="imageSizeInput">Find Largest Image Size Running In Your Cluster (Bytes)</label>
+      <label for="imageSizeInput">
+        <div class="tooltip-container"><b>Find Largest Image Size Running In Your Cluster (Bytes)</b>
+            <i class="tooltip-icon fas fa-question-circle"></i>
+            <div class="tooltip-text">Run below command against cluster to find largest image size running in your cluster.</div>
+        </div>
+      </label>
       <pre id="kubectlCommandText">
 kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort -nr | head -1
       </pre>
@@ -110,7 +115,10 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       <label>
         <input type="checkbox" name="proxyCheckBoxID" id="proxyCheckbox"
           onchange="toggleProxyInputs('proxyCheckbox', 'proxyInput')">
-        Is Proxy Required?
+        <div class="tooltip-container"><b>Is Proxy Required?</b>
+            <i class="tooltip-icon fas fa-question-circle"></i>
+            <div class="tooltip-text">Specify proxy information if direct access to public internet is not available.</div>
+        </div>
       </label>
       <div id="proxyInput" class="form-section"></div>
     </div>
@@ -121,7 +129,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
           onchange="toggleRegistryInputs('registryCheckbox', 'registryInput')">
         <div class="tooltip-container"><b>Is Internal Registry Required?</b>
             <i class="tooltip-icon fas fa-question-circle"></i>
-            <div class="tooltip-text">Testing</div>
+            <div class="tooltip-text">Specify internal registry url. Image pullstrings are auto-generated based on registry url and image versions.</div>
         </div>
       </label>
       <div id="registryInput" class="form-section"></div>
