@@ -555,7 +555,7 @@ function toggleProxyInputs(checkboxId, inputsContainerId) {
     tooltipdiv.appendChild(tooltiptextdiv);
     const clusterIPCommand = document.createElement("pre");
     clusterIPCommand.textContent = "kubectl get service kubernetes -o jsonpath='{.spec.clusterIP}'; echo";
-    tooltipdiv.appendChild(clusterIPCommand);
+    
 
     const input3 = document.createElement('input');
     input3.type = 'text';
@@ -565,6 +565,7 @@ function toggleProxyInputs(checkboxId, inputsContainerId) {
 
     // inputWrapper3.appendChild(label3);
     inputWrapper3.appendChild(tooltipdiv);
+    inputWrapper3.appendChild(clusterIPCommand);
     // inputWrapper3.appendChild(para);
     inputWrapper3.appendChild(input3);
 
