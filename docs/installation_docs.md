@@ -64,12 +64,14 @@
 
 ## Sysdig Installation
 
-* Gather following information: application name/business unit, environment, platform(eks,gke,etc.), vsadid, vastid
-* Fill out all required fields
-* Generate install commands to output helm commands that can then be used to install sysdig
-  * Make sure to click download copy of commands to reference helm commands for future use
-* Select download input values if needing to pre-populate input fields. 
-* Complete onboarding form found here: https://alexwang19.github.io./
+* A self-service form for generating Sysdig installation files, commands and instructions has been created to standardize the process for installing Sysdig at Verizon.
+* The form should be self-explanatory. Use the tooltips in the form for explanation for each field.
+* The form is designed so that after all fields are populated correctly, the generate install commands button will provide the installation files and instructions.
+  * A static-helm-values.yaml file will be downloaded. You should save this file to the directory you will execute the install from.
+  * Copy the generated commands and execute them from the directory where the static-helm-values.yaml is located.
+* At this stage, you can also download the form input values and save them for future use.
+  * This file can be uploaded with the "Choose File" option in the form.
+* The form is found here: https://alexwang19.github.io./
 
 ## Verify Sysdig Installation
 
