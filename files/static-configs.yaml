@@ -11,7 +11,7 @@ agent:
       prometheus:
         enabled: false
 nodeAnalyzer:
-  enabled: false
+  enabled: true
   nodeAnalyzer:
     sslVerifyCertificate: false
     imageAnalyzer:
