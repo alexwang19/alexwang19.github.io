@@ -538,15 +538,21 @@ function toggleProxyInputs(checkboxId, inputsContainerId) {
     inputWrapper3.classList.add('dynamic-input-wrapper');
 
     const label3 = document.createElement('label');
-    label3.textContent = 'No Proxy List(Comma delimited)';
+    // label3.textContent = 'No Proxy List(Comma delimited)';
 
     const tooltipdiv = document.createElement('div');
     tooltipdiv.id = "tooltipdiv";
     tooltipdiv.className = "tooltip-container";
-    tooltipdiv.textContent = 'No Proxy List';
-    const para = document.createElement("i");
-    para.className = "tooltip-icon fas fa-question-circle";
-    tooltipdiv.appendChild(para);
+    const boldstyling = document.createElement("b");
+    boldstyling.textContent = 'No Proxy List';
+    tooltipdiv.appendChild(boldstyling);
+    const tooltip = document.createElement("i");
+    tooltip.className = "tooltip-icon fas fa-question-circle";
+    const tooltiptextdiv = document.createElement("div");
+    tooltiptextdiv.className = "tooltip-text";
+    tooltiptextdiv.textContent = "testing content";
+    tooltip.appendChild(tooltiptextdiv);
+    tooltipdiv.appendChild(tooltip);
 
     const input3 = document.createElement('input');
     input3.type = 'text';
