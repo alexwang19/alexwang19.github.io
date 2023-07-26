@@ -615,11 +615,11 @@ function displayOutput() {
 
   let helmQuickstartDocs = '<b>Link for installation instructions <a target="_blank" href="https://github.com/alexwang19/alexwang19.github.io/blob/main/docs/installation_docs.md">here</a></b><br><br>';
   let helmHeader = '<b>Use Below Commands to Install Sysdig via Helm. Update full path of static-helm-values.yaml in the command.</b><br><br>';
-  let helmInitText = 'helm repo add sysdig https://charts.sysdig.com --force-update <br><br>';
-  let helmInstallText = 'helm install sysdig-agent \\<br>&nbsp;&nbsp;&nbsp;&nbsp; --namespace kube-system \\<br>';
-  let clusterNameText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.clusterConfig.name=' + businessUnitInput + '-' + platformInput + '-' + environmentInput + '-' + vastInput + '-' + vsadInput + ' \\ <br>';
-  let clusterTagsText = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.sysdig.settings.tags="cluster:' + businessUnitInput + '-' + platformInput + '-' + environmentInput + '-' + vastInput + '-' + vsadInput + '\\,' + 'vz-vsadid:' + vsadInput + '\\,' + 'vz-vastid:' + vastInput +'" \\ <br>';
-  let outputText = helmQuickstartDocs + helmHeader + "<pre>" + helmInitText + helmInstallText + clusterNameText + clusterTagsText + "</pre>";
+  let helmInitText = '<pre>helm repo add sysdig https://charts.sysdig.com --force-update <br><br></pre>';
+  let helmInstallText = '<pre>helm install sysdig-agent \\<br>&nbsp;&nbsp;&nbsp;&nbsp; --namespace kube-system \\<br></pre>';
+  let clusterNameText = '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set global.clusterConfig.name=' + businessUnitInput + '-' + platformInput + '-' + environmentInput + '-' + vastInput + '-' + vsadInput + ' \\ <br></pre>';
+  let clusterTagsText = '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set agent.sysdig.settings.tags="cluster:' + businessUnitInput + '-' + platformInput + '-' + environmentInput + '-' + vastInput + '-' + vsadInput + '\\,' + 'vz-vsadid:' + vsadInput + '\\,' + 'vz-vastid:' + vastInput +'" \\ <br></pre>';
+  let outputText = helmQuickstartDocs + helmHeader + helmInitText + helmInstallText + clusterNameText + clusterTagsText;
 
 
   if (imageSizeInput.value > 2147483648) {
@@ -630,24 +630,24 @@ function displayOutput() {
     let memoryLimitBytes = 2 * imageSizeInput.value;
     const memoryLimitGigabytes = convertBytesToGigabytes(memoryLimitBytes);
 
-    outputText += '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.settings.maxImageSizeAllowed=' + imageSizeInput.value + ' \\<br>';
-    outputText += '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.requests.ephemeral-storage=' + Math.ceil(ephemeralStorageRequestGigabytes) + 'Gi \\<br>';
-    outputText += '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.limits.memory=' + Math.ceil(memoryLimitGigabytes) + 'Gi \\<br>'
-    outputText += '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.limits.ephemeral-storage=' + Math.ceil(ephemeralStorageLimitGigabytes) + 'Gi \\<br>';
+    outputText += '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.settings.maxImageSizeAllowed=' + imageSizeInput.value + ' \\<br></pre>';
+    outputText += '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.requests.ephemeral-storage=' + Math.ceil(ephemeralStorageRequestGigabytes) + 'Gi \\<br></pre>';
+    outputText += '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.limits.memory=' + Math.ceil(memoryLimitGigabytes) + 'Gi \\<br></pre>'
+    outputText += '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.limits.ephemeral-storage=' + Math.ceil(ephemeralStorageLimitGigabytes) + 'Gi \\<br></pre>';
   }
 
   let regionInput;
   let accessKeyInput;
   const regionSelect = document.getElementById('regionSelect');
   if (regionSelect.value === 'us2') {
-    let regionText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.region=us2 \\<br>';
+    let regionText = '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.region=us2 \\<br></pre>';
     accessKeyInput = document.getElementById('testSysdigAccessKey').value;
-    let accessKeyText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput + ' \\ <br>';
+    let accessKeyText = '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput + ' \\ <br></pre>';
     outputText += regionText;
     outputText += accessKeyText;
   } else if (regionSelect.value === 'us3'){
     accessKeyInput = document.getElementById('standardSysdigAccessKey').value;
-    let accessKeyText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput + ' \\ <br>';
+    let accessKeyText = '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput + ' \\ <br></pre>';
     outputText += accessKeyText;
   };
   // Validate required inputs
@@ -670,11 +670,11 @@ function displayOutput() {
         return;
       };
     };
-    let httpProxy = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.proxy.httpProxy=' + inputs[0].value + ':' + inputs[1].value + ' \\ <br>';
-    let httpsProxy = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.proxy.httpsProxy=' + inputs[0].value + ':' + inputs[1].value + ' \\ <br>';
-    let noProxy = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.proxy.noProxy=' + '"' + inputs[2].value + '"' + ' \\ <br>';
-    let agentHttpProxyPort = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.sysdig.settings.http_proxy.proxy_port=' + inputs[1].value + ' \\ <br>';
-    let agentHttpProxyHost = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.sysdig.settings.http_proxy.proxy_host=' + inputs[0].value + ' \\ <br>';
+    let httpProxy = '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set global.proxy.httpProxy=' + inputs[0].value + ':' + inputs[1].value + ' \\ <br></pre>';
+    let httpsProxy = '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set global.proxy.httpsProxy=' + inputs[0].value + ':' + inputs[1].value + ' \\ <br></pre>';
+    let noProxy = '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set global.proxy.noProxy=' + '"' + inputs[2].value + '"' + ' \\ <br>';
+    let agentHttpProxyPort = '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set agent.sysdig.settings.http_proxy.proxy_port=' + inputs[1].value + ' \\ <br></pre>';
+    let agentHttpProxyHost = '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set agent.sysdig.settings.http_proxy.proxy_host=' + inputs[0].value + ' \\ <br></pre>';
     outputText += httpProxy;
     outputText += httpsProxy;
     outputText += noProxy;
@@ -689,18 +689,18 @@ function displayOutput() {
         return;
       };
     };
-    let agentImageRegistry = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.registry=' + registryInputs[0].value + ' \\ <br>';
-    let agentImageRepository = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.repository=sysdig/agent \\ <br>';
+    let agentImageRegistry = '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.registry=' + registryInputs[0].value + ' \\ <br></pre>';
+    let agentImageRepository = '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.repository=sysdig/agent \\ <br></pre>';
     // let agentImageRepository = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.repository=' + registryInputs[1].value + ' \\ <br>';
-    let agentImagePullSecrets = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.pullSecrets=' + registryInputs[1].value + ' \\ <br>';
-    let nodeAnalyzerImageRegistry = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.image.registry=' + registryInputs[0].value + ' \\ <br>';
+    let agentImagePullSecrets = '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.pullSecrets=' + registryInputs[1].value + ' \\ <br></pre>';
+    let nodeAnalyzerImageRegistry = '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.image.registry=' + registryInputs[0].value + ' \\ <br></pre>';
     // let nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.repository=' + registryInputs[3].value + ' \\ <br>';
-    let nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.repository=sysdig/vuln-runtime-scanner \\ <br>';
-    let nodeAnalyzerNodeAnalyzerPullSecrets = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.pullSecrets=' + registryInputs[1].value + ' \\ <br>';
-    let agentImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.tag=' + agentTagsSelect.value + ' \\<br>';
-    let nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + runtimeScannerTagsSelect.value + ' \\ <br>';
-    // let agentImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.tag=' + registryInputs[4].value + ' \\<br>';
-    // let nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + registryInputs[5].value + ' \\ <br>';
+    let nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository = '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.repository=sysdig/vuln-runtime-scanner \\ <br></pre>';
+    let nodeAnalyzerNodeAnalyzerPullSecrets = '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.pullSecrets=' + registryInputs[1].value + ' \\ <br></pre>';
+    let agentImageTag = '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.tag=' + agentTagsSelect.value + ' \\<br></pre>';
+    let nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag = '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + runtimeScannerTagsSelect.value + ' \\ <br></pre>';
+    // let agentImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.tag=' + registryInputs[4].value + ' \\<br></pre>';
+    // let nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + registryInputs[5].value + ' \\ <br></pre>';
     outputText += agentImageRegistry;
     outputText += agentImageRepository;
     if (registryInputs[2].value.trim() != '') {
@@ -718,8 +718,8 @@ function displayOutput() {
       alert('Please select agent tag and runtime scanner versions.');
       return;
     } else {
-      let agentImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.tag=' + agentTagsSelect.value + ' \\<br>';
-      let runtimeScannerTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + runtimeScannerTagsSelect.value + ' \\ <br>';
+      let agentImageTag = '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.tag=' + agentTagsSelect.value + ' \\<br></pre>';
+      let runtimeScannerTag = '<pre>&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + runtimeScannerTagsSelect.value + ' \\ <br></pre>';
       outputText += agentImageTag;
       outputText += runtimeScannerTag;
     };
@@ -729,67 +729,8 @@ function displayOutput() {
   //   outputText += '--set agent.priorityClassName=' + priorityInput.value + ' \\ <br>';
   // }
 
-  outputText += '&nbsp;&nbsp;&nbsp;&nbsp; -f <my-path>/static-helm-values.yaml \\<br>';
-  outputText += 'sysdig/sysdig-deploy<br>';
-  // outputText += '<br><br><b>Steps To Verify Installation</b><br>';
-  // outputText += '- Ensure all sysdig pods are 1/1 Running state.<br>';
-  // outputText += '- Double check the largest image size to make sure a new larger image is not encountered.<br>';
-  // outputText += '- If a new and larger image is encountered, we may need to tune the runtime scanner to accommodate the larger size.<br>';
-  // outputText += '- You can also watch for log messages with "too" that say image scans are being skipped due to size.<br>';
-  // outputText += '- Grep all of the agent pod logs for "Error," and ensure there are no recurring errors of concern.<br>';
-  // outputText += '- Grep all of the agent pod logs for "POLICIES_V2". You should see something like "Received command 22 (POLICIES_V2)" This signifies that the pod is up and running successfully.<br>';
-  // outputText += '- Grep all of the agent node analyzer pod logs for "\"level\":\"error\"" and ensure there are no recurring errors of concern.<br>';
-  // outputText += '- Sometimes you will see recurring errors if a scan is attempted for an application pod that has not come up or is failing.<br>';
-  // outputText += '- Grep all of the agent node analyzer pods logs for "\"message\":\"startup sleep\"". This signifies that the pod is up and running successfully.<br>';
-
-// // Create YAML content
-// let yamlContent = `global:
-// sysdig:
-// region: "us3"
-// agent:
-// slim:
-// enabled: false
-// auditLog:
-// enabled: false
-// sysdig:
-// settings:
-//   prometheus:
-//     enabled: false
-// nodeAnalyzer:
-// nodeAnalyzer:
-// sslVerifyCertificate: false
-// imageAnalyzer:
-//   deploy: false
-// benchmarkRunner:
-//   deploy: false
-// hostAnalyzer:
-//   deploy: false
-// hostScanner:
-//   deploy: false
-// runtimeScanner:
-//   deploy: true
-//   settings:
-//     eveEnabled: false
-//     maxImageSizeAllowed: "4194304000"
-//     maxFileSizeAllowed: "262144000"
-//   eveConnector:
-//     deploy: false
-//   resources:
-//     requests:
-//       ephemeral-storage: 3Gi
-//     limits:
-//       cpu: 1000m
-//       memory: 4Gi
-//       ephemeral-storage: 6Gi`;
-
-//   // Create a Blob with the YAML content
-//   const blob = new Blob([yamlContent], { type: 'text/yaml' });
-//   outputDiv.innerHTML = outputText;
-//   // Create a temporary <a> element to trigger the download
-//   const link = document.createElement('a');
-//   link.href = URL.createObjectURL(blob);
-//   link.download = 'static-configs.yaml';
-//   link.click();
+  outputText += '<pre>&nbsp;&nbsp;&nbsp;&nbsp; -f <my-path>/static-helm-values.yaml \\<br></pre>';
+  outputText += '<pre>sysdig/sysdig-deploy<br></pre>';
 
   downloadYamlFile(outputDiv, outputText);
   document.getElementById('downloadOutputBtn').style.display = 'inline-block';
