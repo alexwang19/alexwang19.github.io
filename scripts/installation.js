@@ -540,6 +540,14 @@ function toggleProxyInputs(checkboxId, inputsContainerId) {
     const label3 = document.createElement('label');
     label3.textContent = 'No Proxy List(Comma delimited)';
 
+    const tooltipdiv = document.createElement('div');
+    tooltipdiv.id = "tooltipdiv";
+    tooltipdiv.className = "tooltip-container";
+    tooltipdiv.textContent = 'No Proxy List';
+    const para = document.createElement("i");
+    para.className = "tooltip-icon fas fa-question-circle";
+    document.getElementById("tooltipdiv").appendChild(para);
+
     const input3 = document.createElement('input');
     input3.type = 'text';
     input3.name = 'no_proxy_list';
