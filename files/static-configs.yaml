@@ -12,6 +12,7 @@ agent:
         enabled: false
 nodeAnalyzer:
   nodeAnalyzer:
+    enabled: false
     sslVerifyCertificate: false
     imageAnalyzer:
       deploy: false
