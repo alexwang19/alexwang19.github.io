@@ -6,7 +6,7 @@
 
 ## Sysdig Installation Pre-Reqs
 
-* If unfamiliar with helm, please reference the helm quickstart page [here](https://github.com/alexwang19/alexwang19.github.io/edit/main/docs/sysdig_helm_quickstart.md)
+* If unfamiliar with helm, please reference the helm quickstart page [here](https://github.com/alexwang19/alexwang19.github.io/edit/main/docs/sysdig_helm_quickstart.md).
 * Confirm correct kubernetes cluster is targeted
   * ```
     kubectl config get-contexts
@@ -64,8 +64,12 @@
 
 ## Sysdig Installation
 
-Form description with link to it
-
+* Gather following information: application name/business unit, environment, platform(eks,gke,etc.), vsadid, vastid
+* Fill out all required fields
+* Generate install commands to output helm commands that can then be used to install sysdig
+  * Make sure to click download copy of commands to reference helm commands for future use
+* Select download input values if needing to pre-populate input fields. 
+* Complete onboarding form found here: https://alexwang19.github.io./
 
 ## Verify Sysdig Installation
 
@@ -78,7 +82,11 @@ Form description with link to it
     kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort -nr | head -1
     ```
 * If a new and larger image is encountered, we may need to tune the runtime scanner to accommodate the larger size.
+  * Enter new larger image size in onboarding portal(https://alexwang19.github.io./) to generate new set of helm commands based on new larger image size.
 * You can also watch for log messages with "too" that say image scans are being skipped due to size.
+  * ```
+    kubectl -n kube-system logs <agent-node-analyzer-pod-name> | grep -i too
+    ``` 
 * Grep all of the agent pod logs for "Error," and ensure there are no recurring errors of concern.
   * ```
     kubectl -n kube-system logs <agent-pod-name> | grep -i error
