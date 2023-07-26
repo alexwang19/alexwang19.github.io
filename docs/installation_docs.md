@@ -68,7 +68,7 @@
 * The form should be self-explanatory. Use the tooltips in the form for explanation for each field.
 * The form is designed so that after all fields are populated correctly, the generate install commands button will provide the installation files and instructions.
   * A static-helm-values.yaml file will be downloaded. You should save this file to the directory you will execute the install from.
-  * Copy the generated commands and execute them from the directory where the static-helm-values.yaml is located.
+  * Copy the generated commands and execute them from the directory where the static-helm-values.yaml is located to install Sysdig.
 * At this stage, you can also download the form input values and save them for future use.
   * This file can be uploaded with the "Choose File" option in the form.
 * The form is found here: https://alexwang19.github.io./
