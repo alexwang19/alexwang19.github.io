@@ -542,17 +542,17 @@ function toggleProxyInputs(checkboxId, inputsContainerId) {
 
     const tooltipdiv = document.createElement('div');
     tooltipdiv.id = "tooltipdiv";
-    tooltipdiv.className = "tooltip-container";
+    tooltipdiv.class = "tooltip-container";
     const boldstyling = document.createElement("b");
-    boldstyling.textContent = 'No Proxy List(Comma delimited';
+    boldstyling.textContent = 'No Proxy List(Comma delimited)';
     tooltipdiv.appendChild(boldstyling);
     const tooltip = document.createElement("i");
-    tooltip.className = "tooltip-icon fas fa-question-circle";
+    tooltip.class = "tooltip-icon fas fa-question-circle";
     const tooltiptextdiv = document.createElement("div");
-    tooltiptextdiv.className = "tooltip-text";
+    tooltiptextdiv.class = "tooltip-text";
     tooltiptextdiv.textContent = "Make sure to include clusterip as first ip in the no_proxy list.";
-    tooltip.appendChild(tooltiptextdiv);
     tooltipdiv.appendChild(tooltip);
+    tooltipdiv.appendChild(tooltiptextdiv);
 
     const input3 = document.createElement('input');
     input3.type = 'text';
