@@ -68,6 +68,7 @@
 * The form should be self-explanatory. Use the tooltips in the form for explanation for each field.
 * The form is designed so that after all fields are populated correctly, the generate install commands button will provide the installation files and instructions.
   * A static-helm-values.yaml file will be downloaded. You should save this file to the directory you will execute the install from.
+  * IMPORTANT: Please make sure pre-reqs are completed and you're targeting the correct cluster before executing install commands.
   * Copy the generated commands and execute them from the directory where the static-helm-values.yaml is located to install Sysdig.
 * At this stage, you can also download the form input values and save them for future use.
   * This file can be uploaded with the "Choose File" option in the form.
@@ -78,16 +79,6 @@
 * Ensure all sysdig pods are 1/1 Running state.
   * ```
     kubectl -n kube-system get pods
-    ``` 
-* Double check the largest image size to make sure a new larger image is not encountered.
-  * ```
-    kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort -nr | head -1
-    ```
-* If a new and larger image is encountered, we may need to tune the runtime scanner to accommodate the larger size.
-  * Enter new larger image size in onboarding portal(https://alexwang19.github.io./) to generate new set of helm commands based on new larger image size.
-* You can also watch for log messages with "too" that say image scans are being skipped due to size.
-  * ```
-    kubectl -n kube-system logs <agent-node-analyzer-pod-name> | grep -i too
     ``` 
 * Grep all of the agent pod logs for "Error," and ensure there are no recurring errors of concern.
   * ```
@@ -101,10 +92,13 @@
   * ```
     kubectl -n kube-system logs <agent-node-analyzer-pod-name> | grep -i "\"level\":\"error\""
     ``` 
-* Sometimes you will see recurring errors if a scan is attempted for an application pod that has not come up or is failing.
 * Grep all of the agent node analyzer pods logs for "\"message\":\"startup sleep\"". This signifies that the pod is up and running successfully.
   * ```
     kubectl -n kube-system logs <agent-node-analyzer-pod-name> | grep -i "\"message\":\"startup sleep\""
+    ```
+* After the node analyzer has been running for 30 minutes, check for log messages with "too" that say image scans are being skipped due to size.
+  * ```
+    kubectl -n kube-system logs <agent-node-analyzer-pod-name> | grep -i too
     ``` 
-
+* Sometimes you will see recurring errors in the node analyzer logs if a scan is attempted for an application pod that has not come up or is failing.
 
