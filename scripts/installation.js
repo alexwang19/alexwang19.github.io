@@ -594,7 +594,7 @@ function displayOutput() {
   const runtimeScannerTagsSelect = document.getElementById('runtimeScannerTags');
 
   let helmQuickstartDocs = '<b>Link for installation instructions <a target="_blank" href="https://github.com/alexwang19/alexwang19.github.io/blob/main/docs/installation_docs.md">here</a></b><br><br>';
-  let helmHeader = '<b>Use Below Commands to Install Sysdig via Helm. Update full path of static-helm-values.yaml in the command.</b><br>';
+  let helmHeader = '<b>Use Below Commands to Install Sysdig via Helm. Update full path of static-helm-values.yaml in the command.</b><br><br>';
   let helmInitText = 'helm repo add sysdig https://charts.sysdig.com --force-update <br><br>';
   let helmInstallText = 'helm install sysdig-agent \\<br>&nbsp;&nbsp;&nbsp;&nbsp; --namespace kube-system \\<br>';
   let clusterNameText = '&nbsp;&nbsp;&nbsp;&nbsp; --set global.clusterConfig.name=' + businessUnitInput + '-' + platformInput + '-' + environmentInput + '-' + vastInput + '-' + vsadInput + ' \\ <br>';
