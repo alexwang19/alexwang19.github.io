@@ -705,7 +705,7 @@ function displayOutput() {
     // let nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + registryInputs[5].value + ' \\ <br></pre>';
     outputText += agentImageRegistry;
     outputText += agentImageRepository;
-    if (registryInputs[2].value.trim() != '') {
+    if (registryInputs[1].value.trim() != '') {
       outputText += agentImagePullSecrets;
       outputText += nodeAnalyzerNodeAnalyzerPullSecrets;
     };
