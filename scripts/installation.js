@@ -160,8 +160,8 @@ function isValidVersion(version) {
 
 // Comparison function for version strings
 function compareVersions(a, b) {
-  console.log("Tag: ", a);
   if (isValidVersion(a)){
+    console.log("Tag: ", a);
     const partsA = a.split('.').map(Number);
     const partsB = b.split('.').map(Number);
   
@@ -178,7 +178,7 @@ function compareVersions(a, b) {
     }
   }
 
-  return 0;
+  return -1;
 }
 
 // Function to format the tag version in "1.5.1" format
