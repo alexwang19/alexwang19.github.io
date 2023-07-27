@@ -135,7 +135,7 @@ function populateRuntimeScannerTagOptions() {
     .then(response => response.json())
     .then(data => {
       const tags = data.tags
-        .filter(tag => compareVersions(tag.name, '1.4.12') >= 0)
+        .filter(tag => isValidVersion(tag.name))
         .map(tag => formatTagVersion(tag.name));
       console.log("Tags: ", tags);
       const uniqueTags = Array.from(new Set(tags));
