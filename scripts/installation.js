@@ -135,7 +135,7 @@ function populateRuntimeScannerTagOptions() {
     .then(response => response.json())
     .then(data => {
       const tags = data.tags
-        .filter(tag => isValidVersion(tag.name))
+        .filter(tag => compareVersions(tag.name, '1.4.12') >= 0)
         .map(tag => formatTagVersion(tag.name));
       console.log("Tags: ", tags);
       const uniqueTags = Array.from(new Set(tags));
@@ -160,18 +160,21 @@ function isValidVersion(version) {
 
 // Comparison function for version strings
 function compareVersions(a, b) {
-  const partsA = a.split('.').map(Number);
-  const partsB = b.split('.').map(Number);
-
-  for (let i = 0; i < Math.max(partsA.length, partsB.length); i++) {
-    const partA = partsA[i] || 0;
-    const partB = partsB[i] || 0;
-
-    if (partA < partB) {
-      return -1;
-    }
-    if (partA > partB) {
-      return 1;
+  console.log("Tag: ", a);
+  if (isValidVersion(a)){
+    const partsA = a.split('.').map(Number);
+    const partsB = b.split('.').map(Number);
+  
+    for (let i = 0; i < Math.max(partsA.length, partsB.length); i++) {
+      const partA = partsA[i] || 0;
+      const partB = partsB[i] || 0;
+  
+      if (partA < partB) {
+        return -1;
+      }
+      if (partA > partB) {
+        return 1;
+      }
     }
   }
 
