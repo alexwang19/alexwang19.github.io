@@ -686,7 +686,7 @@ function displayOutput() {
   if (registryCheckbox.checked) {
     for (let i = 0; i < registryInputs.length; i++) {
       const input = registryInputs[i];
-      if (input.value.trim() === '' && i != 2) {
+      if (input.value.trim() === '' && i != 1) {
         alert('Please fill in all internal registry fields.');
         return;
       };
