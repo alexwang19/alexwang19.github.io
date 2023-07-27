@@ -137,6 +137,7 @@ function populateRuntimeScannerTagOptions() {
       const tags = data.tags
         .filter(tag => isValidVersion(tag.name))
         .map(tag => formatTagVersion(tag.name));
+      console.log("Tags: ", tags);
       const uniqueTags = Array.from(new Set(tags));
       console.log(uniqueTags);
       const lastFiveUniqueTags = uniqueTags.slice(0,5);
