@@ -155,7 +155,7 @@ function populateRuntimeScannerTagOptions() {
 }
 
 function isValidVersion(version) {
-  return /^(\d+|\d+\.\d+)$/.test(version) && !/^\d+\.\d+\.\d+$/.test(version);
+  return /^(\d+|\d+\.\d+)$/.test(version) || /^\d+\.\d+\.\d+$/.test(version);
   // return /^\d+\.\d+\.\d+$/.test(version);
 }
 
