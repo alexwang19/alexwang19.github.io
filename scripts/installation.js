@@ -97,7 +97,7 @@ function populateTagOptions() {
     .then(response => response.json())
     .then(data => {
       const tags = data.tags
-        .filter(tag => compareVersions(tag.name, '12.13.0') >= 0)
+        .filter(tag => isValidVersion(tag.name))
         .map(tag => formatTagVersion(tag.name));
       const uniqueTags = Array.from(new Set(tags));
       const lastFiveUniqueTags = uniqueTags.slice(1,5);
@@ -135,7 +135,7 @@ function populateRuntimeScannerTagOptions() {
     .then(response => response.json())
     .then(data => {
       const tags = data.tags
-        .filter(tag => compareVersions(tag.name, '1.4.12') >= 0)
+        .filter(tag => isValidVersion(tag.name))
         .map(tag => formatTagVersion(tag.name));
       const uniqueTags = Array.from(new Set(tags));
       const lastFiveUniqueTags = uniqueTags.slice(0,3);
@@ -150,6 +150,10 @@ function populateRuntimeScannerTagOptions() {
     .catch(error => {
       console.error('Error fetching tags:', error);
     });
+}
+
+function isValidVersion(version) {
+  return /^\d+\.\d+\.\d+$/.test(version);
 }
 
 // Comparison function for version strings
