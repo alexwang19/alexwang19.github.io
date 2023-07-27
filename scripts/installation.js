@@ -100,7 +100,7 @@ function populateTagOptions() {
         .filter(tag => isValidVersion(tag.name))
         .map(tag => formatTagVersion(tag.name));
       const uniqueTags = Array.from(new Set(tags));
-      const lastFiveUniqueTags = uniqueTags.slice(1,5);
+      const lastFiveUniqueTags = uniqueTags.slice(0,3);
       lastFiveUniqueTags.forEach(tag => {
         const option = document.createElement('option');
         option.value = tag;
