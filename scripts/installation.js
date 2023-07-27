@@ -96,7 +96,9 @@ function populateTagOptions() {
   })
     .then(response => response.json())
     .then(data => {
-      const tags = data.tags.map(tag => formatTagVersion(tag.name));
+      const tags = data.tags
+        .filter(tag => compareVersions(tag.name, '12.13.0') >= 0)
+        .map(tag => formatTagVersion(tag.name));
       const uniqueTags = Array.from(new Set(tags));
       const lastFiveUniqueTags = uniqueTags.slice(1,5);
       lastFiveUniqueTags.forEach(tag => {
