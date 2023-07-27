@@ -160,6 +160,7 @@ function isValidVersion(version) {
 
 // Comparison function for version strings
 function compareVersions(a, b) {
+  console.log("OUtside tag: ", a);
   if (isValidVersion(a)){
     console.log("Tag: ", a);
     const partsA = a.split('.').map(Number);
