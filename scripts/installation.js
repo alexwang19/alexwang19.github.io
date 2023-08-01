@@ -745,7 +745,7 @@ function displayOutput() {
   //   outputText += '--set agent.priorityClassName=' + priorityInput.value + ' \\ <br>';
   // }
 
-  outputText += '<pre>&nbsp;&nbsp; -f (replace-me)/static-helm-values.yaml \\<br></pre>';
+  outputText += '<pre>&nbsp;&nbsp; -f static-helm-values.yaml \\<br></pre>';
   outputText += '<pre>sysdig/sysdig-deploy<br></pre>';
 
   downloadYamlFile(outputDiv, outputText);
