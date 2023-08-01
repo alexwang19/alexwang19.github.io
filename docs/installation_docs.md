@@ -60,6 +60,7 @@
     ```
     kubectl get service kubernetes -o jsonpath='{.spec.clusterIP}'; echo
     ```
+* If using internal registry, make sure to pull images(agent and vuln-runtime-scanner) from sysdig's [repository](https://quay.io/organization/sysdig) and have those images pushed to your internal registry with same path, name, and tag. (ex: sysdig/agent:12.15.1, sydig/vuln-runtime-scanner:1.5.2)
 * [Agent Requirement Docs](https://docs.sysdig.com/en/docs/installation/sysdig-secure/install-agent-components/installation-requirements/sysdig-agent/)
 
 ## Sysdig Installation
@@ -72,6 +73,7 @@
   * Copy the generated commands and execute them from the directory where the static-helm-values.yaml is located to install Sysdig.
 * At this stage, you can also download the form input values and save them for future use.
   * This file can be uploaded with the "Choose File" option in the form.
+* NOTE: This form needs to be filled out for every different cluster deployment
 * The form is found here: https://alexwang19.github.io./
 
 ## Verify Sysdig Installation
