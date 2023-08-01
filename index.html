@@ -20,7 +20,7 @@
     <h4>Please review installation instructions <a target="_blank" href="https://github.com/alexwang19/alexwang19.github.io/blob/main/docs/installation_docs.md">here</a> and fill in required fields below to generate install commands.</h4>
     
     <div id="regionInput" class="form-section">
-      <label for="regionInput">Deployment Type (Required)</label>
+      <label for="regionInput">Sysdig Deployment Type (Required)</label>
       <select name="regionID" id="regionSelect" onchange="handleRegionChange()" required>
         <option disabled selected value> -- select an option -- </option>
         <option value="us2">Sysdig Test Deployment</option>
@@ -86,7 +86,7 @@
     </div>
 
     <div id="clusterNameInput" class="form-section">
-      <label for="clusterNameInput">Cluster Name</label>
+      <label for="clusterNameInput">Sysdig Cluster Name</label>
       <input type="text" class="non-editable-input" name="clusterNameID" id="clusterName" placeholder="Auto-Generated" oninput="autoPopulateClusterName()" required>
     </div>
 
