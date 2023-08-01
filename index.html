@@ -58,11 +58,22 @@
         <option value="prod">prod</option>
       </select>
     </div>
-    
+
     <div id="platformInput" class="form-section">
       <label for="platformInput">Platform (Required)</label>
-      <input type="text" name="platformID" id="platform" placeholder="ex: eks, gke, etc." required>
+      <select name="platformID" id="platformSelect" required>
+        <option disabled selected value> -- select an option -- </option>
+        <option value="eks">eks</option>
+        <option value="gke">gke</option>
+        <option value="ocp">ocp</option>
+        <option value="oss-k8s">oss-k8s</option>
+      </select>
     </div>
+    
+<!--     <div id="platformInput" class="form-section">
+      <label for="platformInput">Platform (Required)</label>
+      <input type="text" name="platformID" id="platform" placeholder="ex: eks, gke, etc." required>
+    </div> -->
 
     <div id="vastInput" class="form-section">
       <label for="vastInput">VASTID (Required)</label>
