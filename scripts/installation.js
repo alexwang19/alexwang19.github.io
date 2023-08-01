@@ -195,7 +195,8 @@ window.addEventListener('DOMContentLoaded', populateRuntimeScannerTagOptions);
 function autoPopulateClusterName() {
   const businessUnit = document.getElementById('businessUnit').value.toLowerCase();
   const environment = document.getElementById('environmentSelect').value.toLowerCase();
-  const platform = document.getElementById('platform').value.toLowerCase();
+  const platform = document.getElementById('platformSelect').value.toLowerCase();
+  // const platform = document.getElementById('platform').value.toLowerCase();
   const vsadId = document.getElementById('vsad').value.toLowerCase();
   const vastId = document.getElementById('vast').value.toLowerCase();
 
@@ -604,7 +605,8 @@ function displayOutput() {
   // const namespaceInput = document.querySelector('#namespaceInput input');
   // const regionCheckbox = document.getElementById('regionCheckbox');
   const businessUnitInput = document.querySelector('#businessUnitInput input').value.toLowerCase();
-  const platformInput = document.querySelector('#platformInput input').value.toLowerCase();
+  // const platformInput = document.querySelector('#platformInput input').value.toLowerCase();
+  const platformInput = document.getElementById('platformSelect').value.toLowerCase();
   // const environmentInput = document.querySelector('#environmentInput input');
   const environmentInput = document.getElementById('environmentSelect').value.toLowerCase();
   const vastInput = document.querySelector('#vastInput input').value.toLowerCase();
@@ -632,6 +634,9 @@ function displayOutput() {
   let clusterTagsText = '<pre>&nbsp;&nbsp; --set agent.sysdig.settings.tags="cluster:' + businessUnitInput + '-' + platformInput + '-' + environmentInput + '-' + vastInput + '-' + vsadInput + '\\,' + 'vz-vsadid:' + vsadInput + '\\,' + 'vz-vastid:' + vastInput +'" \\ <br></pre>';
   let outputText = helmQuickstartDocs + helmHeader + helmInitText + helmInstallText + clusterNameText + clusterTagsText;
 
+  if (platformInput === "gke"){
+    outputText += '<pre>&nbsp;&nbsp; --set agent.ebpf.enabled=true \\<br></pre>';
+  }
 
   if (imageSizeInput.value > 2147483648) {
     let ephemeralStorageRequestBytes = 1.5 * imageSizeInput.value;
