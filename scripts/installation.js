@@ -390,14 +390,14 @@ function downloadInputValues() {
 
 
 function downloadOutputText() {
-  const outputText = document.getElementById('output').textContent;
+  const outputText = document.getElementById('output').innerHTML;
 
-  const blob = new Blob([outputText], { type: 'text/plain' });
+  const blob = new Blob([outputText], { type: 'text/html' });
   const url = URL.createObjectURL(blob);
 
   const link = document.createElement('a');
   link.href = url;
-  link.download = 'output.txt';
+  link.download = 'helm_install_commands.html';
   link.click();
 
   URL.revokeObjectURL(url);
