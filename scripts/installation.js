@@ -629,13 +629,13 @@ function displayOutput() {
   let helmQuickstartDocs = '<b>Link for installation instructions <a target="_blank" href="https://github.com/alexwang19/alexwang19.github.io/blob/main/docs/installation_docs.md">here</a></b><br><br>';
   let helmHeader = '<b>Use Below Commands to Install Sysdig via Helm. Update full path of static-helm-values.yaml in the command.</b><br><br>';
   let helmInitText = '<pre>helm repo add sysdig https://charts.sysdig.com --force-update </pre><br><br>';
-  let helmInstallText = '<pre>helm install sysdig-agent \\<br>&nbsp;&nbsp; --namespace kube-system \\</pre><br>';
-  let clusterNameText = '<pre>&nbsp;&nbsp; --set global.clusterConfig.name=' + businessUnitInput + '-' + platformInput + '-' + environmentInput + '-' + vastInput + '-' + vsadInput + ' \\</pre><br>';
-  let clusterTagsText = '<pre>&nbsp;&nbsp; --set agent.sysdig.settings.tags="cluster:' + businessUnitInput + '-' + platformInput + '-' + environmentInput + '-' + vastInput + '-' + vsadInput + '\\,' + 'vz-vsadid:' + vsadInput + '\\,' + 'vz-vastid:' + vastInput +'" \\</pre><br>';
+  let helmInstallText = '<pre>helm install sysdig-agent \\<br>&nbsp;&nbsp; --namespace kube-system \\</pre>';
+  let clusterNameText = '<pre>&nbsp;&nbsp; --set global.clusterConfig.name=' + businessUnitInput + '-' + platformInput + '-' + environmentInput + '-' + vastInput + '-' + vsadInput + ' \\</pre>';
+  let clusterTagsText = '<pre>&nbsp;&nbsp; --set agent.sysdig.settings.tags="cluster:' + businessUnitInput + '-' + platformInput + '-' + environmentInput + '-' + vastInput + '-' + vsadInput + '\\,' + 'vz-vsadid:' + vsadInput + '\\,' + 'vz-vastid:' + vastInput +'" \\</pre>';
   let outputText = helmQuickstartDocs + helmHeader + helmInitText + helmInstallText + clusterNameText + clusterTagsText;
 
   if (platformInput === "gke"){
-    outputText += '<pre>&nbsp;&nbsp; --set agent.ebpf.enabled=true \\</pre><br>';
+    outputText += '<pre>&nbsp;&nbsp; --set agent.ebpf.enabled=true \\</pre>';
   }
 
   if (imageSizeInput.value > 2147483648) {
@@ -646,24 +646,24 @@ function displayOutput() {
     let memoryLimitBytes = 2 * imageSizeInput.value;
     const memoryLimitGigabytes = convertBytesToGigabytes(memoryLimitBytes);
 
-    outputText += '<pre>&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.settings.maxImageSizeAllowed=' + imageSizeInput.value + ' \\</pre><br>';
-    outputText += '<pre>&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.requests.ephemeral-storage=' + Math.ceil(ephemeralStorageRequestGigabytes) + 'Gi \\</pre><br>';
-    outputText += '<pre>&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.limits.memory=' + Math.ceil(memoryLimitGigabytes) + 'Gi \\</pre><br>'
-    outputText += '<pre>&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.limits.ephemeral-storage=' + Math.ceil(ephemeralStorageLimitGigabytes) + 'Gi \\</pre><br>';
+    outputText += '<pre>&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.settings.maxImageSizeAllowed=' + imageSizeInput.value + ' \\</pre>';
+    outputText += '<pre>&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.requests.ephemeral-storage=' + Math.ceil(ephemeralStorageRequestGigabytes) + 'Gi \\</pre>';
+    outputText += '<pre>&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.limits.memory=' + Math.ceil(memoryLimitGigabytes) + 'Gi \\</pre>';
+    outputText += '<pre>&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.resources.limits.ephemeral-storage=' + Math.ceil(ephemeralStorageLimitGigabytes) + 'Gi \\</pre>';
   }
 
   let regionInput;
   let accessKeyInput;
   const regionSelect = document.getElementById('regionSelect');
   if (regionSelect.value === 'us2') {
-    let regionText = '<pre>&nbsp;&nbsp; --set global.sysdig.region=us2 \\</pre><br>';
+    let regionText = '<pre>&nbsp;&nbsp; --set global.sysdig.region=us2 \\</pre>';
     accessKeyInput = document.getElementById('testSysdigAccessKey').value;
-    let accessKeyText = '<pre>&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput + ' \\</pre><br>';
+    let accessKeyText = '<pre>&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput + ' \\</pre>';
     outputText += regionText;
     outputText += accessKeyText;
   } else if (regionSelect.value === 'us3'){
     accessKeyInput = document.getElementById('standardSysdigAccessKey').value;
-    let accessKeyText = '<pre>&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput + ' \\</pre><br>';
+    let accessKeyText = '<pre>&nbsp;&nbsp; --set global.sysdig.accessKey=' + accessKeyInput + ' \\</pre>';
     outputText += accessKeyText;
   };
   // Validate required inputs
@@ -686,11 +686,11 @@ function displayOutput() {
         return;
       };
     };
-    let httpProxy = '<pre>&nbsp;&nbsp; --set global.proxy.httpProxy=' + inputs[0].value + ':' + inputs[1].value + ' \\</pre><br>';
-    let httpsProxy = '<pre>&nbsp;&nbsp; --set global.proxy.httpsProxy=' + inputs[0].value + ':' + inputs[1].value + ' \\</pre><br>';
-    let noProxy = '<pre>&nbsp;&nbsp; --set global.proxy.noProxy=' + '"' + inputs[2].value + '"' + ' \\</pre><br>';
-    let agentHttpProxyPort = '<pre>&nbsp;&nbsp; --set agent.sysdig.settings.http_proxy.proxy_port=' + inputs[1].value + ' \\</pre><br>';
-    let agentHttpProxyHost = '<pre>&nbsp;&nbsp; --set agent.sysdig.settings.http_proxy.proxy_host=' + inputs[0].value + ' \\</pre><br>';
+    let httpProxy = '<pre>&nbsp;&nbsp; --set global.proxy.httpProxy=' + inputs[0].value + ':' + inputs[1].value + ' \\</pre>';
+    let httpsProxy = '<pre>&nbsp;&nbsp; --set global.proxy.httpsProxy=' + inputs[0].value + ':' + inputs[1].value + ' \\</pre>';
+    let noProxy = '<pre>&nbsp;&nbsp; --set global.proxy.noProxy=' + '"' + inputs[2].value + '"' + ' \\</pre>';
+    let agentHttpProxyPort = '<pre>&nbsp;&nbsp; --set agent.sysdig.settings.http_proxy.proxy_port=' + inputs[1].value + ' \\</pre>';
+    let agentHttpProxyHost = '<pre>&nbsp;&nbsp; --set agent.sysdig.settings.http_proxy.proxy_host=' + inputs[0].value + ' \\</pre>';
     outputText += httpProxy;
     outputText += httpsProxy;
     outputText += noProxy;
@@ -705,16 +705,16 @@ function displayOutput() {
         return;
       };
     };
-    let agentImageRegistry = '<pre>&nbsp;&nbsp; --set agent.image.registry=' + registryInputs[0].value + ' \\</pre><br>';
-    let agentImageRepository = '<pre>&nbsp;&nbsp; --set agent.image.repository=sysdig/agent \\</pre><br>';
+    let agentImageRegistry = '<pre>&nbsp;&nbsp; --set agent.image.registry=' + registryInputs[0].value + ' \\</pre>';
+    let agentImageRepository = '<pre>&nbsp;&nbsp; --set agent.image.repository=sysdig/agent \\</pre>';
     // let agentImageRepository = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.repository=' + registryInputs[1].value + ' \\ <br>';
-    let agentImagePullSecrets = '<pre>&nbsp;&nbsp; --set agent.image.pullSecrets=' + registryInputs[1].value + ' \\</pre><br>';
-    let nodeAnalyzerImageRegistry = '<pre>&nbsp;&nbsp; --set nodeAnalyzer.image.registry=' + registryInputs[0].value + ' \\</pre><br>';
+    let agentImagePullSecrets = '<pre>&nbsp;&nbsp; --set agent.image.pullSecrets=' + registryInputs[1].value + ' \\</pre>';
+    let nodeAnalyzerImageRegistry = '<pre>&nbsp;&nbsp; --set nodeAnalyzer.image.registry=' + registryInputs[0].value + ' \\</pre>';
     // let nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.repository=' + registryInputs[3].value + ' \\ <br>';
-    let nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository = '<pre>&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.repository=sysdig/vuln-runtime-scanner \\</pre><br>';
-    let nodeAnalyzerNodeAnalyzerPullSecrets = '<pre>&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.pullSecrets=' + registryInputs[1].value + ' \\</pre><br>';
-    let agentImageTag = '<pre>&nbsp;&nbsp; --set agent.image.tag=' + agentTagsSelect.value + ' \\</pre><br>';
-    let nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag = '<pre>&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + runtimeScannerTagsSelect.value + ' \\</pre><br>';
+    let nodeAnalyzerNodeAnalyzerRuntimeScannerImageRepository = '<pre>&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.repository=sysdig/vuln-runtime-scanner \\</pre>';
+    let nodeAnalyzerNodeAnalyzerPullSecrets = '<pre>&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.pullSecrets=' + registryInputs[1].value + ' \\</pre>';
+    let agentImageTag = '<pre>&nbsp;&nbsp; --set agent.image.tag=' + agentTagsSelect.value + ' \\</pre>';
+    let nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag = '<pre>&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + runtimeScannerTagsSelect.value + ' \\</pre>';
     // let agentImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set agent.image.tag=' + registryInputs[4].value + ' \\<br></pre>';
     // let nodeAnalyzerNodeAnalyzerRuntimeScannerImageTag = '&nbsp;&nbsp;&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + registryInputs[5].value + ' \\ <br></pre>';
     outputText += agentImageRegistry;
@@ -734,8 +734,8 @@ function displayOutput() {
       alert('Please select agent tag and runtime scanner versions.');
       return;
     } else {
-      let agentImageTag = '<pre>&nbsp;&nbsp; --set agent.image.tag=' + agentTagsSelect.value + ' \\</pre><br>';
-      let runtimeScannerTag = '<pre>&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + runtimeScannerTagsSelect.value + ' \\</pre><br>';
+      let agentImageTag = '<pre>&nbsp;&nbsp; --set agent.image.tag=' + agentTagsSelect.value + ' \\</pre>';
+      let runtimeScannerTag = '<pre>&nbsp;&nbsp; --set nodeAnalyzer.nodeAnalyzer.runtimeScanner.image.tag=' + runtimeScannerTagsSelect.value + ' \\</pre>';
       outputText += agentImageTag;
       outputText += runtimeScannerTag;
     };
@@ -745,8 +745,8 @@ function displayOutput() {
   //   outputText += '--set agent.priorityClassName=' + priorityInput.value + ' \\ <br>';
   // }
 
-  outputText += '<pre>&nbsp;&nbsp; -f static-helm-values.yaml \\</pre><br>';
-  outputText += '<pre>sysdig/sysdig-deploy</pre><br>';
+  outputText += '<pre>&nbsp;&nbsp; -f static-helm-values.yaml \\</pre>';
+  outputText += '<pre>sysdig/sysdig-deploy</pre>';
 
   downloadYamlFile(outputDiv, outputText);
   document.getElementById('downloadOutputBtn').style.display = 'inline-block';
