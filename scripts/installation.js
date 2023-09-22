@@ -206,18 +206,19 @@ function autoPopulateClusterName() {
   if (businessUnit) {
     nameParts.push(businessUnit);
   }
-  if (environment) {
-    nameParts.push(environment);
-  }
   if (platform) {
     nameParts.push(platform);
   }
-  if (vsadId) {
-    nameParts.push(vsadId);
+  if (environment) {
+    nameParts.push(environment);
   }
   if (vastId) {
     nameParts.push(vastId);
   }
+  if (vsadId) {
+    nameParts.push(vsadId);
+  }
+
 
   const clusterName = nameParts.join('-');
   clusterNameInput.value = clusterName;
