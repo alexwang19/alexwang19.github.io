@@ -46,6 +46,17 @@
       <input type="text" name="environmentID" id="environment" placeholder="ex: dev, qa, preprod, prod, etc." required>
     </div> -->
 
+    <div id="platformInput" class="form-section">
+      <label for="platformInput">Platform (Required)</label>
+      <select name="platformID" id="platformSelect" required>
+        <option disabled selected value> -- select an option -- </option>
+        <option value="eks">Amazon Elastic Kubernetes Service (EKS)</option>
+        <option value="gke">Google Kubernetes Engine (GKE)</option>
+        <option value="ocp">Red Hat OpenShift Container Platform (OCP)</option>
+        <option value="oss-k8s">OSS Kubernetes</option>
+      </select>
+    </div>
+
     <div id="environmentInput" class="form-section">
       <label for="environmentInput">Environment (Required)</label>
       <select name="environmentID" id="environmentSelect" required>
@@ -56,17 +67,6 @@
         <option value="stg">stg</option>
         <option value="preprod">preprod</option>
         <option value="prod">prod</option>
-      </select>
-    </div>
-
-    <div id="platformInput" class="form-section">
-      <label for="platformInput">Platform (Required)</label>
-      <select name="platformID" id="platformSelect" required>
-        <option disabled selected value> -- select an option -- </option>
-        <option value="eks">Amazon Elastic Kubernetes Service (EKS)</option>
-        <option value="gke">Google Kubernetes Engine (GKE)</option>
-        <option value="ocp">Red Hat OpenShift Container Platform (OCP)</option>
-        <option value="oss-k8s">OSS Kubernetes</option>
       </select>
     </div>
     
