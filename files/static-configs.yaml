@@ -26,8 +26,8 @@ nodeAnalyzer:
       deploy: true
       settings:
         eveEnabled: false
-        maxImageSizeAllowed: "4194304000"
-        maxFileSizeAllowed: "262144000"
+        maxImageSizeAllowed: "2147483648"
+        maxFileSizeAllowed: "500000000"
       eveConnector:
         deploy: false
       resources:
