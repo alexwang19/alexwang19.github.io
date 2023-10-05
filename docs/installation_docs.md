@@ -53,7 +53,7 @@
     ssh myuser@k8s_worker_node
     
     export http{s,}_proxy=http://myproxy.com:8080
-    curl -sL ingest-us2.app.sysdig.com:6443 -v
+    curl -sL ingest.us3.sysdig.com:6443 -v
     ```
 * If using a proxy, make sure to include clusterIP in the no_proxy list in the onboarding form.
   * Command to find clusterIP: 
